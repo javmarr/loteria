@@ -10,7 +10,7 @@ html
       //- :8000 for http
       //- :8443 for https
       //- var socket = io('http://localhost');
-      var socket = io.connect('//localhost:8080/', {'forceNew': true});
+      var socket = io('//localhost:8080/', {'forceNew': true});
       //- console.log(socket);
       //- if (!socket.connected) {
       //-   socket = io.connect('//localhost:8080/', {'forceNew': true});
