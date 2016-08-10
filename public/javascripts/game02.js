@@ -12,7 +12,7 @@ window.onload = function() {
     //  string by which we'll identify the image later in our code.
 
     //  The second parameter is the URL of the image (relative)
-    game.load.image('flyer', 'images/ball.png');
+    game.load.image('flyer', 'ima.png');
   }
 
   var image;

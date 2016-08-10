@@ -1,5 +1,7 @@
 extends layout
 
 block content
-  script(src="javascripts/phaser.min.js")
-  script(src="javascripts/game.js")
+  script(src="../javascripts/phaser.min.js")
+  script(src="../javascripts/#{gameFile}")
+  div(id="gameBox" style="width: 100%")
+  

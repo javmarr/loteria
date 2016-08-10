@@ -4,6 +4,12 @@ body {
   font: 13px Helvetica, Arial;
 }
 
+/* used for game view */
+canvas {
+  display: block;
+  margin: auto;
+  padding-top: 20px;
+}
 form {
   background: #000;
   padding: 3px;

@@ -6,16 +6,8 @@ html
     script(src="/javascripts/socket.io.js")
     script(src="http://code.jquery.com/jquery-1.11.1.js")
     script.
-      //- var socket = io.connect('//localhost:8000/', {'forceNew': true});
-      //- :8000 for http
-      //- :8443 for https
-      //- var socket = io('http://localhost');
-      var socket = io('//localhost:8080/', {'forceNew': true});
-      //- console.log(socket);
-      //- if (!socket.connected) {
-      //-   socket = io.connect('//localhost:8080/', {'forceNew': true});
-      //-   console.log('New connection');
-      //-   console.log(socket);
-      //- }
+      var socket = io();
+      
+      
   body
     block content
