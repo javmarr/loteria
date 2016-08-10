@@ -4,20 +4,16 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 var routes = require('./routes/index');
+var socketio = require('socket.io');
 
 var app = express();
 
 var server = require('http').Server(app);
-var io = require('socket.io').listen(server);
+var io = global.io = app.io = socketio();
 
-// set listener for either local and openshift
-if (process.env.OPENSHIFT_NODEJS_PORT) {
-  server.listen(process.env.OPENSHIFT_NODEJS_PORT, process.env.OPENSHIFT_NODEJS_IP);
-} else {
-  server.listen(8080);
-}
+
+
 
 io.on('connection', function(socket) {
   console.log('--- user connected ---');
