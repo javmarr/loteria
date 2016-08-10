@@ -7,3 +7,5 @@ Simple website using Express/Socket.IO/Phaser/Openshift-ready
   * Takes user input to move the ships
   * Destroy objects by shooting lasers
   * Two player mode planned
+
+[Link to live test](https://spacewars-javmarr.rhcloud.com/)
