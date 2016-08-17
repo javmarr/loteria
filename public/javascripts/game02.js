@@ -46,9 +46,5 @@ window.onload = function() {
   }
 
   function render () {
-
-    //debug helper
-    game.debug.spriteInfo(image, 32, 32);
-
   }
 };

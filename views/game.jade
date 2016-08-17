@@ -5,3 +5,29 @@ block content
   script(src="../javascripts/#{gameFile}")
   div(id="gameBox" style="width: 100%")
   
+  ul(id='messages')
+  form(action='')
+    input(id='m' autocomplete='off')
+    button Send
+      
+  script.
+    $('form').submit(function() {
+      socket.emit('chat message', $('#m').val());
+      addMsg($('#m').val());
+      $('#m').val('');
+      return false;
+    });
+    
+    socket.on('connect', function(data) {
+      socket.emit('join', 'Hello World from client');
+    });
+    
+    function addMsg(msg) {
+      var newMsg = $('<li>').text(msg);
+      $('#messages').append(newMsg);
+      newMsg.focus();
+    }
+    
+    socket.on('chat message', function(msg) {
+      addMsg(msg);
+    });

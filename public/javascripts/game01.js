@@ -13,6 +13,8 @@ window.onload = function() {
   var game = new Phaser.Game(800, 600, Phaser.AUTO, 'gameBox', { preload: preload, create: create, update: update, render: render });
 
   function preload() {
+    console.log(game.disableVisibilityChange);
+    console.log(game.random);
 
     //  You can fill the preloader with as many assets as your game requires
     //  Here we are loading an image. The first parameter is the unique
