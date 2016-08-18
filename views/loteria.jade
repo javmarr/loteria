@@ -1,0 +1,34 @@
+extends layout
+
+block content  
+  script(src="javascripts/phaser.min.js")
+  
+  script(src="javascripts/src/boot.js")
+  script(src="javascripts/src/preload.js")
+  script(src="javascripts/src/gameTitle.js")
+  script(src="javascripts/src/loteria.js")
+  script(src="javascripts/src/gameOver.js")
+  
+  script.
+    var game = new Phaser.Game(320, 480, Phaser.AUTO, "game");
+    game.state.add("Boot", boot);
+    game.state.add("Preload", preload);
+    game.state.add("GameTitle", gameTitle);
+    game.state.add("Loteria", loteria);
+    game.state.add("GameOver", gameOver);
+    
+    game.state.start("Boot");
+    
+    socket.on('connect', function(data) {
+      socket.emit('join', 'Hello World from client');
+    });
+    
+    function addMsg(msg) {
+      var newMsg = $('<li>').text(msg);
+      $('#messages').append(newMsg);
+      newMsg.focus();
+    }
+    
+    socket.on('chat message', function(msg) {
+      addMsg(msg);
+    });
