@@ -1,5 +1,5 @@
-var boot = function(game){
-	console.log("%Loteria round, start!", "color:white; background:green");
+var boot = function(game) {
+	console.log("%cLoteria round, start!", "color:white; background:green");
 };
 
 boot.prototype = {

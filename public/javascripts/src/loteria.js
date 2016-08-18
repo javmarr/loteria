@@ -4,7 +4,6 @@ var loteria = function(game){
   deckSize = 54;
   cardNumber = 0; // index for a card in the deck (0-deckSize-1)
   turn = 0; // 1-deckSize
-  gameOver = false;
 
 };
 
@@ -16,7 +15,6 @@ loteria.prototype = {
     console.log('After shuffle: ' + deck);
     cardNumber = 0;
     turn = 1;
-    console.log('loteria-preload');
     console.log('preload loteria.js');
   },
 
@@ -38,7 +36,7 @@ loteria.prototype = {
     for(var i = 1; i <= deckSize; i++) {
       deck.push(i);
     }
-  },
+    },
 
   shuffleDeck: function() {
     var times = deckSize; // swap these many times
@@ -63,8 +61,8 @@ loteria.prototype = {
       // currentCard.x += 10;
       // console.log('x: ' + currentCard.x);
 
-      if(cardsDealt.length > 5)
-        console.log('cardsDealt' + cardsDealt);
+      // if(cardsDealt.length > 5)
+      //   console.log('cardsDealt' + cardsDealt);
       currentCard.loadTexture('loteria', 'card_' + deck[cardNumber] + '.png');
 
       turn = cardNumber+1;
