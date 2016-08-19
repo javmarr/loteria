@@ -1,16 +1,19 @@
 extends layout
 
 block content  
-  script(src="javascripts/phaser.min.js")
+  script(src="../javascripts/phaser.min.js")
   
-  script(src="javascripts/src/boot.js")
-  script(src="javascripts/src/preload.js")
-  script(src="javascripts/src/gameTitle.js")
-  script(src="javascripts/src/loteria.js")
-  script(src="javascripts/src/gameOver.js")
+  script(src="../javascripts/src/boot.js")
+  script(src="../javascripts/src/preload.js")
+  script(src="../javascripts/src/gameTitle.js")
+  script(src="../javascripts/src/loteria.js")
+  script(src="../javascripts/src/gameOver.js")
   
   script.
-    var game = new Phaser.Game(320, 480, Phaser.AUTO, "game");
+    var gameID = "#{gameID}"
+    console.log("On jade (gameID) " + gameID);
+    
+    var game = new Phaser.Game(480, 800, Phaser.AUTO, "game");
     game.state.add("Boot", boot);
     game.state.add("Preload", preload);
     game.state.add("GameTitle", gameTitle);
@@ -32,3 +35,6 @@ block content
     socket.on('chat message', function(msg) {
       addMsg(msg);
     });
+
+  div(id="game" class="vertical-center")
+      h1 Loteria

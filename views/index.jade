@@ -1,34 +1,35 @@
 extends layout
 
-block content  
-  script(src="javascripts/phaser.min.js")
-  
-  script(src="javascripts/src/boot.js")
-  script(src="javascripts/src/preload.js")
-  script(src="javascripts/src/gameTitle.js")
-  script(src="javascripts/src/loteria.js")
-  script(src="javascripts/src/gameOver.js")
+block content
+    
+  div(class="jumbotron vertical-center")
+    div(id="menu" class="center")
+      h1 Loteria 
+      a(href="#" class="btn btn-primary btn-lg btn-block") Create Game
+      a(href="#" class="btn btn-default btn-block" id="joinLink") Join Game
+      a(href="#" class="btn btn-default btn-block") Monitor Game
+      br
+      div(class="input-group")
+        input(class="form-control" placeholder="Secret link")
+        span(class="input-group-btn")
+          button(type="submit" class="btn btn-default") Join
+      
   
   script.
-    var game = new Phaser.Game(320, 480, Phaser.AUTO, "game");
-    game.state.add("Boot", boot);
-    game.state.add("Preload", preload);
-    game.state.add("GameTitle", gameTitle);
-    game.state.add("Loteria", loteria);
-    game.state.add("GameOver", gameOver);
-    
-    game.state.start("Boot");
-    
-    socket.on('connect', function(data) {
-      socket.emit('join', 'Hello World from client');
-    });
-    
-    function addMsg(msg) {
-      var newMsg = $('<li>').text(msg);
-      $('#messages').append(newMsg);
-      newMsg.focus();
+    function generateRandomID() {
+      var keyLength = 10;
+      var key = '';
+      var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      for (var i = 0 ; i < keyLength; i++) {
+        random = ((Math.floor(Math.random() * 100)) % possible.length); // 0 - (length-1)
+        key += possible.charAt(random);
+      }
+      console.log('returning key: ' + key);
+      return key;
     }
     
-    socket.on('chat message', function(msg) {
-      addMsg(msg);
+    $(document).ready( function () {
+      var random = generateRandomID();
+      $("#joinLink").attr("href", "loteria/"+random );
     });
+    

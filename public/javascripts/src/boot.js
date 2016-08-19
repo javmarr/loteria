@@ -4,13 +4,13 @@ var boot = function(game) {
 
 boot.prototype = {
 	preload: function() {
-    this.game.load.image("loading","images/temp/loading.png");
+    this.game.load.image("loading","../images/temp/loading.png");
 	},
 
 	create: function() {
-  	this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-  	this.scale.pageAlignHorizontally = true;
-  	this.scale.updateLayout();
+  	// this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+  	// this.scale.pageAlignHorizontally = true;
+  	// this.scale.updateLayout();
   	this.game.state.start("Preload");
 	}
 };

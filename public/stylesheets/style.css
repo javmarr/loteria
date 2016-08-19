@@ -1,3 +1,35 @@
 body {
-  margin:0
+  display: table;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+.hide {
+  display: none;
+}
+
+.center {
+  margin: auto;
+}
+
+.jumbotron {
+   display: table-cell;
+   vertical-align: middle;
+}
+
+#ui {
+   width: 100%;
+   position: absolute;
+   top: 500;
+   left: 400;
+}
+
+#btn-container {
+  width: 300px;
+}
+
+#menu {
+   width: 30%;
 }

@@ -23,13 +23,21 @@ loteria.prototype = {
     cardsDealt.push(deck[cardNumber]);
     console.log('card number: ' + cardNumber);
     console.log('dealt: ' + deck[cardNumber]);
-    cardBorder = this.game.add.image(40, 40, 'border');
-    currentCard = this.game.add.sprite(cardBorder.x + 30, cardBorder.y + 32, 'loteria', 'card_' + deck[cardNumber] + '.png');
+
+    card = this.game.add.group(); // card containing image and border
+    cardBorder = card.create(0, 0, 'border');
+    cardImage = card.create(cardBorder.x+30, cardBorder.y+32, 'loteria', 'card_' + deck[cardNumber] + '.png');
+
+
+    // currentCard = this.game.add.sprite(cardBorder.x + 30, cardBorder.y + 32, 'loteria', 'card_' + deck[cardNumber] + '.png');
+
+    // cardBorder2 = this.game.add.image(0, 0, 'border');
+    // currentCard2 = this.game.add.sprite(cardBorder.x + 30, cardBorder.y + 32, 'loteria', 'card_' + deck[cardNumber] + '.png');
 
     text = this.game.add.text(250, 16, '', { fill: '#ffffff' });
 
-    currentCard.inputEnabled = true;
-    currentCard.events.onInputUp.add(this.changeCard, this);
+    cardImage.inputEnabled = true;
+    cardImage.events.onInputUp.add(this.changeCard, this);
   },
 
   generateDeck: function() {
@@ -63,10 +71,11 @@ loteria.prototype = {
 
       // if(cardsDealt.length > 5)
       //   console.log('cardsDealt' + cardsDealt);
-      currentCard.loadTexture('loteria', 'card_' + deck[cardNumber] + '.png');
+      cardImage.loadTexture('loteria', 'card_' + deck[cardNumber] + '.png');
 
       turn = cardNumber+1;
     }
+
   }
 
 };
