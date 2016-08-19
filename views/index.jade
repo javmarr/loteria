@@ -1,20 +1,32 @@
 extends layout
 
 block content
-    
+  script(src='https://cdn.auth0.com/js/lock/10.0/lock.min.js')
+  script.
+    var lock = new Auth0Lock('0WOTu5RTLLDXXA0DNbZ0KDATEbcwmYjs', 'javmarr.auth0.com', {
+      auth: {
+        redirectUrl: 'http://localhost:3000/callback',
+        responseType: 'code',
+        params: {
+          scope: 'openid email' // Learn about scopes: https://auth0.com/docs/scopes
+        }
+      }
+    });
+
   div(class="jumbotron vertical-center")
     div(id="menu" class="center")
       h1 Loteria 
-      a(href="#" class="btn btn-primary btn-lg btn-block") Create Game
-      a(href="#" class="btn btn-default btn-block" id="joinLink") Join Game
-      a(href="#" class="btn btn-default btn-block") Monitor Game
+      a(href="#" class="btn btn-primary btn-lg btn-block" id="createGame") Create Game
+      a(onclick="lock.show(); return false;a" class="btn btn-primary btn-lg btn-block" id="login") Login
+      a(href="#" class="btn btn-default btn-block" id="monitorGame") Monitor Game
+      a(href="#" class="btn btn-default btn-block") Logout
       br
       div(class="input-group")
-        input(class="form-control" placeholder="Secret link")
+        input(id="joinGame" class="form-control" placeholder="Secret link")
         span(class="input-group-btn")
           button(type="submit" class="btn btn-default") Join
       
-  
+    
   script.
     function generateRandomID() {
       var keyLength = 10;
@@ -30,6 +42,6 @@ block content
     
     $(document).ready( function () {
       var random = generateRandomID();
-      $("#joinLink").attr("href", "loteria/"+random );
+      $("#monitorGame").attr("href", "loteria/"+random );
     });
     

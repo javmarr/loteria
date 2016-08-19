@@ -3,11 +3,19 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var socketio = require('socket.io');
 
+var passport = require('passport');
+var strategy = require('./setup-passport');
+
+var Auth0Strategy = require('passport-auth0');
+
 var app = express();
+
+require('dotenv').config();
 
 var server = require('http').Server(app);
 var io = global.io = app.io = socketio();
@@ -43,9 +51,29 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({ secret: process.env.CLIENT_SECRET, resave: false,  saveUninitialized: false }));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
+
+app.get('/callback',
+  passport.authenticate('auth0', { failureRedirect: '/Error' }),
+  function(req, res) {
+    if (!req.user) {
+      throw new Error('user null');
+    }
+    console.log('login worked!');
+    res.redirect("/user");
+  });
+
+app.get('/user', function (req, res) {
+  res.send('user', {
+    user: req.user
+  });
+});
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
