@@ -1,0 +1,23 @@
+extends layout
+
+block content
+
+  div(class="jumbotron vertical-center")
+    div(id="menu" class="center")
+      h1 Loteria 
+      
+      if displayName
+        p Hello, #{displayName}
+      
+      br
+      div(class="input-group")
+        input(id="joinGame" class="form-control" placeholder="Secret link")
+        span(class="input-group-btn")
+          button(type="submit" class="btn btn-default") Join
+      
+    
+  script.
+    $(document).ready( function () {
+      
+    });
+    

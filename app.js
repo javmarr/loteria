@@ -13,15 +13,26 @@ var strategy = require('./setup-passport');
 
 var Auth0Strategy = require('passport-auth0');
 
+// db connection
+var mongoose = require('mongoose');
+const MONGO_HOST = process.env.OPENSHIFT_MONGODB_DB_HOST;
+const MONGO_PORT = process.env.OPENSHIFT_MONGODB_DB_PORT;
+const MONGO_PASSWORD = process.env.OPENSHIFT_MONGODB_DB_PASSWORD;
+const DB_NAME = 'spacewars';
+
+if(MONGO_HOST) {
+  mongoose.connect('mongodb://admin:' + MONGO_PASSWORD + '@' + MONGO_HOST + ':' + MONGO_PORT + '/' + DB_NAME);
+}
+else {
+  require('dotenv').config();
+  mongoose.connect('mongodb://localhost/' + DB_NAME);
+}
 var app = express();
 
-require('dotenv').config();
 
+// io setup
 var server = require('http').Server(app);
 var io = global.io = app.io = socketio();
-
-
-
 
 io.on('connection', function(socket) {
   console.log('--- user connected ---');
@@ -49,7 +60,7 @@ app.set('view engine', 'jade');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(session({ secret: process.env.CLIENT_SECRET, resave: false,  saveUninitialized: false }));
 app.use(passport.initialize());
@@ -58,6 +69,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 
+
+app.get('*', function(req, res, next) {
+  if(req.user){
+    req.session.user = req.user;
+  }
+  next();
+});
+
 app.get('/callback',
   passport.authenticate('auth0', { failureRedirect: '/Error' }),
   function(req, res) {
@@ -65,13 +84,19 @@ app.get('/callback',
       throw new Error('user null');
     }
     console.log('login worked!');
-    res.redirect("/user");
+    res.redirect("/login");
   });
 
-app.get('/user', function (req, res) {
-  res.send('user', {
-    user: req.user
-  });
+app.get('/login', function (req, res) {
+  req.session.user = req.user;
+  // res.send(req.user);
+  res.redirect('/'); // index
+
+});
+
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
 });
 
 
