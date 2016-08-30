@@ -27,31 +27,17 @@ block content
         p Hello, #{displayName}
         a(href="/create" class="btn btn-primary btn-lg btn-block" id="createGame") Create Game
         a(href="" class="btn btn-default btn-block" id="monitorGame") Monitor Game
+        a(href="/join" class="btn btn-default btn-block") Join Game
         a(href="/logout" class="btn btn-default btn-block") Logout
       else 
         p Hello, Guest
         a(onclick="lock.show(); return false;" class="btn btn-primary btn-lg btn-block" id="login") Login
+        a(href="/join" class="btn btn-default btn-block") Join Game
       
-      br
-      div(class="input-group")
-        input(id="joinGame" class="form-control" placeholder="Secret link")
-        span(class="input-group-btn")
-          button(type="submit" class="btn btn-default") Join
       
+        
     
   script.
-    function generateRandomID() {
-      var keyLength = 10;
-      var key = '';
-      var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      for (var i = 0 ; i < keyLength; i++) {
-        random = ((Math.floor(Math.random() * 100)) % possible.length); // 0 - (length-1)
-        key += possible.charAt(random);
-      }
-      console.log('returning key: ' + key);
-      return key;
-    }
-    
     $(document).ready( function () {
       var random = generateRandomID();
       $("#monitorGame").attr("href", "loteria/"+random );

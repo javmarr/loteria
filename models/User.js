@@ -1,12 +1,11 @@
 var mongoose = require('mongoose');
 
 var UserSchema = new mongoose.Schema({
-  facebookId: String,
+  userID: {type: String, required: true, unique: true},
   games: [{
-    key: String,
-    settings: String,
-    cardsDealt: Array,
-    deck: Array
+    gameID: String,
+    deck: Array,
+    boards: Array
   }]
 });
 

@@ -6,15 +6,22 @@ block content
     div(id="menu" class="center")
       h1 Loteria 
       
-      if displayName
-        p Hello, #{displayName}
-      
-      br
-      div(class="input-group")
-        input(id="joinGame" class="form-control" placeholder="Secret link")
-        span(class="input-group-btn")
-          button(type="submit" class="btn btn-default") Join
-      
+      if success
+        p #{success}
+        p Share this link for people to join:
+        div(class="input-group")
+          input(id="secretLink" class="form-control" placeholder="#{gameLink}")
+      else
+        if displayName
+          p Hello, #{displayName}
+        p Rules for the game: Diagonals, inner square, outer square, many people can join.
+        p #{error}
+        br
+        form(action="" method="post" class="input-group")
+          input(id="password" class="form-control" placeholder="Password")
+          span(class="input-group-btn")
+            button(id="create" class="btn btn-default") Create
+    
     
   script.
     $(document).ready( function () {

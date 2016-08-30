@@ -13,6 +13,19 @@ var strategy = require('./setup-passport');
 
 var Auth0Strategy = require('passport-auth0');
 
+// variables for client/host management
+var debug = false;
+var timeOutDelay = 2500;
+var maxPlayers = 4; // per game
+if (debug) {
+    maxPlayers = 2;
+}
+
+var clientPlayers = {};
+var clients = {};
+var hosts = {};
+var games = [];
+
 // db connection
 var mongoose = require('mongoose');
 const MONGO_HOST = process.env.OPENSHIFT_MONGODB_DB_HOST;
@@ -33,24 +46,6 @@ var app = express();
 // io setup
 var server = require('http').Server(app);
 var io = global.io = app.io = socketio();
-
-io.on('connection', function(socket) {
-  console.log('--- user connected ---');
-
-  socket.on('join', function(data) {
-    console.log('Client says: ' + data);
-  });
-
-  socket.on('chat message', function(msg) {
-    // send to everyone except the one who started it
-    socket.broadcast.emit('chat message', msg);
-    console.log('>' + msg);
-  });
-
-  socket.on('disconnect', function() {
-    console.log('-- user disconnected --');
-  });
-});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -73,6 +68,7 @@ app.use('/', routes);
 app.get('*', function(req, res, next) {
   if(req.user){
     req.session.user = req.user;
+    req.session.user_id = req.session.user._json.user_id;
   }
   next();
 });
@@ -89,7 +85,6 @@ app.get('/callback',
 
 app.get('/login', function (req, res) {
   req.session.user = req.user;
-  // res.send(req.user);
   res.redirect('/'); // index
 
 });
@@ -130,6 +125,43 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+
+io.on('connection', function(socket) {
+
+  // app.get('session').socketId = socket.getId();
+
+  var room = io.sockets.adapter.rooms;
+  console.log(room);
+  console.log('--- user ' + socket.id + ' connected ---');
+
+  console.log('room length' + room.length);
+
+  // socket for each session
+  // get socket from saved socket_id
+
+
+  socket.on('join', function(data) {
+    console.log('Client says: ' + data);
+
+  });
+
+  socket.on('chat message', function(msg) {
+    // send to everyone except the one who started it
+    socket.broadcast.emit('chat message', msg);
+    console.log('>' + msg);
+  });
+
+  socket.on('disconnect', function() {
+    console.log('-- user disconnected --');
+  });
+});
+
+
+
+
+
+
 
 
 module.exports = app;
