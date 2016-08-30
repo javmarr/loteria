@@ -20,7 +20,8 @@ function generateRandomID() {
 
 function addGameToUser(req, res, next) {
   var userID = req.session.user_id;
-  var tempGames = {};
+  var savedGames; // array of games
+  var newGame = {}; // just the new game
 
   // check if userID is on the database
   User.findOne({'userID': userID }, function(err, user){
@@ -29,41 +30,45 @@ function addGameToUser(req, res, next) {
       res.rediret('/create');
     }
     if (user) {
-      // found, get values
+      // found
       console.log('user is: ');
       console.log(user);
 
+      // get values
       savedGames = user.games;
-      console.log(user.games);
-      // set values for the game
-      tempGames['gameID'] = generateRandomID();
-      tempGames['deck'] = user.deck;
-      tempGames['boards'] = user.boards;
-      console.log(tempGames);
+      // console.log(user.games);
+
+      // set values for the new game
+      newGame['gameID'] = generateRandomID();
+      newGame['deck'] = user.deck;
+      newGame['boards'] = user.boards;
+      console.log(newGame);
 
       // make sure id is different from the other games the user has
 
-      // update the db entry
-      // Cart.update({'userid': ID}, {
-      //   itemid: newitems}, { multi: true }, function(err, raw){
-      //     if (err) return handleError(err);
-      //     console.log('The raw response from Mongo was ', raw);
-      // })
+      // add to savedGames
+      savedGames.push(newGame);
+
+      // update the db entry using the old + new games
+      User.findOneAndUpdate({'userID': userID}, {games: savedGames}, function(err, raw){
+          if (err) return handleError(err);
+          console.log('The raw response from Mongo was ', raw);
+      });
     } else {
       // userID not found, make a new entry
       var tempDeck = [1,2,45];
       var tempBoards = ["1,-1,39,28,1", "1,29,2,5,7"];
-      tempGames['gameID'] = generateRandomID();
-      tempGames['deck'] = tempDeck;
-      tempGames['boards'] = tempBoards;
+      newGame['gameID'] = generateRandomID();
+      newGame['deck'] = tempDeck;
+      newGame['boards'] = tempBoards;
 
-      console.log(tempGames);
+      console.log(newGame);
 
       // save the user with the new information
       // console.log(JSON.stringify(result, null, '  '));
       var user = new User({
         userID: userID,
-        games: tempGames
+        games: newGame
       });
 
       user.save(function(err){
