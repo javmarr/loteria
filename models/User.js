@@ -3,7 +3,8 @@ var mongoose = require('mongoose');
 var UserSchema = new mongoose.Schema({
   userID: {type: String, required: true, unique: true},
   games: [{
-    gameID: String,
+    gameID: {type: String, required: true},
+    boardLayout: {type: String, required: true},
     deck: Array,
     boards: Array
   }]

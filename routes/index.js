@@ -4,7 +4,13 @@ var router = express.Router();
 
 var User = require('../models/User.js');
 
+// get only games
+// db.getCollection('users').find({}, { games: 1})
 
+// find user that is hosting a certain game
+// db.getCollection('users').find({"games.gameID" : "3AZBYjMRlF" }, { games: 1})
+
+var maxGamesPerPlayer = 5; // no more for each player
 
 function generateRandomID() {
   var keyLength = 10;
@@ -22,6 +28,7 @@ function addGameToUser(req, res, next) {
   var userID = req.session.user_id;
   var savedGames; // array of games
   var newGame = {}; // just the new game
+  var boardLayout = req.body.boardLayout;
 
   // check if userID is on the database
   User.findOne({'userID': userID }, function(err, user){
@@ -38,27 +45,38 @@ function addGameToUser(req, res, next) {
       savedGames = user.games;
       // console.log(user.games);
 
-      // set values for the new game
-      newGame['gameID'] = generateRandomID();
-      newGame['deck'] = user.deck;
-      newGame['boards'] = user.boards;
-      console.log(newGame);
+      // check number of games
+      if (savedGames.length >= maxGamesPerPlayer) {
+        req.session.error = 'Cannot create more than ' + maxGamesPerPlayer + ' games.';
+        res.redirect('/create');
+      } else {
+        // can add more games
+        // set values for the new game
+        newGame['gameID'] = generateRandomID();
+        newGame['boardLayout'] = boardLayout;
+        newGame['deck'] = user.deck;
+        newGame['boards'] = user.boards;
+        console.log(newGame);
 
-      // make sure id is different from the other games the user has
+        // make sure id is different from the other games the user has
 
-      // add to savedGames
-      savedGames.push(newGame);
+        // add to savedGames
+        savedGames.push(newGame);
 
-      // update the db entry using the old + new games
-      User.findOneAndUpdate({'userID': userID}, {games: savedGames}, function(err, raw){
-          if (err) return handleError(err);
-          console.log('The raw response from Mongo was ', raw);
-      });
+        // update the db entry using the old + new games
+        User.findOneAndUpdate({'userID': userID}, {games: savedGames}, function(err, raw){
+            if (err) return handleError(err);
+            // console.log('The raw response from Mongo was ', raw);
+            req.session.success = 'Game created';
+            res.redirect('/create');
+        });
+      }
     } else {
       // userID not found, make a new entry
       var tempDeck = [1,2,45];
       var tempBoards = ["1,-1,39,28,1", "1,29,2,5,7"];
       newGame['gameID'] = generateRandomID();
+      newGame['boardLayout'] = boardLayout;
       newGame['deck'] = tempDeck;
       newGame['boards'] = tempBoards;
 
@@ -119,7 +137,7 @@ router.post('/create', function(req, res, next) {
   // req.session.error = "Post create";
   // req.session.success = "It worked"
   // res.redirect('/create');
-
+  console.log('\n\n\n\n\n');
   console.log('post create called');
   addGameToUser(req, res, next);
 

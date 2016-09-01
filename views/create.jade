@@ -7,21 +7,28 @@ block content
       h1 Loteria 
       
       if success
-        p #{success}
+        p(class="green") #{success}
         p Share this link for people to join:
         div(class="input-group")
-          input(id="secretLink" class="form-control" placeholder="#{gameLink}")
+          input(id="gameLink" class="form-control" placeholder="#{gameLink}")
       else
-        if displayName
-          p Hello, #{displayName}
+        
         p Rules for the game: Diagonals, inner square, outer square, many people can join.
-        p #{error}
+        p(class="red") #{error}
         br
-        form(action="" method="post" class="input-group")
-          input(id="password" class="form-control" placeholder="Password")
-          span(class="input-group-btn")
-            button(id="create" class="btn btn-default") Create
-    
+
+        form(action="" method="post")
+          div(class="cc-selector")
+            input(checked="checked" id="fullBoard" type="radio" name="boardLayout" value="fullBoard")
+            label(class="drinkcard-cc fullBoard" for="fullBoard")
+            input(id="halfBoard" type="radio" name="boardLayout" value="halfBoard")
+            label(class="drinkcard-cc halfBoard right" for="halfBoard")
+          div(class="input-group")
+            input(id="password" class="form-control" placeholder="Password")
+            span(class="input-group-btn")
+              button(id="create" class="btn btn-primary") Create
+      br
+      a(href="/" class="btn btn-default btn-block") Back
     
   script.
     $(document).ready( function () {
