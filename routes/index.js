@@ -29,12 +29,17 @@ function addGameToUser(req, res, next) {
   var savedGames; // array of games
   var newGame = {}; // just the new game
   var boardLayout = req.body.boardLayout;
+  var gameID = generateRandomID();
+
+  // set values for the new game
+  newGame['gameID'] = gameID;
+  newGame['boardLayout'] = boardLayout;
 
   // check if userID is on the database
   User.findOne({'userID': userID }, function(err, user){
     if (err) {
       req.session.error = "Error when finding userID in create";
-      res.rediret('/create');
+      res.redirect('/create');
     }
     if (user) {
       // found
@@ -52,10 +57,8 @@ function addGameToUser(req, res, next) {
       } else {
         // can add more games
         // set values for the new game
-        newGame['gameID'] = generateRandomID();
-        newGame['boardLayout'] = boardLayout;
-        newGame['deck'] = user.deck;
-        newGame['boards'] = user.boards;
+        newGame['deck'] = user.games.deck;
+        newGame['boards'] = user.games.boards;
         console.log(newGame);
 
         // make sure id is different from the other games the user has
@@ -68,6 +71,7 @@ function addGameToUser(req, res, next) {
             if (err) return handleError(err);
             // console.log('The raw response from Mongo was ', raw);
             req.session.success = 'Game created';
+            req.session.gameID = gameID;
             res.redirect('/create');
         });
       }
@@ -75,8 +79,6 @@ function addGameToUser(req, res, next) {
       // userID not found, make a new entry
       var tempDeck = [1,2,45];
       var tempBoards = ["1,-1,39,28,1", "1,29,2,5,7"];
-      newGame['gameID'] = generateRandomID();
-      newGame['boardLayout'] = boardLayout;
       newGame['deck'] = tempDeck;
       newGame['boards'] = tempBoards;
 
@@ -124,6 +126,7 @@ router.get('/create', function(req, res, next) {
   if (req.user) {
     res.locals.error = req.session.error;
     res.locals.success = req.session.success;
+    res.locals.gameID = req.session.gameID;
     req.session.error = null;
     req.session.success = null;
     res.render('create', {displayName: req.session.user.displayName});
@@ -137,7 +140,6 @@ router.post('/create', function(req, res, next) {
   // req.session.error = "Post create";
   // req.session.success = "It worked"
   // res.redirect('/create');
-  console.log('\n\n\n\n\n');
   console.log('post create called');
   addGameToUser(req, res, next);
 
@@ -146,9 +148,13 @@ router.post('/create', function(req, res, next) {
 
 router.get('/join', function(req, res, next) {
   if (req.user) {
+    res.locals.error = req.session.error;
+    res.locals.success = req.session.success;
+    req.session.error = null;
+    req.session.success = null;
     res.render('join', {displayName: req.session.user.displayName});
   } else {
-    res.render('join');
+    res.redirect('/');
   }
 });
 
@@ -165,15 +171,28 @@ router.post('/join', function(req, res, next) {
 
   // send to login/error page if failed
   console.log(req.body.nickname);
-  console.log(req.body.secretLink);
+  console.log(req.body.secretCode);
 
-  res.send(req.body.nickname + " " + req.body.secretLink);
+  res.send(req.body.nickname + " " + req.body.secretCode);
 });
 
 router.get('/loteria/:gameID', function(req, res, next) {
-  var gameID = req.params.gameID;
-  console.log(gameID);
   if (req.user) {
+    var gameID = req.params.gameID;
+    console.log(gameID);
+
+    // get the game from the db
+    User.findOne({"games.gameID" : gameID }, function (err, user) {
+      if (err) {
+        req.session.error = "Error when finding userID in create";
+        res.redirect('/join');
+      }
+      if (user) {
+        console.log("loteria get (user):");
+        console.log(user);
+      }
+    });
+
     res.render('loteria', { gameID: gameID});
   }
   res.redirect('/');

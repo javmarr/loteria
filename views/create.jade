@@ -8,11 +8,10 @@ block content
       
       if success
         p(class="green") #{success}
-        p Share this link for people to join:
+        p Share this code to let people join the game:
         div(class="input-group")
-          input(id="gameLink" class="form-control" placeholder="#{gameLink}")
+          input(class="form-control" value="#{gameID}")
       else
-        
         p Rules for the game: Diagonals, inner square, outer square, many people can join.
         p(class="red") #{error}
         br

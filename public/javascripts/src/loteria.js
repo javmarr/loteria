@@ -1,3 +1,4 @@
+
 var loteria = function(game){
   cardsDealt = [];
   deck = [];
@@ -38,13 +39,14 @@ loteria.prototype = {
 
     cardImage.inputEnabled = true;
     cardImage.events.onInputUp.add(this.changeCard, this);
+    console.log("\n\n\n\n\nOn loteria (gameID) " + gameID);
   },
 
   generateDeck: function() {
     for(var i = 1; i <= deckSize; i++) {
       deck.push(i);
     }
-    },
+  },
 
   shuffleDeck: function() {
     var times = deckSize; // swap these many times

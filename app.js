@@ -84,7 +84,7 @@ app.get('/callback',
   });
 
 app.get('/login', function (req, res) {
-  req.session.user = req.user;
+  // req.session.user = req.user;
   res.redirect('/'); // index
 
 });
