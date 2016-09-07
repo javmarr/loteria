@@ -10,8 +10,10 @@ block content
   script(src="../javascripts/src/gameOver.js")
   
   script.
-    var gameID = "#{gameID}"
+    var gameID = "#{gameID}";
+    var nickname = "#{nickname}";
     console.log("On jade (gameID) " + gameID);
+    console.log("On jade (nickname) " + nickname);
     
     var game = new Phaser.Game(480, 800, Phaser.AUTO, "game");
     game.state.add("Boot", boot);
@@ -38,3 +40,4 @@ block content
 
   div(id="game" class="vertical-center")
       h1 Loteria
+      a(href="../" class="btn btn-default btn-block") Back

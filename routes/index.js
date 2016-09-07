@@ -2,6 +2,7 @@
 var express = require('express');
 var router = express.Router();
 
+
 var User = require('../models/User.js');
 
 // get only games
@@ -32,7 +33,6 @@ function addGameToUser(req, res, next) {
   var gameID = generateRandomID();
 
   // set values for the new game
-  newGame['gameID'] = gameID;
   newGame['boardLayout'] = boardLayout;
 
   // check if userID is on the database
@@ -43,8 +43,8 @@ function addGameToUser(req, res, next) {
     }
     if (user) {
       // found
-      console.log('user is: ');
-      console.log(user);
+      // console.log('user is: ');
+      // console.log(user);
 
       // get values
       savedGames = user.games;
@@ -56,12 +56,20 @@ function addGameToUser(req, res, next) {
         res.redirect('/create');
       } else {
         // can add more games
+
+        // make sure id is different from the other games the user has
+        for (var i = 0; i < savedGames.length; i++) {
+          while (savedGames[i].gameID == gameID){
+            gameID = generateRandomID();
+          }
+        }
+
+
         // set values for the new game
+        newGame['gameID'] = gameID;
         newGame['deck'] = user.games.deck;
         newGame['boards'] = user.games.boards;
         console.log(newGame);
-
-        // make sure id is different from the other games the user has
 
         // add to savedGames
         savedGames.push(newGame);
@@ -79,6 +87,7 @@ function addGameToUser(req, res, next) {
       // userID not found, make a new entry
       var tempDeck = [1,2,45];
       var tempBoards = ["1,-1,39,28,1", "1,29,2,5,7"];
+      newGame['gameID'] = gameID;
       newGame['deck'] = tempDeck;
       newGame['boards'] = tempBoards;
 
@@ -101,6 +110,7 @@ function addGameToUser(req, res, next) {
           }
         } else {
           req.session.success = 'Game created';
+          req.session.gameID = gameID;
           res.redirect('/create');
         }
       });
@@ -147,14 +157,15 @@ router.post('/create', function(req, res, next) {
 
 
 router.get('/join', function(req, res, next) {
+  res.locals.error = req.session.error;
+  res.locals.success = req.session.success;
+  req.session.error = null;
+  req.session.success = null;
+
   if (req.user) {
-    res.locals.error = req.session.error;
-    res.locals.success = req.session.success;
-    req.session.error = null;
-    req.session.success = null;
     res.render('join', {displayName: req.session.user.displayName});
   } else {
-    res.redirect('/');
+    res.render('join');
   }
 });
 
@@ -170,32 +181,47 @@ router.post('/join', function(req, res, next) {
   // send them to the game if joined
 
   // send to login/error page if failed
-  console.log(req.body.nickname);
-  console.log(req.body.secretCode);
-
-  res.send(req.body.nickname + " " + req.body.secretCode);
+  console.log(req.body.nicknameContainer);
+  console.log(req.body.secretCodeContainer);
+  req.session.nickname = req.body.nicknameContainer
+  // res.send(req.body.nicknameContainer + " " + req.body.secretCodeContainer);
+  res.redirect('/loteria/' + req.body.secretCodeContainer);
 });
 
 router.get('/loteria/:gameID', function(req, res, next) {
-  if (req.user) {
+  if (req.session.nickname) {
     var gameID = req.params.gameID;
-    console.log(gameID);
+    var nickname = req.session.nickname;
+    console.log('nickname: ' + nickname);
+    console.log('gameID: ' + gameID);
 
     // get the game from the db
     User.findOne({"games.gameID" : gameID }, function (err, user) {
+      console.log(err);
+      console.log('user');
+      console.log(user);
       if (err) {
+        console.log('err');
         req.session.error = "Error when finding userID in create";
         res.redirect('/join');
       }
       if (user) {
+        console.log('user');
         console.log("loteria get (user):");
         console.log(user);
+        
+        res.render('loteria', {gameID: gameID, nickname: nickname});
+      } else {
+        req.session.error = "Game doesn't exist";
+        res.redirect('/join');
       }
-    });
 
-    res.render('loteria', { gameID: gameID});
+    });
+  } else {
+    res.redirect('/');
+    // res.send('no nickname');
   }
-  res.redirect('/');
+
 });
 
 module.exports = router;

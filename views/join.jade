@@ -7,28 +7,21 @@ block content
     div(id="menu" class="center")
       h1 Loteria 
       br
-      form(action="/" method="post")
-        input(name="nicknameContainer" class="form-control" placeholder="Nickname" value="#{displayName}")
-        div(class="input-group")
-          input(name="secretCodeContainer" class="form-control" placeholder="Secret code" value="ZvSEcHKQ4Q")
-          span(class="input-group-btn")
-            input(id="joinGame" type="submit" class="btn btn-primary" value="Join")
+      form(action="/join" method="post")
+        if displayName
+          input(name="nicknameContainer" class="form-control" placeholder="Nickname" value="#{displayName}" required)
+        else
+          input(name="nicknameContainer" class="form-control" placeholder="Nickname" value="bob" required)
+          div(class="input-group")
+            input(name="secretCodeContainer" class="form-control" placeholder="Secret code" value="yrbULUnYYV" required)
+            span(class="input-group-btn")
+              input(id="joinGame" type="submit" class="btn btn-primary" value="Join")
       br
       p(class="red") #{error}
       p(class="green") #{success}
       a(href="../" class="btn btn-default btn-block") Back
     
   script.
-    $("#joinGame").click(function () {
-        $("#buttonsContainer").addClass("hide");
-        $("#formContainer").removeClass("hide");
-
-        if (hash.length > 0) {
-            $("#inputGameId").val(hash);
-        }
-        $("#inputGameId").select();
-    });
-    
     $("#joinGameId").click(function () {
         $("#connect").addClass("hide");
 

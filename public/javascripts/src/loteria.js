@@ -40,6 +40,7 @@ loteria.prototype = {
     cardImage.inputEnabled = true;
     cardImage.events.onInputUp.add(this.changeCard, this);
     console.log("\n\n\n\n\nOn loteria (gameID) " + gameID);
+    console.log("\nOn loteria (nickname) " + nickname);
   },
 
   generateDeck: function() {
