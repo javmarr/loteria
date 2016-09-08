@@ -12,10 +12,10 @@ block content
           input(name="nicknameContainer" class="form-control" placeholder="Nickname" value="#{displayName}" required)
         else
           input(name="nicknameContainer" class="form-control" placeholder="Nickname" value="bob" required)
-          div(class="input-group")
-            input(name="secretCodeContainer" class="form-control" placeholder="Secret code" value="yrbULUnYYV" required)
-            span(class="input-group-btn")
-              input(id="joinGame" type="submit" class="btn btn-primary" value="Join")
+        div(class="input-group")
+          input(name="secretCodeContainer" class="form-control" placeholder="Secret code" value="yrbULUnYYV" required)
+          span(class="input-group-btn")
+            input(id="joinGame" type="submit" class="btn btn-primary" value="Join")
       br
       p(class="red") #{error}
       p(class="green") #{success}

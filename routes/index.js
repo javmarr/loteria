@@ -12,6 +12,31 @@ var User = require('../models/User.js');
 // db.getCollection('users').find({"games.gameID" : "3AZBYjMRlF" }, { games: 1})
 
 var maxGamesPerPlayer = 5; // no more for each player
+var deckSize = 54; // cards in deck
+
+function shuffleDeck(deck) {
+  var size = deck.length;
+  var output = deck;
+  // every card, swap to a random spot
+  for (var i = 0; i < size; i++) {
+    var temp = output[i];
+    var random = ((Math.floor(Math.random() * 100)) % size); // 0 - (deckSize-1)
+
+    // swap values
+    output[i] = output[random];
+    output[random] = temp;
+  }
+  return output;
+}
+
+function generateDeck(size) {
+  var deck = [];
+  for(var i = 1; i <= size; i++) {
+    deck.push(i);
+  }
+  deck = shuffleDeck(deck);
+  return deck;
+}
 
 function generateRandomID() {
   var keyLength = 10;
@@ -25,15 +50,66 @@ function generateRandomID() {
   return key;
 }
 
+function saveDeckToGame(gameID, userID, newDeck, callback) {
+
+  console.log("SAVING DECK TO GAME: " + gameID);
+  User.update({'userID': userID, 'games.gameID': gameID},
+              {$set: {'games.$.deck': newDeck}},
+              function(err, doc) {
+                callback(err, doc);
+              });
+
+}
+
+// assumes the user exists, this function will add a newGame to their db entry
+function saveGame(newGame, user, userID, req, res, next) {
+  // get values
+  var savedGames = user.games;
+  var gameID = generateRandomID();
+  // console.log(user.games);
+
+  // check number of games
+  if (savedGames.length >= maxGamesPerPlayer) {
+    req.session.error = 'Cannot create more than ' + maxGamesPerPlayer + ' games.';
+    res.redirect('/create');
+  } else {
+    // can add more games
+    // make sure id is different from the other games the user has
+    for (var i = 0; i < savedGames.length; i++) {
+      while (savedGames[i].gameID == gameID){
+        gameID = generateRandomID();
+      }
+    }
+
+    // set values for the new game
+    newGame['gameID'] = gameID;
+    newGame['boards'] = [];
+    console.log(newGame);
+
+    // add to savedGames
+    savedGames.push(newGame);
+
+    // update the db entry using the old + new games
+    User.findOneAndUpdate({'userID': userID}, {games: savedGames}, function(err, raw){
+        if (err) return handleError(err);
+        // console.log('The raw response from Mongo was ', raw);
+        req.session.success = 'Game created';
+        req.session.gameID = gameID;
+        res.redirect('/create');
+    });
+  }
+}
+
 function addGameToUser(req, res, next) {
   var userID = req.session.user_id;
-  var savedGames; // array of games
+
   var newGame = {}; // just the new game
   var boardLayout = req.body.boardLayout;
-  var gameID = generateRandomID();
-
+  var newDeck = generateDeck(deckSize);
   // set values for the new game
   newGame['boardLayout'] = boardLayout;
+  newGame['deck'] = newDeck;
+  newGame['turn'] = 0;
 
   // check if userID is on the database
   User.findOne({'userID': userID }, function(err, user){
@@ -42,53 +118,15 @@ function addGameToUser(req, res, next) {
       res.redirect('/create');
     }
     if (user) {
-      // found
-      // console.log('user is: ');
-      // console.log(user);
+      // user found, add game to their entry
+      saveGame(newGame, user, userID, req, res, next);
 
-      // get values
-      savedGames = user.games;
-      // console.log(user.games);
-
-      // check number of games
-      if (savedGames.length >= maxGamesPerPlayer) {
-        req.session.error = 'Cannot create more than ' + maxGamesPerPlayer + ' games.';
-        res.redirect('/create');
-      } else {
-        // can add more games
-
-        // make sure id is different from the other games the user has
-        for (var i = 0; i < savedGames.length; i++) {
-          while (savedGames[i].gameID == gameID){
-            gameID = generateRandomID();
-          }
-        }
-
-
-        // set values for the new game
-        newGame['gameID'] = gameID;
-        newGame['deck'] = user.games.deck;
-        newGame['boards'] = user.games.boards;
-        console.log(newGame);
-
-        // add to savedGames
-        savedGames.push(newGame);
-
-        // update the db entry using the old + new games
-        User.findOneAndUpdate({'userID': userID}, {games: savedGames}, function(err, raw){
-            if (err) return handleError(err);
-            // console.log('The raw response from Mongo was ', raw);
-            req.session.success = 'Game created';
-            req.session.gameID = gameID;
-            res.redirect('/create');
-        });
-      }
     } else {
-      // userID not found, make a new entry
-      var tempDeck = [1,2,45];
+      // userID not found, make a new user entry
       var tempBoards = ["1,-1,39,28,1", "1,29,2,5,7"];
+      var gameID = generateRandomID();
+      newGame['cardsDealt'] = [];
       newGame['gameID'] = gameID;
-      newGame['deck'] = tempDeck;
       newGame['boards'] = tempBoards;
 
       console.log(newGame);
@@ -132,6 +170,23 @@ router.get('/', function(req, res, next) {
   res.render('index', { DOMAIN: process.env.DOMAIN, CLIENT_ID: process.env.CLIENT_ID, REDIRECT_URL: process.env.CALLBACK_URL, returnToURL: returnToURL});
 });
 
+router.get('/monitor', function(req, res, next) {
+  if (req.user) {
+    // user logged in, retrieve games from them
+    var userID = req.session.user_id;
+
+    User.findOne({'userID': userID}, function(err, docs){
+
+      if (err) { res.send('Error getting games');}
+      res.send(docs.games);
+      // res.render('monitor', {games: docs.games});
+    });
+  } else {
+    res.redirect('/');
+  }
+
+});
+
 router.get('/create', function(req, res, next) {
   if (req.user) {
     res.locals.error = req.session.error;
@@ -170,16 +225,6 @@ router.get('/join', function(req, res, next) {
 });
 
 router.post('/join', function(req, res, next) {
-
-  // get room number from link
-
-  // var roomID = str.substring(str.lastIndexOf('/') + 1);
-
-  // call socket io join
-  // socket.join(roomID)
-
-  // send them to the game if joined
-
   // send to login/error page if failed
   console.log(req.body.nicknameContainer);
   console.log(req.body.secretCodeContainer);
@@ -188,7 +233,38 @@ router.post('/join', function(req, res, next) {
   res.redirect('/loteria/' + req.body.secretCodeContainer);
 });
 
+// game variable related
+
+router.get('/newDeck/:gameID', function(req, res, next) {
+  if (req.user) {
+    var userID = req.session.user_id;
+    var gameID = req.params.gameID;
+    var newDeck = generateDeck(deckSize);
+
+    // test callback using
+    // saveDeckToGame(gameID, function);
+    saveDeckToGame(gameID, userID, newDeck, function(err, doc) {
+      if (err) { res.send("error with adding new deck to game: " + err); }
+
+      if (doc.n == 0) {
+        // n indicates how many documents where selected for update
+        res.send("game not valid (doesn't exist or user is not the owner): " + gameID);
+      }
+      else if (doc.nModified == 0) {
+        res.send("didn't change values for: " + gameID);
+      }
+      else {
+        res.send({deck: newDeck});
+      }
+    });
+
+  } else {
+    res.redirect('/');
+  }
+});
+
 router.get('/loteria/:gameID', function(req, res, next) {
+  // anyone who typed a nickname
   if (req.session.nickname) {
     var gameID = req.params.gameID;
     var nickname = req.session.nickname;
@@ -209,7 +285,7 @@ router.get('/loteria/:gameID', function(req, res, next) {
         console.log('user');
         console.log("loteria get (user):");
         console.log(user);
-        
+
         res.render('loteria', {gameID: gameID, nickname: nickname});
       } else {
         req.session.error = "Game doesn't exist";
