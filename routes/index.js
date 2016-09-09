@@ -299,14 +299,14 @@ router.get('/nextCard/:gameID.json', function(req, res, next) {
       console.log(doc);
 
       // increment turn
-      User.findOneAndUpdate({'userID': userID, 'games.gameID': gameID},
+      User.findOneAndUpdate({'games.gameID': gameID},
                   {$inc: {'games.$.turn': 1}},
                   function(err, result) {
                     console.log('--inc turn result');
                     console.log(err);
                     console.log(result);
-                    var deck = result['games'][0]['deck'];
-                    var turn = result['games'][0]['turn'];
+                    var deck = doc['games'][0]['deck'];
+                    var turn = doc['games'][0]['turn'];
                     console.log(deck);
                     console.log(turn);
                     res.send({error: null, turn: turn});
