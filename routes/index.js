@@ -286,6 +286,38 @@ router.get('/removeGame/:gameID', function(req, res, next) {
   }
 });
 
+router.get('/nextCard/:gameID.json', function(req, res, next) {
+  if (req.user) {
+    var userID = req.session.user_id;
+    var gameID = req.params.gameID;
+    console.log('searching for: ' + gameID);
+    //return only the game matching the id
+    User.findOne({'games.gameID': gameID}, {"games.$.deck" : 1}, function(err, doc) {
+      if (err) { res.send({error: err}); }
+      console.log(err);
+      console.log("doc");
+      console.log(doc);
+
+      // increment turn
+      User.findOneAndUpdate({'userID': userID, 'games.gameID': gameID},
+                  {$inc: {'games.$.turn': 1}},
+                  function(err, result) {
+                    console.log('--inc turn result');
+                    console.log(err);
+                    console.log(result);
+                    var deck = result['games'][0]['deck'];
+                    var turn = result['games'][0]['turn'];
+                    console.log(deck);
+                    console.log(turn);
+                    res.send({error: null, turn: turn});
+                  });
+
+    });
+  } else {
+    res.send({error: 'error: action not valid'});
+  }
+});
+
 router.get('/deck/:gameID.json', function(req, res, next) {
   var gameID = req.params.gameID;
   console.log('searching for: ' + gameID);
@@ -296,9 +328,10 @@ router.get('/deck/:gameID.json', function(req, res, next) {
     console.log("doc");
     console.log(doc);
     var deck = doc['games'][0]['deck'];
+    var turn = doc['games'][0]['turn'];
     console.log(deck);
     // doc.games[gameID]
-    res.send({error: null, deck: deck});
+    res.send({error: null, deck: deck, turn: turn});
   });
 });
 
@@ -336,6 +369,40 @@ router.get('/newDeck/:gameID', function(req, res, next) {
     res.send('error');
   }
 });
+
+router.get('/dealGame/:gameID', function(req, res, next) {
+  // anyone who typed a nickname
+  if (req.user) {
+    var gameID = req.params.gameID;
+    var userID = req.session.user_id;
+    console.log('gameID: ' + gameID);
+
+    // get the game from the db only if the user created it
+    User.findOne({"userID": userID, "games.gameID": gameID }, function (err, user) {
+      console.log(err);
+      console.log('user');
+      console.log(user);
+      if (err) {
+        console.log('err');
+        req.session.error = "Error when finding userID in dealGame";
+        res.redirect('/monitor');
+      }
+      if (user) {
+        // success
+        res.render('loteria', {gameID: gameID, dealer: true});
+      } else {
+        req.session.error = "Game doesn't exist";
+        res.redirect('/monitor');
+      }
+
+    });
+  } else {
+    res.redirect('/');
+    // res.send('no nickname');
+  }
+
+});
+
 
 router.get('/loteria/:gameID', function(req, res, next) {
   // anyone who typed a nickname

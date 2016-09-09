@@ -15,6 +15,7 @@ block content
           th name
           th layout
           th share
+          th dealer
           
         each game in games
           tr
@@ -24,6 +25,8 @@ block content
             td #{game.boardLayout}
             td
               input(type="text" name="qtyText" value="#{game.gameID}")
+            td
+              a(href="dealGame/#{game.gameID}" class="btn btn-default dealButton") go
       br
       a(href="/" class="btn btn-default btn-block") Back
     
