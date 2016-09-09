@@ -1,3 +1,13 @@
+/*
+TODO:
+  WORK ON TURNS ($INC)
+  RESET WHEN MAKING NEW deck
+  USE JAVASCRIPT TO CHANGE CANVAS
+  BOARD GENERATION WHEN JOINING games
+  VIEW FOR "DEALER"
+  boards have nickname
+*/
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');

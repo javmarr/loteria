@@ -14,20 +14,14 @@ block content
           th 
           th name
           th layout
-          th players
           th share
           
         each game in games
           tr
             td
               button(class="btn btn-primary removeButton" id="#{game.gameID}") delete
-            td #{game.gameName} jkljkj
+            td #{game.gameName}
             td #{game.boardLayout}
-            td 
-              form(action="remove", method="post")
-                input(type="hidden", name="act", value="update")
-                input(type="hidden", name="id", value="#{game.gameID}")
-                input(type="text" name="qtyText" value="temp")
             td
               input(type="text" name="qtyText" value="#{game.gameID}")
       br

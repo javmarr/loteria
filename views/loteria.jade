@@ -22,7 +22,13 @@ block content
     game.state.add("Loteria", loteria);
     game.state.add("GameOver", gameOver);
     
-    game.state.start("Boot");
+    var deck = [];
+    jQuery.getJSON('/deck/'+gameID+'.json', function(json) {
+        deck = json['deck'];
+        //- console.log(deck);
+        game.state.start("Boot");
+    });
+    
     
     socket.on('connect', function(data) {
       socket.emit('join', 'Hello World from client');

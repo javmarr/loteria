@@ -197,8 +197,17 @@ router.get('/monitor', function(req, res, next) {
       console.log(err);
       console.log(docs);
       if (err) { res.send('Error getting games');}
-      // res.send(docs.games);
-      if (docs) {res.render('monitor', {games: docs.games});}
+
+      if (docs) {
+        if (docs.games.length <= 0) {
+          // user exist but erased all games
+          req.session.error = 'error: no games exist';
+          res.redirect('/');
+        } else {
+          res.render('monitor', {games: docs.games});
+        }
+
+      }
       else {
         req.session.error = 'error: no games created';
         res.redirect('/');
@@ -267,7 +276,7 @@ router.get('/removeGame/:gameID', function(req, res, next) {
         res.send("error removing game from user");
       }
       else {
-        req.session.success = "successfully removed game: " + gameID;
+        req.session.success = "successfully removed game";
         res.send('success');
       }
     });
@@ -275,6 +284,22 @@ router.get('/removeGame/:gameID', function(req, res, next) {
     req.session.error = 'invalid user';
     res.send('error');
   }
+});
+
+router.get('/deck/:gameID.json', function(req, res, next) {
+  var gameID = req.params.gameID;
+  console.log('searching for: ' + gameID);
+  //return only the game matching the id
+  User.findOne({'games.gameID': gameID}, {"games.$.deck" : 1}, function(err, doc) {
+    if (err) { res.send({error: err}); }
+    console.log(err);
+    console.log("doc");
+    console.log(doc);
+    var deck = doc['games'][0]['deck'];
+    console.log(deck);
+    // doc.games[gameID]
+    res.send({error: null, deck: deck});
+  });
 });
 
 router.get('/newDeck/:gameID', function(req, res, next) {

@@ -1,20 +1,15 @@
 
 var loteria = function(game){
-  cardsDealt = [];
-  deck = [];
-  deckSize = 54;
   cardNumber = 0; // index for a card in the deck (0-deckSize-1)
   turn = 0; // 1-deckSize
-
+  cardsDealt = [];
+  deckSize = 0;
 };
 
 loteria.prototype = {
   preload: function() {
-    this.generateDeck();
-    console.log('Before' + deck);
-    this.shuffleDeck();
-    console.log('After shuffle: ' + deck);
     cardNumber = 0;
+    deckSize = deck.length;
     turn = 1;
     console.log('preload loteria.js');
   },
