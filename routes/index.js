@@ -413,21 +413,18 @@ router.get('/loteria/:gameID', function(req, res, next) {
     console.log('gameID: ' + gameID);
 
     // get the game from the db
-    User.findOne({"games.gameID" : gameID }, function (err, user) {
+    User.findOne({"games.gameID": gameID}, {"games.$.deck": 1}, function (err, doc) {
       console.log(err);
-      console.log('user');
-      console.log(user);
       if (err) {
         console.log('err');
-        req.session.error = "Error when finding userID in create";
+        req.session.error = "Error when finding docID in create";
         res.redirect('/join');
       }
-      if (user) {
-        console.log('user');
-        console.log("loteria get (user):");
-        console.log(user);
-
-        res.render('loteria', {gameID: gameID, nickname: nickname});
+      if (doc) {
+        console.log("loteria get (doc):");
+        console.log(doc);
+        var boardLayout = doc.games[0]['boardLayout'];
+        res.render('loteria', {gameID: gameID, nickname: nickname, boardLayout: boardLayout});
       } else {
         req.session.error = "Game doesn't exist";
         res.redirect('/join');

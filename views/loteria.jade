@@ -14,42 +14,66 @@ block content
     var gameID = "#{gameID}";
     var dealer = "#{dealer}";
     var nickname = "#{nickname}";
-    var deckSize = 0;
-    var turn = 0;
-    var cardsDealt = [];
-    var cardNumber = 0;
-    var deck = [];
+    var boardLayout = "#{boardLayout}";
     
     console.log("On jade (gameID) " + gameID);
     console.log("On jade (nickname) " + nickname);
     console.log("On jade (dealer) " + dealer);
-    
-    var game = new Phaser.Game(480, 800, Phaser.AUTO, "game");
+    var game = new Phaser.Game(770, 1300, Phaser.AUTO, "game");
     game.state.add("Boot", boot);
     game.state.add("Preload", preload);
     game.state.add("GameTitle", gameTitle);
-    if (dealer) { game.state.add("Loteria", loteriaDealer); }
-    else { game.state.add("Loteria", loteria); }
+    if (dealer) {
+      var deckSize = 0;
+      var turn = 0;
+      var cardsDealt = [];
+      var cardNumber = 0;
+      var deck = [];
+      game.state.add("Loteria", loteriaDealer); 
+      
+      // returns deck and initial turn
+      jQuery.getJSON('/deck/'+gameID+'.json', function(json) {
+          deck = json['deck'];
+          deckSize = deck.length;
+          turn = json['turn'];
+          cardNumber = deck[turn];
+          if (cardsDealt.length == 0) {
+            for (var i = 0; i < turn; i++) {
+              cardsDealt.push(deck[i]); // catch up the cardsDealt
+            }
+          }
+          //- console.log(deck);
+          nextCard();
+          game.state.start("Boot");
+      });
+    }
+    else { 
+      game.state.add("Loteria", loteria); 
+      var gameBoard = generateBoard(boardLayout);
+      var imageBoard = imageBoardFrom(gameBoard);
+      game.state.start("Boot");
+    }
     
     game.state.add("GameOver", gameOver);
     
     
-    // returns deck and initial turn
-    jQuery.getJSON('/deck/'+gameID+'.json', function(json) {
-        deck = json['deck'];
-        deckSize = deck.length;
-        turn = json['turn'];
-        cardNumber = deck[turn];
-        if (cardsDealt.length == 0) {
-          for (var i = 0; i < turn; i++) {
-            cardsDealt.push(deck[i]); // catch up the cardsDealt
-          }
-        }
-        //- console.log(deck);
-        nextCard();
-        game.state.start("Boot");
-    });
-    
+    function imageBoardFrom(board) {
+      var output = [];
+      var size = board.length;
+      var i = 0;
+      while (i < 16) {
+        //- if (size == 8 && ![0,3,5,6,9,10,12,15].includes(i)) {
+          // fill in with blank
+          //- output.push('-');
+        //- } else {
+          output.push('card_' + board[i] + '.png');
+          i++;
+        //- }
+        
+      }
+      console.log("imageboard: " + output);
+      return output;
+    }
     function nextCard() {
       console.log("next card");
       jQuery.getJSON('/nextCard/'+gameID+'.json', function(json) {
@@ -61,6 +85,25 @@ block content
       });
     }
     
+    function generateBoard(layout) {
+      var output = [];
+      var random = 0;
+      var size = 0;
+      size = 16;
+      //- if (layout == "fullBoard") { size = 16; } 
+      //- else { size = 8; }
+      
+      for (var i = 0; i < size; i++) {
+        // no duplicate values
+        do {
+          random = ((Math.floor(Math.random() * 100)) % 54) + 1 ; // 1 -> (size)
+        } while (output.includes(random));
+        output.push(random);
+      }
+      
+      console.log('board output: ' + output);
+      return output;
+    }
     
     socket.on('connect', function(data) {
       socket.emit('join', 'Hello World from client');
