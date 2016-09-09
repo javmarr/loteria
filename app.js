@@ -41,7 +41,7 @@ var mongoose = require('mongoose');
 const MONGO_HOST = process.env.OPENSHIFT_MONGODB_DB_HOST;
 const MONGO_PORT = process.env.OPENSHIFT_MONGODB_DB_PORT;
 const MONGO_PASSWORD = process.env.OPENSHIFT_MONGODB_DB_PASSWORD;
-const DB_NAME = 'spacewars';
+const DB_NAME = 'loteria';
 
 if(MONGO_HOST) {
   mongoose.connect('mongodb://admin:' + MONGO_PASSWORD + '@' + MONGO_HOST + ':' + MONGO_PORT + '/' + DB_NAME);
