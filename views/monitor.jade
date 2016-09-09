@@ -4,33 +4,43 @@ block content
 
   div(class="jumbotron vertical-center")
     div(id="menu" class="center")
-      h1 Loteria 
+      h1 Games Created
       
-      if success
-        p(class="green") #{success}
-        p Share this code to let people join the game:
-        div(class="input-group")
-          input(class="form-control" value="#{gameID}")
-      else
-        p Rules for the game: Diagonals, inner square, outer square, many people can join.
-        p(class="red") #{error}
-        br
-
-        form(action="" method="post")
-          div(class="cc-selector")
-            input(checked="checked" id="fullBoard" type="radio" name="boardLayout" value="fullBoard")
-            label(class="drinkcard-cc fullBoard" for="fullBoard")
-            input(id="halfBoard" type="radio" name="boardLayout" value="halfBoard")
-            label(class="drinkcard-cc halfBoard right" for="halfBoard")
-          div(class="input-group")
-            input(id="password" class="form-control" placeholder="Password")
-            span(class="input-group-btn")
-              button(id="create" class="btn btn-primary") Create
+      p(class="green") #{success}
+      p(class="red") #{error}
+      br
+      table
+        tr
+          th 
+          th name
+          th layout
+          th players
+          th share
+          
+        each game in games
+          tr
+            td
+              button(class="btn btn-primary removeButton" id="#{game.gameID}") delete
+            td #{game.gameName} jkljkj
+            td #{game.boardLayout}
+            td 
+              form(action="remove", method="post")
+                input(type="hidden", name="act", value="update")
+                input(type="hidden", name="id", value="#{game.gameID}")
+                input(type="text" name="qtyText" value="temp")
+            td
+              input(type="text" name="qtyText" value="#{game.gameID}")
       br
       a(href="/" class="btn btn-default btn-block") Back
     
   script.
     $(document).ready( function () {
-      
+      $(".removeButton").click(function (e) {
+         console.log(e.target.id);
+        $.get( "removeGame/"+e.target.id, function( data ) {
+          console.log(data);
+          location.reload();
+        });
+      });
     });
     

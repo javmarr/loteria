@@ -22,7 +22,8 @@ block content
             label(class="drinkcard-cc fullBoard" for="fullBoard")
             input(id="halfBoard" type="radio" name="boardLayout" value="halfBoard")
             label(class="drinkcard-cc halfBoard right" for="halfBoard")
-          div(class="input-group")
+          input(id="gameName" class="form-control" name="gameName" placeholder="Game Name" required)
+          div(class="input-group")  
             input(id="password" class="form-control" placeholder="Password")
             span(class="input-group-btn")
               button(id="create" class="btn btn-primary") Create

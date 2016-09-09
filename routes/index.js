@@ -50,15 +50,22 @@ function generateRandomID() {
   return key;
 }
 
-function saveDeckToGame(gameID, userID, newDeck, callback) {
+function removeGameFromUser(gameID, userID, callback) {
+  console.log("REMOVING GAME: " + gameID);
+  User.update({'userID': userID},
+              {$pull: {'games': {'gameID': gameID} }},
+              function(err, doc) {
+                callback(err, doc);
+              });
+}
 
+function saveDeckToGame(gameID, userID, newDeck, callback) {
   console.log("SAVING DECK TO GAME: " + gameID);
   User.update({'userID': userID, 'games.gameID': gameID},
               {$set: {'games.$.deck': newDeck}},
               function(err, doc) {
                 callback(err, doc);
               });
-
 }
 
 // assumes the user exists, this function will add a newGame to their db entry
@@ -105,9 +112,11 @@ function addGameToUser(req, res, next) {
 
   var newGame = {}; // just the new game
   var boardLayout = req.body.boardLayout;
+  var gameName = req.body.gameName;
   var newDeck = generateDeck(deckSize);
   // set values for the new game
   newGame['boardLayout'] = boardLayout;
+  newGame['gameName'] = gameName;
   newGame['deck'] = newDeck;
   newGame['turn'] = 0;
 
@@ -123,11 +132,10 @@ function addGameToUser(req, res, next) {
 
     } else {
       // userID not found, make a new user entry
-      var tempBoards = ["1,-1,39,28,1", "1,29,2,5,7"];
+      // var tempBoards = ["1,-1,39,28,1", "1,29,2,5,7"];
       var gameID = generateRandomID();
-      newGame['cardsDealt'] = [];
       newGame['gameID'] = gameID;
-      newGame['boards'] = tempBoards;
+      newGame['boards'] = [];
 
       console.log(newGame);
 
@@ -163,7 +171,13 @@ router.get('/', function(req, res, next) {
   if (req.user) {
     console.log(req.user.displayName);
     console.log(req.user);
+
     res.locals.displayName = req.user.displayName;
+    res.locals.error = req.session.error;
+    res.locals.success = req.session.success;
+    req.session.error = null;
+    req.session.success = null;
+
   }
   returnToURL = "https://javmarr.auth0.com/v2/logout?federated&returnTo=url_encode(https://javmarr.auth0.com/logout?returnTo=http://www.example.com)&access_token=[facebook access_token]"
 
@@ -172,14 +186,23 @@ router.get('/', function(req, res, next) {
 
 router.get('/monitor', function(req, res, next) {
   if (req.user) {
+    res.locals.error = req.session.error;
+    res.locals.success = req.session.success;
+    req.session.error = null;
+    req.session.success = null;
+
     // user logged in, retrieve games from them
     var userID = req.session.user_id;
-
     User.findOne({'userID': userID}, function(err, docs){
-
+      console.log(err);
+      console.log(docs);
       if (err) { res.send('Error getting games');}
-      res.send(docs.games);
-      // res.render('monitor', {games: docs.games});
+      // res.send(docs.games);
+      if (docs) {res.render('monitor', {games: docs.games});}
+      else {
+        req.session.error = 'error: no games created';
+        res.redirect('/');
+      }
     });
   } else {
     res.redirect('/');
@@ -234,6 +257,25 @@ router.post('/join', function(req, res, next) {
 });
 
 // game variable related
+router.get('/removeGame/:gameID', function(req, res, next) {
+  if (req.user) {
+    var userID = req.session.user_id;
+    var gameID = req.params.gameID;
+    removeGameFromUser(gameID, userID, function(err, doc) {
+      if (err) {
+        req.session.error = err;
+        res.send("error removing game from user");
+      }
+      else {
+        req.session.success = "successfully removed game: " + gameID;
+        res.send('success');
+      }
+    });
+  } else {
+    req.session.error = 'invalid user';
+    res.send('error');
+  }
+});
 
 router.get('/newDeck/:gameID', function(req, res, next) {
   if (req.user) {
@@ -244,22 +286,29 @@ router.get('/newDeck/:gameID', function(req, res, next) {
     // test callback using
     // saveDeckToGame(gameID, function);
     saveDeckToGame(gameID, userID, newDeck, function(err, doc) {
-      if (err) { res.send("error with adding new deck to game: " + err); }
+      if (err) {
+        req.session.error = err;
+        res.send("error with adding new deck to game: " + err);
+      }
 
+      // n indicates how many documents where selected for update
       if (doc.n == 0) {
-        // n indicates how many documents where selected for update
+        req.session.error = "game not valid (doesn't exist or user is not the owner): " + gameID;
         res.send("game not valid (doesn't exist or user is not the owner): " + gameID);
       }
       else if (doc.nModified == 0) {
+        req.session.error = "didn't change values for: " + gameID;
         res.send("didn't change values for: " + gameID);
       }
       else {
+        req.session.success = "created new deck for game: " + gameID;
         res.send({deck: newDeck});
       }
     });
 
   } else {
-    res.redirect('/');
+    req.session.error = 'invalid user';
+    res.send('error');
   }
 });
 
