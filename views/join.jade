@@ -8,12 +8,15 @@ block content
       h1 Loteria 
       br
       form(action="/join" method="post")
-        if displayName
-          input(name="nicknameContainer" class="form-control" placeholder="Nickname" value="#{displayName}" required)
-        else
-          input(name="nicknameContainer" class="form-control" placeholder="Nickname" value="bob" required)
         div(class="input-group")
-          input(name="secretCodeContainer" class="form-control" placeholder="Secret code" value="yrbULUnYYV" required)
+          span(class="input-group-addon") Nickname
+          if displayName
+            input(name="nicknameContainer" class="form-control" placeholder="Nickname" value="#{displayName}" required)
+          else
+            input(name="nicknameContainer" class="form-control" placeholder="Nickname" required)
+        div(class="input-group")
+          span(class="input-group-addon") Secret Code
+          input(name="secretCodeContainer" class="form-control" placeholder="Secret code" required)
           span(class="input-group-btn")
             input(id="joinGame" type="submit" class="btn btn-primary" value="Join")
       br
