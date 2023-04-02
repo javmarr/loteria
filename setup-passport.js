@@ -1,6 +1,6 @@
 var passport = require('passport');
 var Auth0Strategy = require('passport-auth0');
-require('dotenv').config();
+require('dotenv').config({silient: true})
 
 
 var strategy = new Auth0Strategy({
