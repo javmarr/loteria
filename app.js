@@ -56,7 +56,7 @@ else {
 }
 */
 
-mongoose.connect("mongodb://teotzin:Ceniceros5@ac-111n2y6-shard-00-00.s0mbodb.mongodb.net:27017,ac-111n2y6-shard-00-01.s0mbodb.mongodb.net:27017,ac-111n2y6-shard-00-02.s0mbodb.mongodb.net:27017/?ssl=true&replicaSet=atlas-ugjkm4-shard-0&authSource=admin&retryWrites=true&w=majority");
+mongoose.connect("mongodb://teotzin:Ceniceros5@ac-111n2y6-shard-00-00.s0mbodb.mongodb.net:27017/loteria,ac-111n2y6-shard-00-01.s0mbodb.mongodb.net:27017/loteria,ac-111n2y6-shard-00-02.s0mbodb.mongodb.net:27017/loteria?ssl=true&replicaSet=atlas-ugjkm4-shard-0&authSource=admin&retryWrites=true&w=majority");
 
 var app = express();
 
