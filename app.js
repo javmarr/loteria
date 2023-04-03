@@ -43,6 +43,8 @@ const MONGO_PASSWORD = process.env.MONGO_PASSWORD;
 const DB_NAME = process.env.DB_NAME
 //const DB_NAME = 'loteria';
 
+console.log('it was commited');
+
 if(MONGO_HOST) {
   mongoose.connect('mongodb://teotzin:' + MONGO_PASSWORD + '@' + MONGO_HOST + DB_NAME +'/?retryWrites=true&w=majority');
 }
