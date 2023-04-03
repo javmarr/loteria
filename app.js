@@ -44,7 +44,7 @@ const MONGO_PASSWORD = process.env.OPENSHIFT_MONGODB_DB_PASSWORD;
 const DB_NAME = 'loteria';
 
 if(MONGO_HOST) {
-  mongoose.connect('mongodb://admin:' + MONGO_PASSWORD + '@' + MONGO_HOST + ':' + MONGO_PORT + '/' + DB_NAME);
+  mongoose.connect('mongodb://teotzin:' + MONGO_PASSWORD + '@' + MONGO_HOST + DB_NAME +'/?retryWrites=true&w=majority');
 }
 else {
   require('dotenv').config();
