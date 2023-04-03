@@ -45,10 +45,10 @@ const DB_NAME = process.env.DB_NAME
 
 console.log('it was commited');
 
-console.log("mongodb://teotzin:" + MONGO_PASSWORD + '@' + MONGO_HOST + DB_NAME +"/?retryWrites=true&w=majority");
+console.log("mongodb+srv://teotzin:" + MONGO_PASSWORD + '@' + MONGO_HOST + DB_NAME +"/?retryWrites=true&w=majority");
 
 if(MONGO_HOST) {
-  mongoose.connect("mongodb://teotzin:" + MONGO_PASSWORD + '@' + MONGO_HOST + DB_NAME +"/?retryWrites=true&w=majority");
+  mongoose.connect("mongodb+srv://teotzin:" + MONGO_PASSWORD + '@' + MONGO_HOST + DB_NAME +"/?retryWrites=true&w=majority");
 }
 else {
   require('dotenv').config();
