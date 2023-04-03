@@ -43,9 +43,9 @@ const MONGO_PASSWORD = process.env.MONGO_PASSWORD;
 const DB_NAME = process.env.DB_NAME
 //const DB_NAME = 'loteria';
 
-console.log('it was commited');
+//console.log('it was commited');
 
-console.log("mongodb+srv://teotzin:" + MONGO_PASSWORD + '@' + MONGO_HOST + DB_NAME +"/?retryWrites=true&w=majority");
+//console.log("mongodb+srv://teotzin:" + MONGO_PASSWORD + '@' + MONGO_HOST + DB_NAME +"/?retryWrites=true&w=majority");
 /* commented out to test locally, i have a big string
 if(MONGO_HOST) {
   mongoose.connect("mongodb+srv://teotzin:" + MONGO_PASSWORD + '@' + MONGO_HOST + DB_NAME +"/?retryWrites=true&w=majority");
@@ -54,11 +54,11 @@ else {
   require('dotenv').config();
   mongoose.connect('mongodb://localhost/' + DB_NAME);
 }
-var app = express();
 */
 
 mongoose.connect("mongodb://teotzin:Ceniceros5@ac-111n2y6-shard-00-00.s0mbodb.mongodb.net:27017,ac-111n2y6-shard-00-01.s0mbodb.mongodb.net:27017,ac-111n2y6-shard-00-02.s0mbodb.mongodb.net:27017/?ssl=true&replicaSet=atlas-ugjkm4-shard-0&authSource=admin&retryWrites=true&w=majority");
 
+var app = express();
 
 
 
