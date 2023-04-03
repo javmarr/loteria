@@ -38,10 +38,10 @@ var games = [];
 
 // db connection
 var mongoose = require('mongoose');
-const MONGO_HOST = process.env.OPENSHIFT_MONGODB_DB_HOST;
-const MONGO_PORT = process.env.OPENSHIFT_MONGODB_DB_PORT;
-const MONGO_PASSWORD = process.env.OPENSHIFT_MONGODB_DB_PASSWORD;
-const DB_NAME = 'loteria';
+const MONGO_HOST = process.env.MONGO_HOST;
+const MONGO_PASSWORD = process.env.MONGO_PASSWORD;
+const DB_NAME = process.env.DB_NAME
+//const DB_NAME = 'loteria';
 
 if(MONGO_HOST) {
   mongoose.connect('mongodb://teotzin:' + MONGO_PASSWORD + '@' + MONGO_HOST + DB_NAME +'/?retryWrites=true&w=majority');
