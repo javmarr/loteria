@@ -37,7 +37,7 @@ var hosts = {};
 var games = [];
 
 // db connection
-var mongoose = require('mongoose', { useMongoClient: true }{ useNewUrlParser: true } );
+var mongoose = require('mongoose', { useMongoClient: true },{ useNewUrlParser: true } );
 const MONGO_HOST = process.env.MONGO_HOST;
 const MONGO_PASSWORD = process.env.MONGO_PASSWORD;
 const DB_NAME = process.env.DB_NAME
