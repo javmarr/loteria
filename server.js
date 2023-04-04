@@ -17,7 +17,7 @@ function normalizePort(val) {
 }
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
-var port = normalizePort(process.env.OPENSHIFT_NODEJS_PORT || 3000);
+var port = normalizePort(process.env.PORT || 5000);
 
 function terminator(signal) {
   if (!signal) {
