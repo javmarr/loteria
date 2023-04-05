@@ -10,15 +10,7 @@ block content
     
   script.
     var lock = new Auth0Lock(CLIENT_ID, DOMAIN);
-    /*, {
-      auth: {
-        redirectUrl: REDIRECT_URL,
-        responseType: 'code'//,
-       // params: {
-        //  scope: 'openid email' // Learn about scopes: https://auth0.com/docs/scopes
-       // }
-      }
-    });*/
+    
         lock.on("authenticated", function(authResult) {
       lock.getUserInfo(authResult.accessToken, function(error, profile) {
         if (error) {
