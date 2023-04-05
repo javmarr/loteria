@@ -1,9 +1,9 @@
 
-var express = require('express');
-var router = express.Router();
+import { Router } from 'express';
+var router = Router();
 
 
-var User = require('../models/User.js');
+import User, { update, findOneAndUpdate, findOne } from '../models/User.js';
 
 // get only games
 // db.getCollection('users').find({}, { games: 1})
@@ -52,7 +52,7 @@ function generateRandomID() {
 
 function removeGameFromUser(gameID, userID, callback) {
   console.log("REMOVING GAME: " + gameID);
-  User.update({'userID': userID},
+  update({'userID': userID},
               {$pull: {'games': {'gameID': gameID} }},
               function(err, doc) {
                 callback(err, doc);
@@ -61,7 +61,7 @@ function removeGameFromUser(gameID, userID, callback) {
 
 function saveDeckToGame(gameID, userID, newDeck, callback) {
   console.log("SAVING DECK TO GAME: " + gameID);
-  User.update({'userID': userID, 'games.gameID': gameID},
+  update({'userID': userID, 'games.gameID': gameID},
               {$set: {'games.$.deck': newDeck}},
               function(err, doc) {
                 callback(err, doc);
@@ -97,7 +97,7 @@ function saveGame(newGame, user, userID, req, res, next) {
     savedGames.push(newGame);
 
     // update the db entry using the old + new games
-    User.findOneAndUpdate({'userID': userID}, {games: savedGames}, function(err, raw){
+    findOneAndUpdate({'userID': userID}, {games: savedGames}, function(err, raw){
         if (err) return handleError(err);
         // console.log('The raw response from Mongo was ', raw);
         req.session.success = 'Game created';
@@ -121,7 +121,7 @@ function addGameToUser(req, res, next) {
   newGame['turn'] = 0;
 
   // check if userID is on the database
-  User.findOne({'userID': userID }, function(err, user){
+  findOne({'userID': userID }, function(err, user){
     if (err) {
       req.session.error = "Error when finding userID in create";
       res.redirect('/create');
@@ -179,7 +179,7 @@ router.get('/', function(req, res, next) {
     req.session.success = null;
 
   }
-  returnToURL = "https://javmarr.auth0.com/v2/logout?federated&returnTo=url_encode(https://javmarr.auth0.com/logout?returnTo=http://www.example.com)&access_token=[facebook access_token]"
+  //returnToURL = "https://javmarr.auth0.com/v2/logout?federated&returnTo=url_encode(https://javmarr.auth0.com/logout?returnTo=http://www.example.com)&access_token=[facebook access_token]"
 
   res.render('index', { DOMAIN: process.env.DOMAIN, CLIENT_ID: process.env.CLIENT_ID, REDIRECT_URL: process.env.CALLBACK_URL, returnToURL: returnToURL});
 });
@@ -193,7 +193,7 @@ router.get('/monitor', function(req, res, next) {
 
     // user logged in, retrieve games from them
     var userID = req.session.user_id;
-    User.findOne({'userID': userID}, function(err, docs){
+    findOne({'userID': userID}, function(err, docs){
       console.log(err);
       console.log(docs);
       if (err) { res.send('Error getting games');}
@@ -292,14 +292,14 @@ router.get('/nextCard/:gameID.json', function(req, res, next) {
     var gameID = req.params.gameID;
     console.log('searching for: ' + gameID);
     //return only the game matching the id
-    User.findOne({'games.gameID': gameID}, {"games.$.deck" : 1}, function(err, doc) {
+    findOne({'games.gameID': gameID}, {"games.$.deck" : 1}, function(err, doc) {
       if (err) { res.send({error: err}); }
       console.log(err);
       console.log("doc");
       console.log(doc);
 
       // increment turn
-      User.findOneAndUpdate({'games.gameID': gameID},
+      findOneAndUpdate({'games.gameID': gameID},
                   {$inc: {'games.$.turn': 1}},
                   function(err, result) {
                     console.log('--inc turn result');
@@ -322,7 +322,7 @@ router.get('/deck/:gameID.json', function(req, res, next) {
   var gameID = req.params.gameID;
   console.log('searching for: ' + gameID);
   //return only the game matching the id
-  User.findOne({'games.gameID': gameID}, {"games.$.deck" : 1}, function(err, doc) {
+  findOne({'games.gameID': gameID}, {"games.$.deck" : 1}, function(err, doc) {
     if (err) { res.send({error: err}); }
     console.log(err);
     console.log("doc");
@@ -378,7 +378,7 @@ router.get('/dealGame/:gameID', function(req, res, next) {
     console.log('gameID: ' + gameID);
 
     // get the game from the db only if the user created it
-    User.findOne({"userID": userID, "games.gameID": gameID }, function (err, user) {
+    findOne({"userID": userID, "games.gameID": gameID }, function (err, user) {
       console.log(err);
       console.log('user');
       console.log(user);
@@ -413,7 +413,7 @@ router.get('/loteria/:gameID', function(req, res, next) {
     console.log('gameID: ' + gameID);
 
     // get the game from the db
-    User.findOne({"games.gameID": gameID}, {"games.$.deck": 1}, function (err, doc) {
+    findOne({"games.gameID": gameID}, {"games.$.deck": 1}, function (err, doc) {
       console.log(err);
       if (err) {
         console.log('err');
@@ -438,4 +438,4 @@ router.get('/loteria/:gameID', function(req, res, next) {
 
 });
 
-module.exports = router;
+export default router;

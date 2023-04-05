@@ -15,11 +15,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
-var routes = require('./routes/index');
+var routes = require('./routes/index').default;
 var socketio = require('socket.io');
 
 var passport = require('passport');
-var strategy = require('./setup-passport');
+var strategy = require('./setup-passport').default;
 
 var Auth0Strategy = require('passport-auth0');
 
