@@ -12,9 +12,9 @@ block content
     var lock = new Auth0Lock(CLIENT_ID, DOMAIN, {
       auth: {
         redirectUrl: REDIRECT_URL,
-        responseType: 'code',
-        params: {
-          scope: 'openid email' // Learn about scopes: https://auth0.com/docs/scopes
+        responseType: 'code'//,
+       // params: {
+        //  scope: 'openid email' // Learn about scopes: https://auth0.com/docs/scopes
         }
       }
     });
