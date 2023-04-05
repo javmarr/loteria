@@ -9,7 +9,8 @@ block content
     console.log('#{JSON.stringify(user)}');
     
   script.
-    var lock = new Auth0Lock(CLIENT_ID, DOMAIN);/*, {
+    var lock = new Auth0Lock(CLIENT_ID, DOMAIN);
+    /*, {
       auth: {
         redirectUrl: REDIRECT_URL,
         responseType: 'code'//,
@@ -28,7 +29,7 @@ block content
         localStorage.setItem('profile', JSON.stringify(profile));
         window.location.href = '/login';
       });
-    });*/
+    });
   div(class="jumbotron vertical-center")
     div(id="menu" class="center")
       h1 Loteria 
