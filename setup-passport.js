@@ -1,15 +1,6 @@
-import { use, serializeUser, deserializeUser } from 'passport';
-import Auth0Strategy from 'passport-auth0';
-//require('dotenv').config({silient: true})
-
-
-/*
-what is a callbackURL?
-
-
-
-
-*/
+var passport = require('passport');
+var Auth0Strategy = require('passport-auth0');
+require('dotenv').config({silient: true})
 
 
 var strategy = new Auth0Strategy({
@@ -26,15 +17,15 @@ var strategy = new Auth0Strategy({
     return done(null, profile);
   });
 
-use(strategy);
+passport.use(strategy);
 
 // This is not a best practice, but we want to keep things simple for now
-serializeUser(function(user, done) {
+passport.serializeUser(function(user, done) {
   done(null, user);
 });
 
-deserializeUser(function(user, done) {
+passport.deserializeUser(function(user, done) {
   done(null, user);
 });
 
-export default strategy;
+module.exports = strategy;
