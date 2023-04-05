@@ -1,7 +1,7 @@
 #!/bin/env node
 var debug = require('debug')('server');
-import app, { io } from './app';
-import { createServer } from 'http';
+var app = require('./app');
+var http = require('http');
 
 // Removed 'SIGPIPE' from the list - bugz 852598.
 var signals = [
@@ -31,8 +31,8 @@ function terminator(signal) {
 process.on('exit', function () {terminator()});
 signals.forEach( function (signal) {process.on(signal, terminator.bind(null, signal))});
 
-var server = createServer(app);
-io.attach(server);
+var server = http.createServer(app);
+app.io.attach(server);
 
 server.listen(port, ipaddress, function () {
   debug(new Date() + ': Node server started on ' + ipaddress + ':' + port + ' ...');
