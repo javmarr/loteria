@@ -170,7 +170,7 @@ router.get('/', function(req, res, next) {
 
   if (req.user) {
     console.log('HOLA HOLA HOLA HOLA ROOUTER GET /');
-    console.log(req.user.mail);
+    console.log(req.user.nickname);
     console.log(req.user);
 
     res.locals.displayName = req.user.email;
