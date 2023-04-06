@@ -6,8 +6,6 @@ block content
     DOMAIN = '#{DOMAIN}';
     CLIENT_ID = '#{CLIENT_ID}';
     REDIRECT_URL = '#{REDIRECT_URL}';
-    console.log('hola'+'#{JSON.stringify(user)}');
-    
   script.
     var lock = new Auth0Lock(CLIENT_ID, DOMAIN, {
       auth: {
@@ -23,18 +21,12 @@ block content
     div(id="menu" class="center")
       h1 Loteria 
       p(class="red") #{error}
-      if nickname
-        p Hello, #{nickname}
+     p Hello, Teotzin
         a(href="/create" class="btn btn-primary btn-lg btn-block" id="createGame") Create Game
         a(href="/monitor" class="btn btn-default btn-block" id="monitorGame") Monitor Game
         a(href="/join" class="btn btn-default btn-block") Join Game
         a(href="/logout" class="btn btn-default btn-block") Logout
-      else 
-        p Hello, Guest
-        a(onclick="lock.show(); return false;" class="btn btn-primary btn-lg btn-block" id="login") Login
-        a(href="/join" class="btn btn-default btn-block") Join Game
-  
-    
+      
   script.
     $(document).ready( function () {
     });
