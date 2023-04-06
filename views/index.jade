@@ -7,7 +7,7 @@ block content
     CLIENT_ID = '#{CLIENT_ID}';
     REDIRECT_URL = '#{REDIRECT_URL}';
   script.
-    var lock = new Auth0Strategy(CLIENT_ID, DOMAIN, {
+    var lock = new Auth0Lock (CLIENT_ID, DOMAIN, {
       auth: {
         redirectUrl: REDIRECT_URL,
         responseType: 'code',
