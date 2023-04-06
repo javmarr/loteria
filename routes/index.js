@@ -177,7 +177,7 @@ router.get('/', function(req, res, next) {
     req.session.error = null;
     req.session.success = null;
   }
-  returnToURL = "https://dev-qauothmtu2dhfuyy.us.auth0.com/v2/logout?federated&returnTo=url_encode(https://dev-qauothmtu2dhfuyy.us.auth0.com/logout?returnTo=http://www.example.com)&access_token=[facebook access_token]"
+  returnToURL = "https://dev-qauothmtu2dhfuyy.us.auth0.com/v2/logout?federated&returnTo=url_encode(https://dev-qauothmtu2dhfuyy.us.auth0.com/logout?returnTo=http://www.example.com)&access_token=[X-Goog-Authenticated-User-ID']";
 
   res.render('index', { DOMAIN: process.env.DOMAIN, CLIENT_ID: process.env.CLIENT_ID, REDIRECT_URL: process.env.CALLBACK_URL, returnToURL: returnToURL});
 });
