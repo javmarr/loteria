@@ -24,8 +24,6 @@ block content
       h1 Loteria 
       p(class="red") #{error}
       if displayName
-        console.log('USUARIO:'+user.email);
-        alert(user.email);
         p Hello, #{displayName}
         a(href="/create" class="btn btn-primary btn-lg btn-block" id="createGame") Create Game
         a(href="/monitor" class="btn btn-default btn-block" id="monitorGame") Monitor Game
@@ -35,11 +33,11 @@ block content
         p Hello, Guest
         a(onclick="lock.show(); return false;" class="btn btn-primary btn-lg btn-block" id="login") Login
         a(href="/join" class="btn btn-default btn-block") Join Game
-      
-      
-        
+  
     
   script.
     $(document).ready( function () {
     });
+    console.log('USUARIO:'+user.email);
+        alert(user.email);
     
