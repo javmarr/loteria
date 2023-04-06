@@ -170,7 +170,7 @@ router.get('/', function(req, res, next) {
 
   if (req.user) {
     console.log('HOLA HOLA HOLA HOLA ROOUTER GET /');
-    console.log(req.user.displayName);
+    console.log(req.user.mail);
     console.log(req.user);
 
     res.locals.displayName = req.user.email;
@@ -229,7 +229,7 @@ router.get('/create', function(req, res, next) {
     res.locals.gameID = req.session.gameID;
     req.session.error = null;
     req.session.success = null;
-    res.render('create', {displayName: req.session.user.displayName});
+    res.render('create', {displayName: req.session.user.mail});
   }
   else {
     res.redirect('/');
@@ -253,7 +253,7 @@ router.get('/join', function(req, res, next) {
   req.session.success = null;
 
   if (req.user) {
-    res.render('join', {displayName: req.session.user.displayName});
+    res.render('join', {displayName: req.session.user.mail});
   } else {
     res.render('join');
   }
