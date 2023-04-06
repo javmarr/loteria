@@ -169,6 +169,7 @@ function addGameToUser(req, res, next) {
 router.get('/', function(req, res, next) {
 
   if (req.user) {
+    console.log('HOLA HOLA HOLA HOLA ROOUTER GET /');
     console.log(req.user.displayName);
     console.log(req.user);
 
