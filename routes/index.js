@@ -173,7 +173,7 @@ router.get('/', function(req, res, next) {
     console.log(req.user.displayName);
     console.log(req.user);
 
-    res.locals.displayName = req.user.displayName;
+    res.locals.displayName = req.user.email;
     res.locals.error = req.session.error;
     res.locals.success = req.session.success;
     req.session.error = null;
