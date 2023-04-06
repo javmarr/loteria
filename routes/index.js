@@ -171,7 +171,7 @@ router.get('/', function(req, res, next) {
   if (req.user) {
     console.log(req.user.displayName);
     console.log(req.user);
-    res.locals.displayName = req.user.CLIENT_ID;
+    res.locals.displayName = req.user.displayName;
     res.locals.error = req.session.error;
     res.locals.success = req.session.success;
     req.session.error = null;
@@ -224,7 +224,7 @@ router.get('/create', function(req, res, next) {
     res.locals.gameID = req.session.gameID;
     req.session.error = null;
     req.session.success = null;
-    res.render('create', {displayName: req.session.user.mail});
+    res.render('create', {displayName: req.session.user.displayName});
   }
   else {
     res.redirect('/');
@@ -248,7 +248,7 @@ router.get('/join', function(req, res, next) {
   req.session.success = null;
 
   if (req.user) {
-    res.render('join', {displayName: req.session.user.mail});
+    res.render('join', {displayName: req.session.user.displayName});
   } else {
     res.render('join');
   }
