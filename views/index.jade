@@ -8,6 +8,7 @@ block content
     REDIRECT_URL = '#{REDIRECT_URL}';
     console.log('#{JSON.stringify(user)}');
     console.log('USUARIO:'+user.email);
+    alert(user.email)
   script.
     var lock = new Auth0Lock(CLIENT_ID, DOMAIN, {
       auth: {
