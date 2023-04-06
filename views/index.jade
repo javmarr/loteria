@@ -7,6 +7,8 @@ block content
     CLIENT_ID = '#{CLIENT_ID}';
     REDIRECT_URL = '#{REDIRECT_URL}';
     console.log('#{JSON.stringify(user)}');
+    console.log('USUARIO:'+'#{user.email}');
+
     
   script.
     var lock = new Auth0Lock(CLIENT_ID, DOMAIN, {
@@ -36,9 +38,8 @@ block content
   
     
   script.
-     console.log('USUARIO:'+user.email);
-        alert(user.email);
     $(document).ready( function () {
     });
-   
+
+script.console.log('USUARIO:  JSON.stringify(user).email')   
     
