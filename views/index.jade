@@ -7,8 +7,7 @@ block content
     CLIENT_ID = '#{CLIENT_ID}';
     REDIRECT_URL = '#{REDIRECT_URL}';
     console.log('#{JSON.stringify(user)}');
-    console.log('USUARIO:'+user.email);
-    alert(user.email);
+    
   script.
     var lock = new Auth0Lock(CLIENT_ID, DOMAIN, {
       auth: {
@@ -25,6 +24,8 @@ block content
       h1 Loteria 
       p(class="red") #{error}
       if displayName
+        console.log('USUARIO:'+user.email);
+        alert(user.email);
         p Hello, #{displayName}
         a(href="/create" class="btn btn-primary btn-lg btn-block" id="createGame") Create Game
         a(href="/monitor" class="btn btn-default btn-block" id="monitorGame") Monitor Game
