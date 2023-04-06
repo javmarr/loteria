@@ -23,8 +23,8 @@ block content
     div(id="menu" class="center")
       h1 Loteria 
       p(class="red") #{error}
-      if session.user.email is not null
-        p Hello, #{session.user.email}
+      if res.locals.displayName
+        p Hello, #{res.locals.displayName}
         a(href="/create" class="btn btn-primary btn-lg btn-block" id="createGame") Create Game
         a(href="/monitor" class="btn btn-default btn-block" id="monitorGame") Monitor Game
         a(href="/join" class="btn btn-default btn-block") Join Game
