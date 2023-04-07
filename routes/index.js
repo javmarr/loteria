@@ -123,7 +123,7 @@ function addGameToUser(req, res, next) {
   // check if userID is on the database
   User.findOne({'userID': userID }, function(err, user){
     if (err) {
-      log.console('---ERROR---'+err);
+      console.log('---FIND ERROR---'+err);
       req.session.error = "Error when finding userID in create";
       res.redirect('/create');
     }
