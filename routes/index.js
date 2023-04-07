@@ -150,7 +150,7 @@ function addGameToUser(req, res, next) {
       user.save(function(err){
         if (err) {
           console.log('---SAVE ERROR---');
-          console.log('HOLA HOLA'+err.name);
+          console.log('HOLA HOLA'+err.name+err.code);
           if (err.name == 'MongoError' && err.code == '11000') {
             console.log('Duplicate key');
             req.session.error = 'User is already on the list';
