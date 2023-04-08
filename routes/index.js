@@ -150,7 +150,6 @@ function addGameToUser(req, res, next) {
       user.save(function(err){
         if (err) {
           console.log('---SAVE ERROR---');
-          console.log('HOLA HOLA'+err.name+err.code+err);
           if (err.name == 'MongoError' && err.code == '11000') {
             console.log('Duplicate key');
             req.session.error = 'User is already on the list';
@@ -322,7 +321,7 @@ router.get('/deck/:gameID.json', function(req, res, next) {
   var gameID = req.params.gameID;
   console.log('searching for: ' + gameID);
   //return only the game matching the id
-  User.findOne({'games.gameID': gameID}, {"games.$.deck" : 1}, function(err, doc) {
+  User.findOne({'games.gameID': gameID}, {"games.$" : 1}, function(err, doc) {
     if (err) { res.send({error: err}); }
     console.log(err);
     console.log("doc");
