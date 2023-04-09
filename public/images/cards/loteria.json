@@ -491,8 +491,8 @@
 	"version": "1.0",
 	"image": "loteria.png",
 	"format": "RGBA8888",
-	"size": {"w":2100,"h":3230},
-	"scale": "1",
+	"size": {"w":3230,"h":2100},
+	"scale": ".5",
 	"smartupdate": "$TexturePacker:SmartUpdate:11fa271927bb6e01bd56260d45c7fb41:09e70775b44d05d90f58d1a09fb76ea2:5a540470a8efc6fa7c76fb5691663eab$"
 }
 }
