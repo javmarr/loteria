@@ -33,8 +33,11 @@ block content
       
       // returns deck and initial turn
       jQuery.getJSON('/deck/'+gameID+'.json', function(json) {
+          
           deck = json['deck'];
+          console.log(deck);
           deckSize = deck.length;
+          // get the turn
           turn = json['turn'];
           cardNumber = deck[turn];
           if (cardsDealt.length == 0) {
