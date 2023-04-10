@@ -298,8 +298,8 @@ router.get('/nextCard/:gameID.json', function(req, res, next) {
       console.log(doc);
 
       // increment turn
-      User.findOneAndUpdate({'games.gameID': gameID},
-                  {$inc: {'games.$[0].turn': 1}},
+      User.updateOne({'games.gameID': gameID},
+                  {$inc: {'games.$.turn': 1}},
                   function(err, result) {
                     console.log('--inc turn result');
                     console.log(err);
@@ -321,7 +321,7 @@ router.get('/deck/:gameID.json', function(req, res, next) {
   var gameID = req.params.gameID;
   console.log('searching for: ' + gameID);
   //return only the game matching the id
-  User.findOne({'games.gameID': gameID}, {"games.deck.$": 1}, function(err, doc) {
+  User.findOne({'games.gameID': gameID}, {"games.deck": 1}, function(err, doc) {
     if (err) { res.send({error: err}); }
     console.log(err);
     console.log("doc");
