@@ -291,15 +291,15 @@ router.get('/nextCard/:gameID.json', function(req, res, next) {
     var gameID = req.params.gameID;
     console.log('searching for: ' + gameID);
     //return only the game matching the id
-    User.findOne({'games.gameID': gameID}, {"games.deck" : 1}, function(err, doc) {
+    User.findOne({'games.gameID': gameID}, {"games.deck.$" : 1}, function(err, doc) {
       if (err) { res.send({error: err}); }
       console.log(err);
       console.log("doc");
       console.log(doc);
 
       // increment turn
-      User.updateOne({'games.gameID': gameID},
-                  {$inc: {'games.$.turn': 1}},
+      User.findOneAndUpdate({'games.gameID': gameID},
+                  {$inc: {'games.turn.$': 1}},
                   function(err, result) {
                     console.log('--inc turn result');
                     console.log(err);
@@ -329,6 +329,7 @@ router.get('/deck/:gameID.json', function(req, res, next) {
     var deck = doc['games'][0]['deck'];
     var turn = doc['games'][0]['turn'];
     console.log(deck);
+    console.log(turn);
     // doc.games[gameID]
     res.send({error: null, deck: deck, turn: turn});
   });
