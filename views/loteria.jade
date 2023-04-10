@@ -80,7 +80,9 @@ block content
     function nextCard() {
       console.log("next card");
       jQuery.getJSON('/nextCard/'+gameID+'.json', function(json) {
-          console.log('json: ' + json.stringify);
+          console.log('json: ' + json.deck);
+          console.log('json: ' + json.turn);
+          
           turn = json['turn'];
           cardNumber = deck[turn];
           cardsDealt.push(cardNumber);
