@@ -321,7 +321,7 @@ router.get('/deck/:gameID.json', function(req, res, next) {
   var gameID = req.params.gameID;
   console.log('searching for: ' + gameID);
   //return only the game matching the id
-  User.findOne({'games.gameID': gameID}, {"games.deck.$": 1}, function(err, doc) {
+  User.findOne({'games.gameID': gameID}, {"games.$": 1}, function(err, doc) {
     if (err) { res.send({error: err}); }
     console.log(err);
     console.log("doc");
