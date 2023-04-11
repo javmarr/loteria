@@ -62,7 +62,7 @@ function removeGameFromUser(gameID, userID, callback) {
 function saveDeckToGame(gameID, userID, newDeck, callback) {
   console.log("SAVING DECK TO GAME: " + gameID);
   User.update({'userID': userID, 'games.gameID': gameID},
-              {$set: {'games.deck': newDeck}},
+              {$set: {'games.$.deck': newDeck}},
               function(err, doc) {
                 callback(err, doc);
               });
