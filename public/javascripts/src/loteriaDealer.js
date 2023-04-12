@@ -8,7 +8,8 @@ loteriaDealer.prototype = {
   },
 
   create: function() {
-    this.game.stage.backgroundColor = "#ddd";;
+    //what color is the background? 0xRRGGBB  0x000000 = black  0xffffff = white #ddd 
+    this.game.stage.backgroundColor = "#ffffff";
     console.log('cardNumber: ' + cardNumber);
 
     card = this.game.add.group(); // card containing image and border
