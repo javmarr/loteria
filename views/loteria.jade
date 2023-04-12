@@ -23,7 +23,7 @@ block content
     game.state.add("Boot", boot);
     game.state.add("Preload", preload);
     game.state.add("GameTitle", gameTitle);
-    //if (dealer) {
+   
       var deckSize = 0;
       var turn = 0;
       var cardsDealt = [];
@@ -45,19 +45,19 @@ block content
               cardsDealt.push(deck[i]); // catch up the cardsDealt
             }
           }
-          //- console.log(deck);
+         
           nextCard();
           game.state.start("Boot");
       });
-   // }
-   // else { 
+  
       game.state.add("Loteria", loteria); 
       var gameBoard = generateBoard(boardLayout);
       var imageBoard = imageBoardFrom(gameBoard);
       game.state.start("Boot");
-   // }
+  
     
     game.state.add("GameOver", gameOver);
+    
     
     
     function imageBoardFrom(board) {
