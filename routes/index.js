@@ -413,7 +413,7 @@ router.get('/loteria/:gameID', function(req, res, next) {
     console.log('gameID: ' + gameID);
 
     // get the game from the db
-    User.findOne({"games.gameID": gameID}, {"games.deck.$": 1}, function (err, doc) {
+    User.findOne({"games.gameID": gameID}, {"games.$": 1}, function (err, doc) {
       console.log(err);
       if (err) {
         console.log('err');
