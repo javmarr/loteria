@@ -10,9 +10,9 @@ loteria.prototype = {
   create: function() {
     this.game.stage.backgroundColor = "#83d";
 
-    // card = this.game.add.group(); // card containing image and border
-    // cardBorder = card.create(0, 0, 'border');
-    // cardImage = card.create(cardBorder.x+30, cardBorder.y+32, 'loteria', 'card_' + cardNumber + '.png');
+     card = this.game.add.group(); // card containing image and border
+     cardBorder = card.create(0, 0, 'border');
+     cardImage = card.create(cardBorder.x+30, cardBorder.y+32, 'loteria', 'card_' + cardNumber + '.png');
     console.log('imageboard in phaser: ' + imageBoard);
 
     var group = game.add.group();
