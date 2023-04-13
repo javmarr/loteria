@@ -100,8 +100,8 @@ body {
   position:absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) translateY(350px);
-  font: 24px Tahoma, Geneva, sans-serif;
+  transform: translate(-50%, -50%);
+  font: 24px Open Sans;
   color: #FF00FF;
   background-color: #e2ed0b;
   padding: 5px 10px;
