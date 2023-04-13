@@ -93,15 +93,15 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) translateY(350px)
+  transform: translate(-50%, -50%) translateY(200px)
 }
 
 .button {
   position:absolute;
-  top: 50%;
+  top: 20%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  font: 24px Open Sans;
+  transform: translate(-50%, -15%);
+  font: 16px "YouTube Sans", "Roboto", "sans-serif";
   color: #FF00FF;
   background-color: #e2ed0b;
   padding: 5px 10px;
