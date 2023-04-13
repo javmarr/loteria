@@ -98,9 +98,6 @@ body {
 
 .button {
   position:absolute;
-  top: 20%;
-  left: 50%;
-  transform: translate(-50%, -15%);
   font: 16px "YouTube Sans", "Roboto", "sans-serif";
   color: #FF00FF;
   background-color: #e2ed0b;
