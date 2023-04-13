@@ -97,9 +97,13 @@ body {
 }
 
 .button {
-  font: 24px Arial;
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateY(350px);
+  font: 24px Tahoma, Geneva, sans-serif;
   color: #FF00FF;
-  background-color: #ffffff;
+  background-color: #e2ed0b;
   padding: 5px 10px;
   border-radius: 5px;
 }
