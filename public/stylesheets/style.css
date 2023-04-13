@@ -95,3 +95,11 @@ body {
   left: 50%;
   transform: translate(-50%, -50%) translateY(350px)
 }
+
+.button {
+  font: 24px Arial;
+  color: #FF00FF;
+  background-color: #ffffff;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
