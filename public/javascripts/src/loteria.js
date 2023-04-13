@@ -8,8 +8,7 @@ loteria.prototype = {
   },
 
   create: function() {
-    //background color = #83d = green 
-    this.game.stage.backgroundColor = "#ffffff";
+    this.game.stage.backgroundColor = "#83d";
 
     // card = this.game.add.group(); // card containing image and border
     // cardBorder = card.create(0, 0, 'border');
