@@ -103,5 +103,5 @@ body {
   background-color: #e2ed0b;
   padding: 5px 10px;
   border-radius: 5px;
-  transform: translate(-50%, -50%) translateY(100px);
+  transform: translate(20%, 50%) translateY(100px);
 }
