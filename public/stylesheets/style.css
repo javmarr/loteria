@@ -103,3 +103,14 @@ body {
   padding: 5px 10px;
   border-radius: 5px;
 }
+.upperLabel
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.btn-custom {
+  background-color: red;
+}
