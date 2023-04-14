@@ -112,5 +112,10 @@ body {
 }
 
 .btn-custom {
-  background-color: red;
+  background-color: fuchsia;
+  border-color: fuchsia;
+}
+.btn-custom:hover {
+  background-color: #f4f13e;
+  border-color: #f4f13e;
 }
