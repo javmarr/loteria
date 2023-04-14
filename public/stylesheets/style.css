@@ -114,8 +114,10 @@ body {
 .btn-custom {
   background-color: fuchsia;
   border-color: fuchsia;
+  color : white;
 }
 .btn-custom:hover {
   background-color: #f4f13e;
   border-color: #f4f13e;
+  color : white;
 }
