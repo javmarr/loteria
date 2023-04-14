@@ -97,11 +97,9 @@ body {
 }
 
 .button {
-  position:absolute;
   font: 16px "YouTube Sans", "Roboto", "sans-serif";
   color: #FF00FF;
   background-color: #e2ed0b;
   padding: 5px 10px;
   border-radius: 5px;
-  transform: translate(20%, 50%) translateY(100px);
 }
