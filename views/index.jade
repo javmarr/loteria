@@ -22,20 +22,20 @@ block content
 
   div(class="jumbotron vertical-center")
     div(id="menu" class="center")
-     <h5> Loteria de Derechos de Las Mujeres Mexican Lottery for Women Rights
-      p(class="red") #{error}
-      if displayName
-        p Hello, #{displayName}
-        a(href="/create" class="btn btn-primary btn-lg btn-block" id="createGame") Create Game
-        a(href="/monitor" class="btn btn-default btn-block" id="monitorGame") Monitor Game
-        a(href="/join" class="btn btn-default btn-block") Join Game
-        a(href="/logout" class="btn btn-default btn-block") Logout
-      else 
-        p Hello, Guest
-        a(onclick="lock.show(); return false;" class="btn btn-primary btn-lg btn-block" id="login") Login
-    <br><br><br><br><br><br><br><br><br><br>
-    h6 Este juego ha sido realizado por la Organización Si Hay Mujeres en Durango A.C. con el fin de promover la igualdad de género y los derechos de las mujeres en México.
-    h6 Y ha sido patrocinado por la organización Semillas de Vida A.C. 
+      <h5> Loteria de Derechos de Las Mujeres Mexican Lottery for Women Rights
+        p(class="red") #{error}
+        if displayName
+          p Hello, #{displayName}
+          a(href="/create" class="btn btn-primary btn-lg btn-block" id="createGame") Create Game
+          a(href="/monitor" class="btn btn-default btn-block" id="monitorGame") Monitor Game
+          a(href="/join" class="btn btn-default btn-block") Join Game
+          a(href="/logout" class="btn btn-default btn-block") Logout
+        else 
+          p Hello, Guest
+          a(onclick="lock.show(); return false;" class="btn btn-primary btn-lg btn-block" id="login") Login
+          <br><br><br><br><br><br><br><br><br><br>
+      h6 Este juego ha sido realizado por la Organización Si Hay Mujeres en Durango A.C. con el fin de promover la igualdad de género y los derechos de las mujeres en México.
+      h6 Y ha sido patrocinado por la organización Semillas de Vida A.C.     
   script.
     $(document).ready( function () {
     });
