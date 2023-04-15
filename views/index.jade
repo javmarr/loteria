@@ -2,37 +2,13 @@
 extends layout
 
 block content
-  script(src='https://cdn.auth0.com/js/lock/10.0/lock.min.js')
-  script.
-    DOMAIN = '#{DOMAIN}';
-    CLIENT_ID = '#{CLIENT_ID}';
-    REDIRECT_URL = '#{REDIRECT_URL}';
-    console.log('#{JSON.stringify(user)}');
-    
-  script.
-    var lock = new Auth0Lock(CLIENT_ID, DOMAIN, {
-      auth: {
-        redirectUrl: REDIRECT_URL,
-        responseType: 'code',
-        params: {
-          scope: 'openid email' // Learn about scopes: https://auth0.com/docs/scopes
-        }
-      }
-    });
+ 
 
   div(class="jumbotron vertical-center")
     div(id="menu" class="center")
       <h3>Loteria de Derechos de Las Mujeres
-    
       p(class="red") #{error}
-      if displayName
-        p Hello, #{displayName}
-        a(href="/create" class="btn btn-primary btn-lg btn-block" id="createGame") Create Game
-        a(href="/monitor" class="btn btn-default btn-block" id="monitorGame") Monitor Game
-        a(href="/join" class="btn btn-default btn-block") Join Game
-        a(href="/logout" class="btn btn-default btn-block") Logout
-      else 
-        p Hola, Visitante
+      p Hola, Visitante
         a(onclick="lock.show(); return false;" class="btn btn-primary btn-lg btn-block" id="login") Entrar
         <br><br><br><br><br><br><br><br><br><br>
       h4 Este juego ha sido realizado por la Organización Si Hay Mujeres en Durango A.C. con el fin de promover la igualdad de género y los derechos de las mujeres en México.
