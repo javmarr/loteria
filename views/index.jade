@@ -1,29 +1,44 @@
+
 extends layout
 
 block content
-  script(src='https://cdn.auth0.com/js/lock/12.0.2/lock.min.js')
+  script(src='https://cdn.auth0.com/js/lock/10.0/lock.min.js')
   script.
     DOMAIN = '#{DOMAIN}';
     CLIENT_ID = '#{CLIENT_ID}';
     REDIRECT_URL = '#{REDIRECT_URL}';
+    console.log('#{JSON.stringify(user)}');
+    
   script.
-    var lock = new Auth0Lock (CLIENT_ID, DOMAIN, {
+    var lock = new Auth0Lock(CLIENT_ID, DOMAIN, {
       auth: {
         redirectUrl: REDIRECT_URL,
         responseType: 'code',
         params: {
-          scope: 'openid email profile' // Learn about scopes: https://auth0.com/docs/scopes
+          scope: 'openid email' // Learn about scopes: https://auth0.com/docs/scopes
         }
       }
     });
- div(class="jumbotron vertical-center")
-    div(id="menu" class="center")
-      h1 Bienvenido a La Loteria de derechos de las mujeres. Da clic para iniciar a jugar 
-      h2 Este juego fue elaborado por la Asocionación SI HAY MUJERES EN DURANGO A.C. para la campaña de derechos de las mujeres.
-      h3 Patrocinado por Semillas 
 
-     
+  div(class="jumbotron vertical-center")
+    div(id="menu" class="center")
+      h1 Loteria 
+      p(class="red") #{error}
+      if displayName
+        p Hello, #{displayName}
+        a(href="/create" class="btn btn-primary btn-lg btn-block" id="createGame") Create Game
+        a(href="/monitor" class="btn btn-default btn-block" id="monitorGame") Monitor Game
+        a(href="/join" class="btn btn-default btn-block") Join Game
+        a(href="/logout" class="btn btn-default btn-block") Logout
+      else 
         p Hello, Guest
-        a(href="/join" class="btn btn-default btn-block") Iniciar Loteria
+        a(onclick="lock.show(); return false;" class="btn btn-primary btn-lg btn-block" id="login") Login
+        a(href="/join" class="btn btn-default btn-block") Join Game
       
- 
+      
+        
+    
+  script.
+    $(document).ready( function () {
+    });
+    
