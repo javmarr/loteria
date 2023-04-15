@@ -166,124 +166,17 @@ function addGameToUser(req, res, next) {
 }
 
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-
-  if (req.user) {
-    console.log(req.user.displayName);
-    console.log(req.user);
-    res.locals.displayName = req.user.displayName;
-    res.locals.error = req.session.error;
-    res.locals.success = req.session.success;
-    req.session.error = null;
-    req.session.success = null;
-  }
-  returnToURL = "https://dev-qauothmtu2dhfuyy.us.auth0.com/v2/logout?federated&returnTo=url_encode(https://dev-qauothmtu2dhfuyy.us.auth0.com/logout?returnTo=http://www.example.com)&access_token=[X-Goog-Authenticated-User-ID']";
-
-  res.render('index', { DOMAIN: process.env.DOMAIN, CLIENT_ID: process.env.CLIENT_ID, REDIRECT_URL: process.env.CALLBACK_URL, returnToURL: returnToURL});
-});
-
-router.get('/monitor', function(req, res, next) {
-  if (req.user) {
-    res.locals.error = req.session.error;
-    res.locals.success = req.session.success;
-    req.session.error = null;
-    req.session.success = null;
-
-    // user logged in, retrieve games from them
-    var userID = req.session.user_id;
-    User.findOne({'userID': userID}, function(err, docs){
-      console.log(err);
-      console.log(docs);
-      if (err) { res.send('Error getting games');}
-
-      if (docs) {
-        if (docs.games.length <= 0) {
-          // user exist but erased all games
-          req.session.error = 'error: no games exist';
-          res.redirect('/');
-        } else {
-          res.render('monitor', {games: docs.games});
-        }
-
-      }
-      else {
-        req.session.error = 'error: no games created';
-        res.redirect('/');
-      }
-    });
-  } else {
-    res.redirect('/');
-  }
-
-});
-
-router.get('/create', function(req, res, next) {
-  if (req.user) {
-    res.locals.error = req.session.error;
-    res.locals.success = req.session.success;
-    res.locals.gameID = req.session.gameID;
-    req.session.error = null;
-    req.session.success = null;
-    res.render('create', {displayName: req.session.user.displayName});
-  }
-  else {
-    res.redirect('/');
-  }
-});
-
-router.post('/create', function(req, res, next) {
-  // req.session.error = "Post create";
-  // req.session.success = "It worked"
-  // res.redirect('/create');
-  console.log('post create called');
-  addGameToUser(req, res, next);
-
-});
 
 
 router.get('/join', function(req, res, next) {
-  res.locals.error = req.session.error;
-  res.locals.success = req.session.success;
-  req.session.error = null;
-  req.session.success = null;
-
-  if (req.user) {
-    res.render('join', {displayName: req.session.user.displayName});
-  } else {
     res.render('join');
-  }
 });
 
 router.post('/join', function(req, res, next) {
-  // send to login/error page if failed
-  console.log(req.body.nicknameContainer);
-  console.log(req.body.secretCodeContainer);
-  req.session.nickname = req.body.nicknameContainer
-  // res.send(req.body.nicknameContainer + " " + req.body.secretCodeContainer);
-  res.redirect('/loteria/' + req.body.secretCodeContainer);
+  res.render('join');
 });
 
-// game variable related
-router.get('/removeGame/:gameID', function(req, res, next) {
-  if (req.user) {
-    var userID = req.session.user_id;
-    var gameID = req.params.gameID;
-    removeGameFromUser(gameID, userID, function(err, doc) {
-      if (err) {
-        req.session.error = err;
-        res.send("error removing game from user");
-      }
-      else {
-        req.session.success = "successfully removed game";
-        res.send('success');
-      }
-    });
-  } else {
-    req.session.error = 'invalid user';
-    res.send('error');
-  }
-});
+
 
 router.get('/nextCard/:gameID.json', function(req, res, next) {
   if (req.user) {
