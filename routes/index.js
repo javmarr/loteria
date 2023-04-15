@@ -166,7 +166,24 @@ function addGameToUser(req, res, next) {
 }
 
 
+/* GET home page. */
+router.get('/', function(req, res, next) {
 
+  if (req.user) {
+    console.log(req.user.displayName);
+    console.log(req.user);
+
+    res.locals.displayName = req.user.displayName;
+    res.locals.error = req.session.error;
+    res.locals.success = req.session.success;
+    req.session.error = null;
+    req.session.success = null;
+
+  }
+  returnToURL = "https://javmarr.auth0.com/v2/logout?federated&returnTo=url_encode(https://javmarr.auth0.com/logout?returnTo=http://www.example.com)&access_token=[facebook access_token]"
+
+  res.render('index', { DOMAIN: process.env.DOMAIN, CLIENT_ID: process.env.CLIENT_ID, REDIRECT_URL: process.env.CALLBACK_URL, returnToURL: returnToURL});
+});
 
 router.get('/join', function(req, res, next) {
     res.render('join');
