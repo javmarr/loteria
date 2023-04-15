@@ -111,15 +111,15 @@ body {
     height: 100vh;
 }
 
-.btn-default {
+.btn-primary:hover {
   background-color: fuchsia;
   border-color: fuchsia;
   color : white;
 }
 
-.btn-default:hover {
-  background-color: #f4f13e;
-  border-color: #f4f13e;
+.btn-primary:hover {
+  background-color: #fffb00ca;
+  border-color: #fffb00ca;
   color : white;
 }
 
