@@ -115,12 +115,10 @@ body {
   background-color: fuchsia;
   border-color: fuchsia;
   color : white;
-  font: 16px "Ubuntu","Tahoma","Helvetica Neue","Helvetica","Arial","sans-serif";
 }
 
 .btn-custom:hover {
   background-color: #f4f13e;
   border-color: #f4f13e;
   color : white;
-  font: 16px "Ubuntu","Tahoma","Helvetica Neue","Helvetica","Arial","sans-serif";
 }
