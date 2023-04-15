@@ -315,8 +315,7 @@ router.get('/dealGame/:gameID', function(req, res, next) {
 
 
 router.post('/loteria', function(req, res, next) {
-         var boardLayout = doc.games[0]['boardLayout'];
-        res.render('loteria', {gameID:'dummyid', nickname:'visitante', boardLayout:'fullboard'});
+  res.render('loteria', {gameID:'dummyid', nickname:'visitante', boardLayout:'fullboard'});
 });
 
 module.exports = router;
