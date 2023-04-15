@@ -119,12 +119,13 @@ body {
 }
 
 .btn-primary:hover {
-  background-color: #ffffff;
+  background-color: #000;
   border-color: #ffffff;
-  color : white;
+  color : black;
 }
 
-.menu {
+
+.jumbotron {
   background-image: url('../images/logoSiHayMujeres.png');
   background-repeat: no-repeat;
   background-position: center center;
