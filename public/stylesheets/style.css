@@ -119,12 +119,12 @@ body {
 }
 
 .btn-primary:hover {
-  background-color: #fffb00ca;
-  border-color: #fffb00ca;
+  background-color: #ffffff;
+  border-color: #ffffff;
   color : white;
 }
 
-.login-div {
+.menu {
   background-image: url('../images/logoSiHayMujeres.png');
   background-repeat: no-repeat;
   background-position: center center;
