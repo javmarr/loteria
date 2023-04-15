@@ -122,3 +122,10 @@ body {
   border-color: #f4f13e;
   color : white;
 }
+
+.login-div {
+  background-image: url('../images/logoSiHayMujeres.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}

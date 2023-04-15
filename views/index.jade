@@ -16,23 +16,16 @@ block content
         }
       }
     });
-
   div(class="jumbotron vertical-center")
-    div(id="menu" class="center")
-      h1 Loteria 
+    div(id="login-div" class="center")
+      h1 Bienvenido a La Loteria de derechos de las mujeres. Da clic para iniciar a jugar }
+      h2 Este juego fue elaborado por la Asocionación SI HAY MUJERES EN DURANGO A.C. para la campaña de derechos de las mujeres.
+      h3 Patrocinado por Semillas 
+
       p(class="red") #{error}
-      if displayName
-        p Hello, #{displayName}
-        a(href="/create" class="btn btn-default btn-lg btn-block" id="createGame") Create Game
-        a(href="/monitor" class="btn btn-default btn-block" id="monitorGame") Monitor Game
-        a(href="/join" class="btn btn-default btn-block") Join Game
-        a(href="/logout" class="btn btn-default btn-block") Logout
-      else 
         p Hello, Guest
-        a(onclick="lock.show(); return false;" class="btn btn-primary btn-lg btn-block" id="login") Login
-        a(href="/join" class="btn btn-default btn-block") Join Game
-  
-    
+        a(href="/join" class="btn btn-default btn-block") Iniciar Loteria
+      
   script.
     $(document).ready( function () {
     });
