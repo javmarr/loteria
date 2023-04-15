@@ -314,8 +314,9 @@ router.get('/dealGame/:gameID', function(req, res, next) {
 });
 
 
-router.get('/loteria', function(req, res, next) {
-  res.redirect('/join');
+router.get('/loteria/:gameID', function(req, res, next) {
+         var boardLayout = doc.games[0]['boardLayout'];
+        res.render('loteria', {gameID:'dummyid', nickname:'visitante', boardLayout:'fullboard'});
 });
 
 module.exports = router;
