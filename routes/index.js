@@ -404,38 +404,8 @@ router.get('/dealGame/:gameID', function(req, res, next) {
 });
 
 
-router.get('/loteria/:gameID', function(req, res, next) {
-  // anyone who typed a nickname
-  if (req.session.nickname) {
-    var gameID = req.params.gameID;
-    var nickname = req.session.nickname;
-    console.log('nickname: ' + nickname);
-    console.log('gameID: ' + gameID);
-
-    // get the game from the db
-    User.findOne({"games.gameID": gameID}, {"games.$": 1}, function (err, doc) {
-      console.log(err);
-      if (err) {
-        console.log('err');
-        req.session.error = "Error when finding docID in create";
-        res.redirect('/join');
-      }
-      if (doc) {
-        console.log("loteria get (doc):");
-        console.log(doc);
-        var boardLayout = doc.games[0]['boardLayout'];
-        res.render('loteria', {gameID: gameID, nickname: nickname, boardLayout: boardLayout});
-      } else {
-        req.session.error = "Game doesn't exist";
-        res.redirect('/join');
-      }
-
-    });
-  } else {
-    res.redirect('/');
-    // res.send('no nickname');
-  }
-
+router.get('/loteria', function(req, res, next) {
+  res.redirect('/join');
 });
 
 module.exports = router;
