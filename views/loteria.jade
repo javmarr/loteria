@@ -105,21 +105,6 @@ block content
       return output;
     }
     
-    socket.on('connect', function(data) {
-      socket.emit('join', 'Hello World from client');
-    });
-    
-    function addMsg(msg) {
-      var newMsg = $('<li>').text(msg);
-      $('#messages').append(newMsg);
-      newMsg.focus();
-    }
-    
-    socket.on('chat message', function(msg) {
-      addMsg(msg);
-    });
-   div(id="game" class="vertical-center") 
-    h1 Loteria 
-    button(onclick="nextCard()" class="btn btn-default") Siguiente Carta
-
- 
+    div(id="game" class="vertical-center") 
+      h1 Loteria 
+      button(onclick="nextCard()" class="btn btn-default btn-block") Siguiente Carta
