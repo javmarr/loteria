@@ -90,11 +90,7 @@ block content
       var random = 0;
       var size = 0;
       size = 16;
-      //- if (layout == "fullBoard") { size = 16; } 
-      //- else { size = 8; }
-      
       for (var i = 0; i < size; i++) {
-        // no duplicate values
         do {
           random = ((Math.floor(Math.random() * 100)) % 54) + 1 ; // 1 -> (size)
         } while (output.includes(random));
