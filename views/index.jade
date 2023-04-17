@@ -6,13 +6,16 @@ block content
 
   div(class="jumbotron vertical-center")
     div(id="menu" class="center")
-      <h3>Loteria de Derechos de Las Mujeres
+      <h1>Loteria de Derechos de Las Mujeres
       p(class="red") #{error}
       p Hola, Visitante
         form(action="/loteria" method="post")
           div(class="input-group")
            span(class="input-group-btn")
-           input(id="joinGame" type="submit" class="btn btn-primary" value="Iniciar Juego") 
+          
+            <a href="#" id="submit-form">
+            <img src="images/cartaMenu.png" alt="Iniciar Juego">
+            </a>
       <br><br><br><br><br><br><br><br><br><br>
       h4 Este juego ha sido realizado por la Organización Si Hay Mujeres en Durango A.C. con el fin de promover la igualdad de género y los derechos de las mujeres en México.
       h4 Y ha sido patrocinado por la organización Semillas de Vida A.C.     
@@ -21,5 +24,8 @@ block content
   
   script.
     $(document).ready( function () {
+      $('#submit-form').click(function() {
+      $('form').submit();
+    });
     });
     
