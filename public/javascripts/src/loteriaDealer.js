@@ -16,7 +16,7 @@ loteriaDealer.prototype = {
     cardBorder = card.create(0, 0, 'border');
     cardImage = card.create(cardBorder.x+30, cardBorder.y+32, 'loteria', 'card_' + cardNumber + '.png');
 
-    text = this.game.add.text(250, 16, '', { fill: '#ffffff' });
+    text = this.gameDealer.add.text(250, 16, '', { fill: '#ffffff' });
 
     cardImage.inputEnabled = true;
     cardImage.events.onInputUp.add(this.changeCard, this);

@@ -32,7 +32,7 @@ block content
     var deck = [];
     gameDealer.state.add("Loteria", loteriaDealer); 
     nextCard();
-    gameDealer.state.add("Loteria", loteria); 
+    gameLoteria.state.add("Loteria", loteria); 
     var gameBoard = generateBoard(boardLayout);
     var imageBoard = imageBoardFrom(gameBoard);
     gameLoteria.state.start("Boot");
