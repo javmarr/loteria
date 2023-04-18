@@ -128,8 +128,8 @@ body {
 .jumbotron {
   background-image: url('../images/logoSiHayMujeresBajito.png');
   background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
+  background-position: bottom center;
+  background-size: contain;
 }
 
 h4 {
