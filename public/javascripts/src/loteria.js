@@ -8,37 +8,22 @@ loteria.prototype = {
   },
 
   create: function() {
-    this.game.stage.backgroundColor = "#ffffff";
+    this.gameLoteria.stage.backgroundColor = "#ffffff";
 
     // card = this.game.add.group(); // card containing image and border
     // cardBorder = card.create(0, 0, 'border');
     // cardImage = card.create(cardBorder.x+30, cardBorder.y+32, 'loteria', 'card_' + cardNumber + '.png');
     console.log('imageboard in phaser: ' + imageBoard);
 
-    var group = game.add.group();
-    group.createMultiple(1, 'loteria', imageBoard, true);
-    group.align(4, 4, 210, 330);
-    group.scale.set(.9, .9);
+    var groupLoteria = gameLoteria.add.group();
+    groupLoteria.createMultiple(1, 'loteria', imageBoard, true);
+    groupLoteria.align(4, 4, 210, 330);
+    groupLoteria.scale.set(.9, .9);
 
-    if (boardLayout == "halfBoard") {
-      for (var i = 0, len = group.children.length; i < len; i++) {
-        console.log(group.children[i]);
-        if (![0,3,5,6,9,10,12,15].includes(i)){
-            group.children[i].alpha = 0;
-        }
-      }
-    }
+    
   }
 
 };
-
-
-
-
-
-
-
-
 
 
 

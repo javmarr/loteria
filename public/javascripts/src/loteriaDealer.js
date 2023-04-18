@@ -9,10 +9,10 @@ loteriaDealer.prototype = {
 
   create: function() {
     //what color is the background? 0xRRGGBB  0x000000 = black  0xffffff = white #ddd 
-    this.game.stage.backgroundColor = "#ffffff";
+    this.gameDealer.stage.backgroundColor = "#ffffff";
     console.log('cardNumber: ' + cardNumber);
 
-    card = this.game.add.group(); // card containing image and border
+    card = this.gameDealer.add.group(); // card containing image and border
     cardBorder = card.create(0, 0, 'border');
     cardImage = card.create(cardBorder.x+30, cardBorder.y+32, 'loteria', 'card_' + cardNumber + '.png');
 
@@ -26,10 +26,7 @@ loteriaDealer.prototype = {
 
   changeCard: function() {
     nextCard();
-    if (turn >= deckSize) {
-      console.log('gameover');
-      this.game.state.start("GameOver", true, false, cardsDealt);
-    }
+    
   },
   update: function() {
     cardImage.loadTexture('loteria', 'card_' + cardNumber + '.png');

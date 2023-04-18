@@ -19,42 +19,26 @@ block content
     console.log("On jade (gameID) " + gameID);
     console.log("On jade (nickname) " + nickname);
     console.log("On jade (dealer) " + dealer);
-    var game = new Phaser.Game(300, 500, Phaser.AUTO, "game");
-    game.state.add("Boot", boot);
-    game.state.add("Preload", preload);
-    game.state.add("GameTitle", gameTitle);
-    if (dealer) {
-      var deckSize = 0;
-      var turn = 0;
-      var cardsDealt = [];
-      var cardNumber = 0;
-      var deck = [];
-      game.state.add("Loteria", loteriaDealer); 
-      
-      // returns deck and initial turn
-      jQuery.getJSON('/deck/'+gameID+'.json', function(json) {
-          deck = json['deck'];
-          deckSize = deck.length;
-          turn = json['turn'];
-          cardNumber = deck[turn];
-          if (cardsDealt.length == 0) {
-            for (var i = 0; i < turn; i++) {
-              cardsDealt.push(deck[i]); // catch up the cardsDealt
-            }
-          }
-          //- console.log(deck);
-          nextCard();
-          game.state.start("Boot");
-      });
-    }
-    else { 
-      game.state.add("Loteria", loteria); 
-      var gameBoard = generateBoard(boardLayout);
-      var imageBoard = imageBoardFrom(gameBoard);
-      game.state.start("Boot");
-    }
+    var gameDealer = new Phaser.Game(300, 500, Phaser.AUTO, "game");
+    var gameLoteria = new Phaser.Game(300, 500, Phaser.AUTO, "game");
+    gameDealer.state.add("Boot", boot);
+    gameDealer.state.add("Preload", preload);
+    gameDealer.state.add("GameTitle", gameTitle);
     
-    game.state.add("GameOver", gameOver);
+    var deckSize = 0;
+    var turn = 0;
+    var cardsDealt = [];
+    var cardNumber = 0;
+    var deck = [];
+    gameDealer.state.add("Loteria", loteriaDealer); 
+    nextCard();
+    gameDealer.state.add("Loteria", loteria); 
+    var gameBoard = generateBoard(boardLayout);
+    var imageBoard = imageBoardFrom(gameBoard);
+    gameLoteria.state.start("Boot");
+    
+
+    gameLoteria.state.add("GameOver", gameOver);
     
     
     function imageBoardFrom(board) {
@@ -76,14 +60,12 @@ block content
     }
     function nextCard() {
       console.log("next card");
-      jQuery.getJSON('/nextCard/'+gameID+'.json', function(json) {
-          turn = json['turn'];
-          cardNumber = deck[turn];
-          cardsDealt.push(cardNumber);
-          console.log('turn: ' + turn);
-          console.log('cardnumber: ' + cardNumber);
-      });
-    }
+      turn ++;
+      cardNumber = deck[turn];
+      cardsDealt.push(cardNumber);
+      console.log('turn: ' + turn);
+      console.log('cardnumber: ' + cardNumber);
+      }
     
     function generateBoard(layout) {
       var output = [];
@@ -101,6 +83,9 @@ block content
       return output;
     };
   
-  div(id="game" class="vertical-center") 
-      h1 Loteria 
+  div(id="gameDealer" class="vertical-center") 
+      h1 Baraja 
       button(onclick="nextCard()" class="btn btn-default btn-block") Siguiente Carta
+
+  div(id="gameLoteria" class="vertical-center") 
+      h1 Tablero 
