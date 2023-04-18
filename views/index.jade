@@ -1,19 +1,20 @@
 
 extends layout
 
-div(id="bannermenu" vertical-align="top" class="center" background-color="#BA97FF")
+
+block content
+  div(id="bannermenu" vertical-align="top" class="center" background-color="#BA97FF")
+  <h1 align ="center">Loteria de Derechos de Las Mujeres
     img(src="images/semillas.png")
     h4 Este juego ha sido realizado por la Organización 
     h3 Si Hay Mujeres en Durango A.C. 
     h4 con el fin de promover la igualdad de género y los derechos de las mujeres en México.
     h4 Y ha sido patrocinado por la organización Semillas    
 
-block content
- 
   
   div(class="jumbotron" vertical-align="top")
     div(id="topmenu" class="center")
-    <h1 align ="center">Loteria de Derechos de Las Mujeres
+    
     div(id="menu" class="center")
       p(class="red") #{error}
       p Hola, Visitante
