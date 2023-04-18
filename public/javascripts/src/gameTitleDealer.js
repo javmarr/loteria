@@ -22,19 +22,19 @@ gameTitle.prototype = {
 
 		
 
-    var text = this.gameLoteria.add.text(30, 30, '', textoLoteria);
+    var text = this.gameDealer.add.text(30, 30, '', textoLoteria);
     text.text = 'Loteria';
-		var joinButton = this.gameLoteria.add.button(160,320,"join",this.joinGame,this);
+		var joinButton = this.gameDealer.add.button(160,320,"join",this.joinGame,this);
 		joinButton.anchor.setTo(0.5,0.5);
 		joinButton.style = {button	};
 
-    var createButton = this.gameLoteria.add.button(160,400,"create",this.createGame,this);
+    var createButton = this.gameDealer.add.button(160,400,"create",this.createGame,this);
 		createButton.anchor.setTo(0.5,0.5);
 		createButton.style = {button	};
 	},
 
 	joinGame: function() {
-		this.gameLoteria.state.start("Loteria");
+		this.gameDealer.state.start("Loteria");
 	},
 
   createGame: function() {
