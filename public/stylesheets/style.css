@@ -89,6 +89,11 @@ body {
    width: 30%;
 }
 
+#topmenu {
+  width: 30%;
+}
+
+
 #game {
   position: absolute;
   top: 1%;
