@@ -129,7 +129,7 @@ body {
   background-image: url('../images/logoSiHayMujeresBajito.png');
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: contain;
+  background-size: 100%;
 }
 
 h4 {
