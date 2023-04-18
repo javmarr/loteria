@@ -24,22 +24,25 @@ block content
     gameDealer.state.add("Boot", boot);
     gameDealer.state.add("Preload", preload);
     gameDealer.state.add("GameTitle", gameTitle);
+    gameLoteria.state.add("Boot", boot);
+    gameLoteria.state.add("Preload", preload);
+    gameLoteria.state.add("GameTitle", gameTitle);
     
+
     var deckSize = 0;
     var turn = 0;
     var cardsDealt = [];
     var cardNumber = 0;
     var deck = [];
     gameDealer.state.add("Loteria", loteriaDealer); 
-    nextCard();
     gameLoteria.state.add("Loteria", loteria); 
+    nextCard();
     var gameBoard = generateBoard(boardLayout);
     var imageBoard = imageBoardFrom(gameBoard);
     gameLoteria.state.start("Boot");
-    
-
     gameLoteria.state.add("GameOver", gameOver);
-    
+    gameDealer.state.start("Boot");
+    gameDealer.state.add("GameOver", gameOver);
     
     function imageBoardFrom(board) {
       var output = [];
