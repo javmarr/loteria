@@ -128,6 +128,7 @@ body {
 .jumbotron {
   background-image: url('../images/logoSiHayMujeresBajito.png');
   background-repeat: no-repeat;
+  background-color: #BA97FF;
   background-position: center center;
   background-size: 50%;
 }
@@ -139,3 +140,4 @@ h4 {
 h3 {
   color: white;
 }
+
