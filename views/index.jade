@@ -5,9 +5,12 @@ block content
  
 
   div(class="jumbotron" vertical-align="top")
-      img(src="images/semillas.png")
-      <img src="images/cartaMenu.png" alt="Iniciar Juego">
-      <h1 align ="center">Loteria de Derechos de Las Mujeres
+    h4 Este juego ha sido realizado por la Organización Si Hay Mujeres en Durango A.C. con el fin de promover la igualdad de género y los derechos de las mujeres en México.
+    h4 Y ha sido patrocinado por la organización Semillas    
+    div(id="top menu" class="center")
+        img(src="images/semillas.png")
+        <img src="images/cartaMenu.png" alt="Iniciar Juego">
+    <h1 align ="center">Loteria de Derechos de Las Mujeres
     div(id="menu" class="center")
       p(class="red") #{error}
       p Hola, Visitante
@@ -17,9 +20,7 @@ block content
              <a href="#" id="submit-form">
              </a>
              <br><br><br
-      h4 Este juego ha sido realizado por la Organización Si Hay Mujeres en Durango A.C. con el fin de promover la igualdad de género y los derechos de las mujeres en México.
-      h4 Y ha sido patrocinado por la organización Semillas    
-      
+     
   
   script.
     $(document).ready( function () {
