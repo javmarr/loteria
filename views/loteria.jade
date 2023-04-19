@@ -44,8 +44,8 @@ block content
     var imageBoard = imageBoardFrom(gameBoard);
     gameLoteria.state.start("Boot");
     gameLoteria.state.add("GameOver", gameOver);
-    gameDealer.state.start("Boot");
-    gameDealer.state.add("GameOver", gameOver);
+    gameDealer.state.start("BootDealer");
+    gameDealer.state.add("GameOverDealer", gameOver);
     
     function imageBoardFrom(board) {
       var output = [];
