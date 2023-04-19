@@ -1,5 +1,5 @@
 
-var loteriaDealer = function(game){
+var loteriaDealer = function(gameDealer){
 };
 
 loteriaDealer.prototype = {
