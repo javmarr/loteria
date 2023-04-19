@@ -2,7 +2,7 @@ var bootDealer = function(gameDealer) {
 	console.log("%cLoteria round, start!", "color:white; background:green");
 };
 
-boot.prototype = {
+bootDealer.prototype = {
 	preload: function() {
     this.gameDealer.load.image("loading","../images/temp/loading.png");
 	},
