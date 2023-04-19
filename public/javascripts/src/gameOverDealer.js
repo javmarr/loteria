@@ -1,4 +1,4 @@
-var gameOver = function(gameDealer) {}
+var gameOverDealer = function(gameDealer) {}
 
 gameOver.prototype = {
 	init: function(cardsDealt) {

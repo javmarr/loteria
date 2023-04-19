@@ -1,4 +1,4 @@
-var preload = function(gameDealer){}
+var preloadDealer = function(gameDealer){}
 
 preload.prototype = {
 	preload: function() {
