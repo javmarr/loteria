@@ -37,7 +37,7 @@ block content
     var turn = 0;
     var cardsDealt = [];
     var cardNumber = 0;
-    var deck = [];
+    var deck = generateDeck(54);
     gameDealer.state.add("LoteriaDealer", loteriaDealer); 
     gameLoteria.state.add("Loteria", loteria); 
     nextCard();
@@ -48,6 +48,32 @@ block content
     gameLoteria.state.add("GameOver", gameOver);
     gameDealer.state.add("GameOverDealer", gameOverDealer);
     
+
+  function shuffleDeck(deck) {
+  var size = deck.length;
+  var output = deck;
+  // every card, swap to a random spot
+  for (var i = 0; i < size; i++) {
+    var temp = output[i];
+    var random = ((Math.floor(Math.random() * 100)) % size); // 0 - (deckSize-1)
+
+    // swap values
+    output[i] = output[random];
+    output[random] = temp;
+  }
+  return output;
+}
+
+function generateDeck(size) {
+  var deck = [];
+  for(var i = 1; i <= size; i++) {
+    deck.push(i);
+  }
+  deck = shuffleDeck(deck);
+  return deck;
+}
+
+
     function imageBoardFrom(board) {
       var output = [];
       var size = board.length;
