@@ -9,14 +9,14 @@ loteriaDealer.prototype = {
 
   create: function() {
     //what color is the background? 0xRRGGBB  0x000000 = black  0xffffff = white #ddd 
-    this.gameDealer.stage.backgroundColor = "#ffffff";
+    gameDealer.stage.backgroundColor = "#ffffff";
     console.log('cardNumber: ' + cardNumber);
 
-    card = this.gameDealer.add.group(); // card containing image and border
+    card = gameDealer.add.group(); // card containing image and border
     cardBorder = card.create(0, 0, 'border');
     cardImage = card.create(cardBorder.x+30, cardBorder.y+32, 'loteria', 'card_' + cardNumber + '.png');
 
-    text = this.gameDealer.add.text(250, 16, '', { fill: '#ffffff' });
+    text = gameDealer.add.text(250, 16, '', { fill: '#ffffff' });
 
     cardImage.inputEnabled = true;
     cardImage.events.onInputUp.add(this.changeCard, this);

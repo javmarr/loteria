@@ -14,6 +14,6 @@ gameOver.prototype = {
 	},
 
 	playTheGame: function() {
-		this.gameLoteria.state.start("Loteria");
+		gameLoteria.state.start("Loteria");
 	}
 };

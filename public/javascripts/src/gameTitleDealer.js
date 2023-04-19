@@ -34,7 +34,7 @@ gameTitle.prototype = {
 	},
 
 	joinGame: function() {
-		this.gameDealer.state.start("Loteria");
+		gameDealer.state.start("Loteria");
 	},
 
   createGame: function() {
