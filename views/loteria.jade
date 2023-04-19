@@ -4,13 +4,13 @@ block content
   script(src="../javascripts/phaser.min.js")
   
   script(src="../javascripts/src/boot.js")
-  script(src="../javascripts/src/preload.js")
-  script(src="../javascripts/src/gameTitle.js") 
   script(src="../javascripts/src/bootDealer.js")
+  script(src="../javascripts/src/preload.js")
   script(src="../javascripts/src/preloadDealer.js")
+  script(src="../javascripts/src/gameTitle.js") 
   script(src="../javascripts/src/gameTitleDealer.js")
-  script(src="../javascripts/src/loteriaDealer.js")
   script(src="../javascripts/src/loteria.js")
+  script(src="../javascripts/src/loteriaDealer.js")
   script(src="../javascripts/src/gameOver.js")
   script(src="../javascripts/src/gameOverDealer.js")
   script.
@@ -23,7 +23,7 @@ block content
     console.log("On jade (nickname) " + nickname);
     console.log("On jade (dealer) " + dealer);
     var gameDealer = new Phaser.Game(300, 500, Phaser.AUTO, "gameDealer");
-    var gameLoteria = new Phaser.Game(300, 500, Phaser.AUTO, "gameLoteria");
+    var gameLoteria = new Phaser.Game(800, 600, Phaser.AUTO, "gameLoteria");
     gameDealer.state.add("BootDealer", bootDealer);
     gameDealer.state.add("PreloadDealer", preloadDealer);
     gameDealer.state.add("GameTitleDealer", gameTitleDealer);
