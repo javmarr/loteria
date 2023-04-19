@@ -11,6 +11,6 @@ bootDealer.prototype = {
   	// this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
   	// this.scale.pageAlignHorizontally = true;
   	// this.scale.updateLayout();
-  	gameDealer.state.start("Preload");
+  	gameDealer.state.start("PreloadDealer");
 	}
 };
