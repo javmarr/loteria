@@ -24,10 +24,10 @@ block content
     console.log("On jade (dealer) " + dealer);
     var gameDealer = new Phaser.Game(300, 500, Phaser.AUTO, "gameDealer");
     var gameLoteria = new Phaser.Game(300, 500, Phaser.AUTO, "gameLoteria");
-    gameDealer.state.add("BootDealer", boot);
+    gameDealer.state.add("BootDealer", bootDealer);
     gameDealer.state.add("PreloadDealer", preloadDealer);
     gameDealer.state.add("GameTitleDealer", gameTitleDealer);
-    gameLoteria.state.add("Boot", boot);
+    gameLoteria.state.add("Boot", boot;
     gameLoteria.state.add("Preload", preload);
     gameLoteria.state.add("GameTitle", gameTitle);
     
@@ -43,9 +43,9 @@ block content
     var gameBoard = generateBoard(boardLayout);
     var imageBoard = imageBoardFrom(gameBoard);
     gameLoteria.state.start("Boot");
-    gameLoteria.state.add("GameOver", gameOver);
+    gameLoteria.state.add("GameOver", GameOver);
     gameDealer.state.start("BootDealer");
-    gameDealer.state.add("GameOverDealer", gameOver);
+    gameDealer.state.add("GameOverDealer", GameOverDealer);
     
     function imageBoardFrom(board) {
       var output = [];
