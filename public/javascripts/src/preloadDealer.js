@@ -1,6 +1,6 @@
 var preloadDealer = function(gameDealer){}
 
-preload.prototype = {
+preloadDealer.prototype = {
 	preload: function() {
 
     console.log("preloading");
