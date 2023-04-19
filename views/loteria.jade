@@ -43,9 +43,9 @@ block content
     var gameBoard = generateBoard(boardLayout);
     var imageBoard = imageBoardFrom(gameBoard);
     gameLoteria.state.start("Boot");
-    gameLoteria.state.add("GameOver", GameOver);
+    gameLoteria.state.add("GameOver", gameOver);
     gameDealer.state.start("BootDealer");
-    gameDealer.state.add("GameOverDealer", GameOverDealer);
+    gameDealer.state.add("GameOverDealer", gameOverDealer);
     
     function imageBoardFrom(board) {
       var output = [];
