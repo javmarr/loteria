@@ -14,3 +14,4 @@ bootDealer.prototype = {
   	gameDealer.state.start("PreloadDealer");
 	}
 };
+
