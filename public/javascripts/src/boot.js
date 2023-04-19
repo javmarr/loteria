@@ -4,13 +4,13 @@ var boot = function(gameLoteria) {
 
 boot.prototype = {
 	preload: function() {
-    this.gameLoteria.load.image("loading","../images/temp/loading.png");
+    gameLoteria.load.image("loading","../images/temp/loading.png");
 	},
 
 	create: function() {
   	// this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
   	// this.scale.pageAlignHorizontally = true;
   	// this.scale.updateLayout();
-  	this.gameLoteria.state.start("Preload");
+  	gameLoteria.state.start("Preload");
 	}
 };
