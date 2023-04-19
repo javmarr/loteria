@@ -62,7 +62,7 @@ block content
     var turn = 0;
     var cardsDealt = [];
     var cardNumber = 0;
-    
+    var deck = generateDeck(54);
     gameDealer.state.add("LoteriaDealer", loteriaDealer); 
     gameLoteria.state.add("Loteria", loteria); 
     nextCard();
@@ -73,7 +73,7 @@ block content
     gameLoteria.state.add("GameOver", gameOver);
     gameDealer.state.add("GameOverDealer", gameOverDealer);
     
-    var deck = generateDeck(54);
+   
 
       
 
