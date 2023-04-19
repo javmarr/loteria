@@ -37,7 +37,7 @@ block content
     var turn = 0;
     var cardsDealt = [];
     var cardNumber = 0;
-    var deck = generateDeck(54);
+    
     gameDealer.state.add("LoteriaDealer", loteriaDealer); 
     gameLoteria.state.add("Loteria", loteria); 
     nextCard();
@@ -73,6 +73,7 @@ function generateDeck(size) {
   return deck;
 }
 
+var deck = generateDeck(54);
 
     function imageBoardFrom(board) {
       var output = [];
