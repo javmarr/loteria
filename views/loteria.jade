@@ -24,12 +24,13 @@ block content
     console.log("On jade (dealer) " + dealer);
     var gameDealer = new Phaser.Game(300, 500, Phaser.AUTO, "gameDealer");
     var gameLoteria = new Phaser.Game(800, 600, Phaser.AUTO, "gameLoteria");
-    gameDealer.state.add("BootDealer", bootDealer);
-    gameDealer.state.add("PreloadDealer", preloadDealer);
-    gameDealer.state.add("GameTitleDealer", gameTitleDealer);
     gameLoteria.state.add("Boot", boot);
+    gameDealer.state.add("BootDealer", bootDealer);
     gameLoteria.state.add("Preload", preload);
+    gameDealer.state.add("PreloadDealer", preloadDealer);
     gameLoteria.state.add("GameTitle", gameTitle);
+    gameDealer.state.add("GameTitleDealer", gameTitleDealer);
+    
     
 
     var deckSize = 0;
