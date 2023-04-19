@@ -1,4 +1,4 @@
-var boot = function(game) {
+var boot = function(gameDealer) {
 	console.log("%cLoteria round, start!", "color:white; background:green");
 };
 

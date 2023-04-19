@@ -1,4 +1,4 @@
-var gameTitle = function(game){}
+var gameTitle = function(gameLoteria){}
 
 gameTitle.prototype = {
 	create: function() {

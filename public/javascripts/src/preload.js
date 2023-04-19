@@ -1,4 +1,4 @@
-var preload = function(game){}
+var preload = function(gameLoteria){}
 
 preload.prototype = {
 	preload: function() {
