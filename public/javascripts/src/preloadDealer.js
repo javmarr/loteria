@@ -21,6 +21,6 @@ preloadDealer.prototype = {
 
 	create: function() {
 	    // this.game.state.start("GameTitle");
-      gameDealer.state.start("Loteria"); // skip menu
+      gameDealer.state.start("LoteriaDealer"); // skip menu
 	}
 };
