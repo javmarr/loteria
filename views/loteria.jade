@@ -22,8 +22,8 @@ block content
     console.log("On jade (gameID) " + gameID);
     console.log("On jade (nickname) " + nickname);
     console.log("On jade (dealer) " + dealer);
-    var gameDealer = new Phaser.Game(300, 500, Phaser.AUTO, "game");
-    var gameLoteria = new Phaser.Game(300, 500, Phaser.AUTO, "game");
+    var gameDealer = new Phaser.Game(300, 500, Phaser.AUTO, "gameDealer");
+    var gameLoteria = new Phaser.Game(300, 500, Phaser.AUTO, "gameLoteria");
     gameDealer.state.add("Boot", bootDealer);
     gameDealer.state.add("Preload", preloadDealer);
     gameDealer.state.add("GameTitle", gameTitleDealer);
