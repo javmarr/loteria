@@ -64,7 +64,7 @@ block content
     var deck = generateDeck(54);
     gameDealer.state.add("LoteriaDealer", loteriaDealer); 
 
-    gameDealer.input.onPointerDown.add(function() {
+    gameDealer.cardImage.onDown.add(function() {
       var message = {
         type: "nextCard",
         cardNumber: cardNumber,
