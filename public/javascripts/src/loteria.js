@@ -33,8 +33,7 @@ loteria.prototype = {
       console.log('sprite.key: ' + image.key);
       if(image == 'card_'+message.data+'.png')
        {
-        console.log('sprite.key: ' + sprit
-        e.key);
+        console.log('sprite.key: ' + sprite.key);
         sprite.loadTexture('loteria', 'dummyCard.png');
        }
       });
