@@ -1,5 +1,6 @@
 
 var loteria = function(gameLoteria){
+  var groupLoteria;
 };
 
 loteria.prototype = {
@@ -15,7 +16,7 @@ loteria.prototype = {
     // cardImage = card.create(cardBorder.x+30, cardBorder.y+32, 'loteria', 'card_' + cardNumber + '.png');
     console.log('imageboard in phaser: ' + imageBoard);
 
-    var groupLoteria = gameLoteria.add.group();
+    groupLoteria = gameLoteria.add.group();
     groupLoteria.createMultiple(1, 'loteria', imageBoard, true);
     groupLoteria.align(4, 4, 210, 330);
     groupLoteria.scale.set(.9, .9);
