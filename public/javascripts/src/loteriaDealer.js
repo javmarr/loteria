@@ -30,18 +30,6 @@ loteriaDealer.prototype = {
   },
   update: function() {
     cardImage.loadTexture('loteria', 'card_' + cardNumber + '.png');
-
-    
-    groupLoteria.forEach(function(child) {
-    if (child.key == 'card_' + cardNumber + '.png') {
-      imageFoundIndex = groupLoteria.getIndex(child);
-      console.log('image found index: ' + imageFoundIndex);
-      groupLoteria.remove(child);
-    }
-  }, this);
-
-
-
   }
 
 };
