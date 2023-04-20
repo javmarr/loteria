@@ -21,22 +21,10 @@ loteria.prototype = {
     groupLoteria.align(4, 4, 210, 330);
     groupLoteria.scale.set(.9, .9);
     groupLoteria.alive=true;
-  },
-
-  update: function() { 
-    window.addEventListener('message', function(event) {
-      if (event.data.type == "nextCard") {
-         groupLoteria.forEach(function(child) {
-          if (child.key == 'card_' + cardNumber + '.png') {
-            imageFoundIndex = groupLoteria.getIndex(child);
-            console.log('image found index: ' + imageFoundIndex);
-            groupLoteria.remove(child);
-        }});
-      }
-    });
   }
 
 };
+
 
 
 
