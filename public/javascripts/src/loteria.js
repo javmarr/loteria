@@ -30,10 +30,11 @@ loteria.prototype = {
       groupLoteria.forEach(function(sprite) {
       console.log('message.data: ' + message.data);
       var image = gameLoteria.cache.getImage('loteria', 'card_'+message.data+'.png');
-      console.log('sprite.key: ' + sprite.frame.name);
+      console.log('sprite.key: ' + image.key);
       if(image == 'card_'+message.data+'.png')
        {
-        console.log('sprite.key: ' + sprxxite.key);
+        console.log('sprite.key: ' + sprit
+        e.key);
         sprite.loadTexture('loteria', 'dummyCard.png');
        }
       });
