@@ -1,5 +1,5 @@
 
-var loteria = function(gameLoteria){
+var loteria = function(gameLoteria,groupLoteria){
 };
 
 loteria.prototype = {
