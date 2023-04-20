@@ -64,19 +64,6 @@ block content
     var deck = generateDeck(54);
     gameDealer.state.add("LoteriaDealer", loteriaDealer); 
 
-    
-
-    window.addEventListener('message', function(event) {
-      if (event.data.type == "nextCard") {
-         groupLoteria.forEach(function(child) {
-          if (child.key == 'card_' + cardNumber + '.png') {
-            imageFoundIndex = groupLoteria.getIndex(child);
-            console.log('image found index: ' + imageFoundIndex);
-            groupLoteria.remove(child);
-        }});
-      }
-    });
-
 
     gameLoteria.state.add("Loteria", loteria); 
     nextCard();
