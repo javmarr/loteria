@@ -27,12 +27,12 @@ loteriaDealer.prototype = {
   changeCard: function() {
     nextCard();
     var message = {
-      type: 'event',
-      data: 'Some data'
+      type: 'cardNumber',
+      data: cardNumber
     };
     window.parent.postMessage(message, '*');
   },
-  
+
   update: function() {
     cardImage.loadTexture('loteria', 'card_' + cardNumber + '.png');
   }

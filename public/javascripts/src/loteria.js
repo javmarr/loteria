@@ -21,9 +21,22 @@ loteria.prototype = {
     groupLoteria.align(4, 4, 210, 330);
     groupLoteria.scale.set(.9, .9);
     groupLoteria.alive=true;
-  }
 
-};
+window.addEventListener('message', function(event) {
+  var message = event.data;
+
+  if(message.type === 'cardNumber') 
+  {
+    groupLoteria.foreach(function(sprite) 
+    {
+      console.log('message.data: ' + message.data);
+      if(sprite.key === message.data)
+       {
+        sprite.loadTexture('loteria', 'dummyCard.png');
+      }
+    });
+  }
+});
 
 
 
