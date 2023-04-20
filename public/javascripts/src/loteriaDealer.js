@@ -27,7 +27,7 @@ loteriaDealer.prototype = {
         
       };
       window.parent.postMessage(message, "*");
-    });
+    },this);
     console.log("\n\n\n\n\nOn loteria (gameID) " + gameID);
     console.log("\nOn loteria (cardNumber) " + cardNumber);
   },
