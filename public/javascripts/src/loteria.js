@@ -30,7 +30,7 @@ loteria.prototype = {
       groupLoteria.forEach(function(sprite) {
       console.log('message.data: ' + message.data);
       console.log('sprite.key: ' + sprite.frame);
-      if(sprite.frame === message.data)
+      if(sprite.frame == message.data)
        {
         console.log('sprite.key: ' + sprite.key);
         sprite.loadTexture('loteria', 'dummyCard.png');
