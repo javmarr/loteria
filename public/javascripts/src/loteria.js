@@ -19,9 +19,10 @@ loteria.prototype = {
     groupLoteria.createMultiple(1, 'loteria', imageBoard, true);
     groupLoteria.align(4, 4, 210, 330);
     groupLoteria.scale.set(.9, .9);
-
-    
   }
+
+ 
+  
 
 };
 

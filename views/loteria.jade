@@ -95,13 +95,25 @@ block content
       return output;
     }
     function nextCard() {
+      var imageFoundIndex;
       console.log("next card");
       turn ++;
       cardNumber = deck[turn];
       cardsDealt.push(cardNumber);
       console.log('turn: ' + turn);
       console.log('cardnumber: ' + cardNumber);
-      }
+
+      groupLoteria.forEach(function(child) {
+        if (child.key == 'card_' + cardNumber + '.png') {
+          imageFoundIndex = groupLoteria.getIndex(child);
+          console.log('image found index: ' + imageFoundIndex);
+          groupLoteria.remove(child);
+        }
+      }, this);
+
+
+      
+    }
     
     function generateBoard(layout) {
       var output = [];
