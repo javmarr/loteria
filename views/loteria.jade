@@ -103,11 +103,11 @@ block content
       console.log('turn: ' + turn);
       console.log('cardnumber: ' + cardNumber);
 
-      gameLoteria.groupLoteria.forEach(function(child) {
+      gameLoteria.forEach(function(child) {
         if (child.key == 'card_' + cardNumber + '.png') {
-          imageFoundIndex = gameLoteria.groupLoteria.getIndex(child);
+          imageFoundIndex = gameLoteria.getIndex(child);
           console.log('image found index: ' + imageFoundIndex);
-          gameLoteria.groupLoteria.remove(child);
+          gameLoteria.remove(child);
         }
       }, this);
 
