@@ -71,7 +71,7 @@ block content
         
       };
       window.parent.postMessage(message, "*");
-    };
+    });
 
     window.addEventListener('message', function(event) {
       if (event.data.type == "nextCard") {
