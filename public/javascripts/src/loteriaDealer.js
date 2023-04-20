@@ -20,14 +20,14 @@ loteriaDealer.prototype = {
 
     cardImage.inputEnabled = true;
     cardImage.events.onInputUp.add(function() {
-      this.changeCard();
+      this.changeCard;
       var message = {
         type: "nextCard",
         cardNumber: cardNumber,
         
       };
       window.parent.postMessage(message, "*");
-    })
+    });
     console.log("\n\n\n\n\nOn loteria (gameID) " + gameID);
     console.log("\nOn loteria (cardNumber) " + cardNumber);
   },
