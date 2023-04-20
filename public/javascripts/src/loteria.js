@@ -27,7 +27,9 @@ loteria.prototype = {
     var message = event.data;
     if(message.type === 'cardNumber') 
     {
-      groupLoteria.foreach(function(sprite) 
+      groupLoteria.getChildren().forEach(element => {
+        
+      });(function(sprite) 
       {
       console.log('message.data: ' + message.data);
       if(sprite.key === message.data)
