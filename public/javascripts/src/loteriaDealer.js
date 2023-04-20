@@ -19,9 +19,8 @@ loteriaDealer.prototype = {
     text = gameDealer.add.text(250, 16, '', { fill: '#ffffff' });
 
     cardImage.inputEnabled = true;
-    cardImage.events.onInputUp.add(function() {
-      this.changeCard;
-    });
+    cardImage.events.onInputUp.add(this.changeCard,this);
+
     console.log("\n\n\n\n\nOn loteria (gameID) " + gameID);
     console.log("\nOn loteria (cardNumber) " + cardNumber);
   },
