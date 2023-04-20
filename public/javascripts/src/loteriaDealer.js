@@ -26,7 +26,7 @@ loteriaDealer.prototype = {
 
   changeCard: function() {
     nextCard();
-    gameDealer.cardImage.onDown.add(function() {
+    cardImage.onDown.add(function() {
       var message = {
         type: "nextCard",
         cardNumber: cardNumber,
