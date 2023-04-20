@@ -56,19 +56,35 @@ block content
     gameLoteria.state.add("GameTitle", gameTitle);
     gameDealer.state.add("GameTitleDealer", gameTitleDealer);
 
-    var groupLoteria;
     
-    
-    
-
-
-
     var deckSize = 0;
     var turn = 0;
     var cardsDealt = [];
     var cardNumber = 0;
     var deck = generateDeck(54);
     gameDealer.state.add("LoteriaDealer", loteriaDealer); 
+
+    gamedealer.input.onDown.add(function() {
+      var message = {
+        type: "nextCard",
+        cardNumber: cardNumber,
+        
+      };
+      window.parent.postMessage(message, "*");
+    };
+
+    window.addEventListener('message', function(event) {
+      if (event.data.type == "nextCard") {
+         groupLoteria.forEach(function(child) {
+          if (child.key == 'card_' + cardNumber + '.png') {
+            imageFoundIndex = groupLoteria.getIndex(child);
+            console.log('image found index: ' + imageFoundIndex);
+            groupLoteria.remove(child);
+        }, this);
+      }
+    });
+
+
     gameLoteria.state.add("Loteria", loteria); 
     nextCard();
     var gameBoard = generateBoard(boardLayout);
@@ -107,17 +123,6 @@ block content
       cardsDealt.push(cardNumber);
       console.log('turn: ' + turn);
       console.log('cardnumber: ' + cardNumber);
-
-      groupLoteria.forEach(function(child) {
-        if (child.key == 'card_' + cardNumber + '.png') {
-          imageFoundIndex = groupLoteria.getIndex(child);
-          console.log('image found index: ' + imageFoundIndex);
-          groupLoteria.remove(child);
-        }
-      }, this);
-
-
-      
     }
     
     function generateBoard(layout) {

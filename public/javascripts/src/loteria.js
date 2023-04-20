@@ -21,10 +21,6 @@ loteria.prototype = {
     groupLoteria.scale.set(.9, .9);
     groupLoteria.alive=true;
   }
-
- 
-  
-
 };
 
 
