@@ -39,7 +39,7 @@ loteria.prototype = {
       console.log('IMAGE: ' + imageBoard[otIndex]);  
       if(imageBoard[otIndex] == 'card_'+message.data+'.png')
        {
-        imageBoard[otIndex]] = 'dummyCard.png';
+        imageBoard[otIndex] = 'dummyCard.png';
         groupLoteria.createMultiple(1, 'loteria', imageBoard, true, index => {
           return imageBoard[index];
         });
