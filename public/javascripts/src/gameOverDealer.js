@@ -7,17 +7,11 @@ gameOverDealer.prototype = {
 
   create: function() {
 	var endText = this.add.text(200, 200, 'Fin del juego. Lograste ganar en'+turns+'intentos tenias una probabilidad de: '+calculateProbability+' de lograrlo en ese numero de intentos', { fontSize: '32px', fill: '#FFF' });
-	var endText2 = this.add.text(200, 200, 'Fin del juego. Lograste ganar en'+turns+'intentos tenias una probabilidad de: '+calculateProbability+' de lograrlo en ese numero de intentos', { fontSize: '32px', fill: '#FFF' });
+	var endText2 = this.add.text(200, 200, 'ANALISIS DE TU SUERTE:'+calcularSuerte(), { fontSize: '32px', fill: '#FFF' });
 	
-  	var gameOverTitle = gameDealer.add(160, 160, "gameover");
-    gameOverTitle.anchor.setTo(0.5, 0.5);
-    
-	},
-
-	playTheGame: function() {
-		gameDealer.state.start("Loteria");
-	}
-};
+  	endText.setActive(true).setVisible(true);
+	endText2.setActive(true).setVisible(true);
+}}
 
 function calculateProbability (){
 	  var turns=gameDealer.turns;
