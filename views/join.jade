@@ -24,14 +24,7 @@ block content
       p(class="green") #{success}
       a(href="../" class="btn btn-default btn-block") Back
     
-  script.
-    $("#joinGameId").click(function () {
-        $("#connect").addClass("hide");
-
-        socket.emit('join', $("#inputGameId").val().trim(), function(data) {
-            pong.sync({ hosting: false, playersCount: parseInt(data.playersCount) });
-        });
-    });
+ 
     
     $(document).ready( function () {
       //- gameID = $("#secretLinkContainer").val().trim();
