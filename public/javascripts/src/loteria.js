@@ -34,12 +34,12 @@ loteria.prototype = {
       console.log('message.data: ' + message.data);
       //var image = gameLoteria.cache.getKeys(Phaser.Cache.IMAGE).find(function(key) { return gameLoteria.cache.getImage(key).name === sprite.key; });
       //console.log('sprite.key: ' + image);
-      var otIndex = sprite.frameName.slice(5, -4) -1;
+      var index = sprite.frameName.slice(5, -4) -1;
       console.log('sprite.key: ' + otIndex);
       console.log('IMAGE: ' + imageBoard[otIndex]);  
       if(imageBoard[index] === 'card_'+message.data+'.png')
        {
-        imageBoard[otIndex] = 'dummyCard.png';
+        imageBoard[index] = 'dummyCard.png';
         groupLoteria.createMultiple(1, 'loteria', imageBoard, true, index => {
           return imageBoard[index];
         });
