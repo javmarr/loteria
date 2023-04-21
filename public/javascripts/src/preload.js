@@ -17,7 +17,8 @@ preload.prototype = {
     gameLoteria.load.image("cardsDealt", "../images/button/cardsDealt.png");
     gameLoteria.load.image("monitor", "../images/button/monitorGame.png");
 		gameLoteria.load.image("gameover", "../images/temp/gameover.png");
-    
+    gameLoteria.load.image("loteria", "../images/cards/cartaCoinci.png");
+   
 	},
 
 	create: function() {
