@@ -159,12 +159,16 @@ h3 {
 
 .body {
   background-color: #BA97FF;
+  background-image: url('../images/header.png');
+  background-size: 100%;
+  opacity: .8;
 }
 
-.cabeceraold {
+.cabecera {
   background-image: url('../images/header.png');
   background-repeat: no-repeat;
   background-color: #BA97FF;
   background-position: center center;
-  background-size: 50%;
+  background-size: 100%;
+  opacity: .8;
 }
