@@ -29,18 +29,24 @@ loteriaDealer.prototype = {
     console.log("\nOn loteria (cardNumber) " + cardNumber);
   },
   changeCard: function() {
-    nextCard();
-    var message = {
-      type: 'cardNumber',
-      data: cardNumber
-    };
-    window.parent.postMessage(message, '*');
+    if(turn<=50) {
+      nextCard();
+    }
+    else {
+      console.log('Game over');
+      gameDealer.state.start('GameOver', true, false, carsDealt);
+    }
+      var message = {
+        type: 'cardNumber',
+        data: cardNumber
+      };
+      window.parent.postMessage(message, '*');
   },
 
   update: function() {
     if(cardNumber == 0)
       cardImage.loadTexture('cartaX', 'card_xx' + '.png');
     else
-    cardImage.loadTexture('loteria', 'card_' + cardNumber + '.png');
+     cardImage.loadTexture('loteria', 'card_' + cardNumber + '.png');
   }
 };
