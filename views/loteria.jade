@@ -118,7 +118,7 @@ block content
         do {
           random = ((Math.floor(Math.random() * 100)) % 54) + 1 ; // 1 -> (size)
         } while (output.includes(random));
-        output.push(random);
+        if(random>0) output.push(random);
       }
       
       console.log('board output: ' + output);
