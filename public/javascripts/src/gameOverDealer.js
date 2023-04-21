@@ -1,6 +1,6 @@
 var gameOverDealer = function(gameDealer) {}
 
-gameOver.prototype = {
+gameOverDealer.prototype = {
 	init: function(cardsDealt) {
 		console.log("Cards Dealt: " + cardsDealt) ;
 	},
