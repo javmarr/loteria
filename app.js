@@ -106,4 +106,35 @@ if (app.get('env') === 'development') {
 }
 
 
+io.on('connection', function(socket) {
+
+  // app.get('session').socketId = socket.getId();
+
+  var room = io.sockets.adapter.rooms;
+  console.log(room);
+  console.log('--- user ' + socket.id + ' connected ---');
+
+  console.log('room length' + room.length);
+
+  // socket for each session
+  // get socket from saved socket_id
+
+
+  socket.on('join', function(data) {
+    console.log('Client says: ' + data);
+
+  });
+
+  socket.on('chat message', function(msg) {
+    // send to everyone except the one who started it
+    socket.broadcast.emit('chat message', msg);
+    console.log('>' + msg);
+  });
+
+  socket.on('disconnect', function() {
+    console.log('-- user disconnected --');
+  });
+});
+
+
 module.exports = app;
