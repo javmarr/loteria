@@ -60,6 +60,8 @@ router.get('/', function(req, res, next) {
 
   }
   
+  returnToURL='https://loteria-frontend.herokuapp.com/';
+
   res.render('index', { DOMAIN: process.env.DOMAIN, CLIENT_ID: process.env.CLIENT_ID, REDIRECT_URL: process.env.CALLBACK_URL, returnToURL: returnToURL});
 });
 
