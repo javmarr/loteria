@@ -37,7 +37,7 @@ loteria.prototype = {
       var otIndex = sprite.frameName.slice(5, -4) -1;
       console.log('sprite.key: ' + otIndex);
       console.log('IMAGE: ' + imageBoard[otIndex]);  
-      if(imageBoard[otIndex] === 'card_'+message.data+'.png')
+      if(imageBoard[index] === 'card_'+message.data+'.png')
        {
         imageBoard[otIndex] = 'dummyCard.png';
         groupLoteria.createMultiple(1, 'loteria', imageBoard, true, index => {
