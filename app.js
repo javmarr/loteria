@@ -16,6 +16,7 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var routes = require('./routes/index');
+var socketio = require('socket.io');
 
 // variables for client/host management
 var debug = false;
