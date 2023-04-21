@@ -30,11 +30,12 @@ loteria.prototype = {
     var message = event.data;
     if(message.type === 'cardNumber') 
     {
+      var iIndex = 0;
       groupLoteria.forEach(function(sprite) {
       //console.log('message.data: ' + message.data);
       //var image = gameLoteria.cache.getKeys(Phaser.Cache.IMAGE).find(function(key) { return gameLoteria.cache.getImage(key).name === sprite.key; });
       //console.log('sprite.key: ' + image);
-      var iIndex = 0;
+      
             
       console.log('IMAGE: ' + imageBoard[iIndex]);  
       console.log('card_'+message.data+'.png');
