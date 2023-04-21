@@ -44,7 +44,7 @@ loteria.prototype = {
         iIndex++;
         });
       }
-     else {
+     else if(message.data>0) {
       console.log('Game over');
       gameLoteria.state.start('GameOver', true, false, 51);
     }
