@@ -8,7 +8,7 @@ TODO:
   boards have nickname
 */
 
-var express = require('express');
+const express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -30,11 +30,11 @@ var clients = {};
 var hosts = {};
 var games = [];
 
-var app = express();
+const app = express();
 
 // io setup
 var server = require('http').Server(app);
-
+var io = global.io = app.io = socketio();
 
 
 // view engine setup
