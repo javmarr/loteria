@@ -42,12 +42,7 @@ function generateRandomID() {
 }
 
 
-    // set values for the new game
-    newGame['gameID'] = gameID;
-    newGame['boards'] = [];
-    console.log(newGame);
-
-    
+   
 
 
 /* GET home page. */
