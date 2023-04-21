@@ -17,7 +17,10 @@ loteria.prototype = {
     console.log('imageboard in phaser: ' + imageBoard);
 
     groupLoteria = gameLoteria.add.group();
-    groupLoteria.createMultiple(1, 'loteria', imageBoard, true);
+    //groupLoteria.createMultiple(1, 'loteria', imageBoard, true);
+    groupLoteria.createMultiple(imageBoard.length, 'loteria', null, true, index => {
+      return imageBoard[index];
+    });
     groupLoteria.align(4, 4, 210, 330);
     groupLoteria.scale.set(.9, .9);
     groupLoteria.alive=true;
@@ -29,9 +32,10 @@ loteria.prototype = {
     {
       groupLoteria.forEach(function(sprite) {
       console.log('message.data: ' + message.data);
-      var image = gameLoteria.cache.getKeys(Phaser.Cache.IMAGE).find(function(key) { return gameLoteria.cache.getImage(key).name === sprite.key; });
-      console.log('sprite.key: ' + image);
-      if(image == 'card_'+message.data+'.png')
+      //var image = gameLoteria.cache.getKeys(Phaser.Cache.IMAGE).find(function(key) { return gameLoteria.cache.getImage(key).name === sprite.key; });
+      //console.log('sprite.key: ' + image);
+      var otIndex = sprite.frameName.slice(5, -4) -1;
+      if(imageBoard[otIndex] == 'card_'+message.data+'.png')
        {
         console.log('sprite.key: ' + sprite.key);
         sprite.loadTexture('loteria', 'dummyCard.png');
