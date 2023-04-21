@@ -39,10 +39,7 @@ loteria.prototype = {
       console.log('IMAGE: ' + imageBoard[index]);  
       if(imageBoard[index] === 'card_'+message.data+'.png')
        {
-        imageBoard[index] = 'dummyCard.png';
-        groupLoteria.createMultiple(1, 'loteria', imageBoard, true, index => {
-          return imageBoard[index];
-        });
+        sprite.loadTexture('loteria', 'dummyCard.png');
        }
       });
     }
