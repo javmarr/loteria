@@ -41,7 +41,6 @@ function generateRandomID() {
   return key;
 }
 
-f
 
     // set values for the new game
     newGame['gameID'] = gameID;
