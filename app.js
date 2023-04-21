@@ -17,7 +17,18 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 
+// variables for client/host management
+var debug = false;
+var timeOutDelay = 2500;
+var maxPlayers = 4; // per game
+if (debug) {
+    maxPlayers = 2;
+}
 
+var clientPlayers = {};
+var clients = {};
+var hosts = {};
+var games = [];
 
 var app = express();
 
