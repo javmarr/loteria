@@ -47,9 +47,7 @@ loteriaDealer.prototype = {
   },
 
   update: function() {
-    if(cardNumber == 0)
-      cardImage.loadTexture('cartaX', 'card_xx' + '.png');
-    else
+    if(cardNumber > 0)
      cardImage.loadTexture('loteria', 'card_' + cardNumber + '.png');
   }
 };

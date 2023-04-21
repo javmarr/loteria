@@ -15,8 +15,8 @@ gameOverDealer.prototype = {
 
 function calculateProbability (){
 	  var turns=gameDealer.turns;
-	  var combination=factorial(turns)/(factorial(16)*factorial(turns-16));
-	  probability=combination/(Math.pow(54,turns));
+	  var combination=factorial(turn)/(factorial(16)*factorial(turn-16));
+	  probability=combination/(Math.pow(54,turn));
 }
 
 function factorial(n){
