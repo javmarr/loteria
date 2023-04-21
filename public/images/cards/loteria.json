@@ -504,7 +504,6 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":201,"h":330},
 	"sourceSize": {"w":201,"h":330},
 	"pivot": {"x":0.5,"y":0.5}
-}
 },
 "meta": {
 	"app": "http://www.codeandweb.com/texturepacker",
