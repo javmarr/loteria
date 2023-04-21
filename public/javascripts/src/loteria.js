@@ -44,10 +44,9 @@ loteria.prototype = {
         iIndex++;
         });
       }
-    }
-    else {
+     else {
       console.log('Game over');
       gameLoteria.state.start('GameOver', true, false, 51);
     }
-  })}
   }
+  })}}
