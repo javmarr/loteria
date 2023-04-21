@@ -6,6 +6,7 @@ loteriaDealer.prototype = {
   preload: function() {
     console.log('preload loteria.js');
     this.load.image('cartaX', '../images/cards/card_xx.png');
+    this.load.image('cartaCoinci', '../images/cards/cartaCoinci.png');
   },
 
   create: function() {
@@ -46,6 +47,9 @@ loteriaDealer.prototype = {
   },
 
   update: function() {
+    if(cardNumber == 0)
+      cardImage.loadTexture('cartaX', 'card_xx' + '.png');
+    else
      cardImage.loadTexture('loteria', 'card_' + cardNumber + '.png');
   }
 };

@@ -31,7 +31,7 @@ loteria.prototype = {
     var message = event.data;
     if(message.type === 'cardNumber') 
     {
-      if(message.data <=50) {
+      if(message.data <=50 && message.data>0) {
         var iIndex = 0;
         groupLoteria.forEach(function(sprite) {
             console.log('IMAGE: ' + imageBoard[iIndex]);  
