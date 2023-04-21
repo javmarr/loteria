@@ -18,7 +18,7 @@ loteria.prototype = {
 
     groupLoteria = gameLoteria.add.group();
     //groupLoteria.createMultiple(1, 'loteria', imageBoard, true);
-    groupLoteria.createMultiple(imageBoard.length, 'loteria', null, true, index => {
+    groupLoteria.createMultiple(1, 'loteria', imageBoard, true, index => {
       return imageBoard[index];
     });
     groupLoteria.align(4, 4, 210, 330);
