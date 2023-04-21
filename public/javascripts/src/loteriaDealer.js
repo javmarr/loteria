@@ -28,9 +28,10 @@ loteriaDealer.prototype = {
     console.log("\n\n\n\n\nOn loteria (gameID) " + gameID);
     console.log("\nOn loteria (cardNumber) " + cardNumber);
   },
+
   changeCard: function() {
     console.log('TURN IN CHANGE CARD: ' + turn);
-    if(turn<=50) {
+    if(turn<=50 && cardNumber>0) {
       nextCard();
     }
     else {
