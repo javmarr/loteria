@@ -485,6 +485,15 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":201,"h":330},
 	"sourceSize": {"w":201,"h":330},
 	"pivot": {"x":0.5,"y":0.5}
+},
+"cardCoinci.png":
+{
+	"frame": {"x":1637,"y":1323,"w":201,"h":330},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":201,"h":330},
+	"sourceSize": {"w":201,"h":330},
+	"pivot": {"x":0.5,"y":0.5}
 }
 },
 "meta": {

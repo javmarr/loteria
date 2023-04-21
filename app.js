@@ -21,56 +21,9 @@ var socketio = require('socket.io');
 var passport = require('passport');
 var strategy = require('./setup-passport');
 
-var Auth0Strategy = require('passport-auth0');
-
-// variables for client/host management
-var debug = false;
-var timeOutDelay = 2500;
-var maxPlayers = 4; // per game
-if (debug) {
-    maxPlayers = 2;
-}
-
-var clientPlayers = {};
-var clients = {};
-var hosts = {};
-var games = [];
-
-// db connection
-var mongoose = require('mongoose', { useMongoClient: true },{ useNewUrlParser: true } );
-const MONGO_HOST = process.env.MONGO_HOST;
-const MONGO_PASSWORD = process.env.MONGO_PASSWORD;
-const DB_NAME = process.env.DB_NAME
-//const DB_NAME = 'loteria';
-
-//console.log('it was commited');
-
-//console.log("mongodb+srv://teotzin:" + MONGO_PASSWORD + '@' + MONGO_HOST + DB_NAME +"/?retryWrites=true&w=majority");
-/* commented out to test locally, i have a big string
-if(MONGO_HOST) {
-  mongoose.connect("mongodb+srv://teotzin:" + MONGO_PASSWORD + '@' + MONGO_HOST + DB_NAME +"/?retryWrites=true&w=majority");
-}
-else {
-  require('dotenv').config();
-  mongoose.connect('mongodb://localhost/' + DB_NAME);
-}
-*/
-
-//mongoose.connect("mongodb://teotzin:Ceniceros5@ac-111n2y6-shard-00-00.s0mbodb.mongodb.net:27017/loteria,ac-111n2y6-shard-00-01.s0mbodb.mongodb.net:27017/loteria,ac-111n2y6-shard-00-02.s0mbodb.mongodb.net:27017/loteria?ssl=true&replicaSet=atlas-ugjkm4-shard-0&authSource=admin&retryWrites=true&w=majority");
-
-mongoose.connect("mongodb+srv://teotzin:Ceniceros5@loteria.s0mbodb.mongodb.net/test?retryWrites=true&w=majority");
-
-
-
-
 
 var app = express();
 
-
-
-// io setup
-var server = require('http').Server(app);
-var io = global.io = app.io = socketio();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -98,15 +51,6 @@ app.get('*', function(req, res, next) {
   next();
 });
 
-app.get('/callback',
-  passport.authenticate('auth0', { failureRedirect: '/Error' }),
-  function(req, res) {
-    if (!req.user) {
-      throw new Error('user null');
-    }
-    console.log('login worked!');
-    res.redirect("/login");
-  });
 
 app.get('/login', function (req, res) {
   // req.session.user = req.user;
@@ -137,45 +81,6 @@ app.use(function(req, res, next) {
       error: err
     });
   });
-
-
-
-
-io.on('connection', function(socket) {
-
-  // app.get('session').socketId = socket.getId();
-
-  var room = io.sockets.adapter.rooms;
-  console.log(room);
-  console.log('--- user ' + socket.id + ' connected ---');
-
-  console.log('room length' + room.length);
-
-  // socket for each session
-  // get socket from saved socket_id
-
-
-  socket.on('join', function(data) {
-    console.log('Client says: ' + data);
-
-  });
-
-  socket.on('chat message', function(msg) {
-    // send to everyone except the one who started it
-    socket.broadcast.emit('chat message', msg);
-    console.log('>' + msg);
-  });
-
-  socket.on('disconnect', function() {
-    console.log('-- user disconnected --');
-  });
-});
-
-
-
-
-
-
 
 
 module.exports = app;
