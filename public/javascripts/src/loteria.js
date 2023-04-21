@@ -10,7 +10,7 @@ loteria.prototype = {
   },
 
   create: function() {
-    gameLoteria.stage.backgroundColor = "#ffffff";
+    gameLoteria.stage.backgroundColor = "#BA97FF";
    
     // card = this.game.add.group(); // card containing image and border
     // cardBorder = card.create(0, 0, 'border');
