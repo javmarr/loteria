@@ -43,7 +43,7 @@ loteria.prototype = {
       if(imageBoard[iIndex] === 'card_'+message.data+'.png')
        {
         console.log('!!!!!SUSTITUYENDO.!!!!!!!!!!!!!!!!: ' + imageBoard[iIndex]);  
-        sprite.loadTexture('loteria', 'cartaCoinci.png');
+        sprite.loadTexture('cartaCoinci', 'cartaCoinci.png');
        }
       iIndex++;
       });
