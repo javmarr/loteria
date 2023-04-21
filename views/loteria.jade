@@ -97,11 +97,16 @@ block content
     }
     function nextCard() {
       console.log("next card");
-      turn ++;
-      cardNumber = deck[turn];
-      cardsDealt.push(cardNumber);
-      console.log('turn: ' + turn);
-      console.log('cardnumber: ' + cardNumber);
+      if(turn!=0) {
+        cardNumber = deck[turn];
+      }
+      else {
+        cardNumber=0;
+      }
+        turn ++;
+        cardsDealt.push(cardNumber);
+        console.log('turn: ' + turn);
+        console.log('cardnumber: ' + cardNumber);
     }
     
     function generateBoard(layout) {
