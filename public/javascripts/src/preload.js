@@ -9,6 +9,7 @@ preload.prototype = {
     this.game.load.setPreloadSprite(loadingBar);
 
     gameLoteria.load.atlasJSONHash('loteria', '../images/cards/loteria.png', '../images/cards/loteria.json');
+    gameLoteria.load.image("loteria", "../images/cards/cartaCoinci.png");
     gameLoteria.load.image('border', '../images/cards/border.png');
 
 		gameLoteria.load.image("gametitle", "../images/temp/gametitle.png");

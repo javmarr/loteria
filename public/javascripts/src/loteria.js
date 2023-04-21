@@ -5,7 +5,7 @@ var loteria = function(gameLoteria,groupLoteria){
 loteria.prototype = {
   preload: function() {
     console.log('loteria board');
-    gameLoteria.load.image("loteria", "../images/cards/cartaCoinci.png");
+    this.load.image('cartaCoinci', '../images/cards/cartaCoinci.png');
     
   },
 
