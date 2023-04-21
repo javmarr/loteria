@@ -38,6 +38,9 @@ loteriaDealer.prototype = {
   },
 
   update: function() {
+    if(cardNumber == 0)
+      cardImage.loadTexture('cartaX', 'card_xx' + '.png');
+    else
     cardImage.loadTexture('loteria', 'card_' + cardNumber + '.png');
   }
 };
