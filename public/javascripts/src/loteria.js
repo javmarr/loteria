@@ -34,8 +34,8 @@ loteria.prototype = {
       //console.log('message.data: ' + message.data);
       //var image = gameLoteria.cache.getKeys(Phaser.Cache.IMAGE).find(function(key) { return gameLoteria.cache.getImage(key).name === sprite.key; });
       //console.log('sprite.key: ' + image);
-      var iIndex = sprite.frameName.slice(5, -4) -1;
-      
+      var iIndex = 0;
+            
       console.log('IMAGE: ' + imageBoard[iIndex]);  
       console.log('card_'+message.data+'.png');
       if(imageBoard[iIndex] === 'card_'+message.data+'.png')
@@ -43,6 +43,7 @@ loteria.prototype = {
         console.log('!!!!!SUSTITUYENDO.!!!!!!!!!!!!!!!!: ' + imageBoard[iIndex]);  
         sprite.loadTexture('loteria', 'dummyCard.png');
        }
+      iIndex++;
       });
     }
   });
