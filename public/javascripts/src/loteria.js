@@ -31,22 +31,22 @@ loteria.prototype = {
     var message = event.data;
     if(message.type === 'cardNumber') 
     {
-      var iIndex = 0;
-      groupLoteria.forEach(function(sprite) {
-      //console.log('message.data: ' + message.data);
-      //var image = gameLoteria.cache.getKeys(Phaser.Cache.IMAGE).find(function(key) { return gameLoteria.cache.getImage(key).name === sprite.key; });
-      //console.log('sprite.key: ' + image);
-      
-            
-      console.log('IMAGE: ' + imageBoard[iIndex]);  
-      console.log('card_'+message.data+'.png');
-      if(imageBoard[iIndex] === 'card_'+message.data+'.png')
-       {
-        console.log('!!!!!SUSTITUYENDO.!!!!!!!!!!!!!!!!: ' + imageBoard[iIndex]);  
-        sprite.loadTexture('cartaCoinci', 'cartaCoinci.png');
-       }
-      iIndex++;
-      });
+      if(message.data <=50) {
+        var iIndex = 0;
+        groupLoteria.forEach(function(sprite) {
+            console.log('IMAGE: ' + imageBoard[iIndex]);  
+            console.log('card_'+message.data+'.png');
+            if(imageBoard[iIndex] === 'card_'+message.data+'.png')
+            {
+              console.log('!!!!!SUSTITUYENDO.!!!!!!!!!!!!!!!!: ' + imageBoard[iIndex]);  
+              sprite.loadTexture('cartaCoinci', 'cartaCoinci.png');
+            }
+        iIndex++;
+        });
+    }
+    else {
+      console.log('Game over');
+      gameLoteria.state.start('GameOver', true, false, 51);
     }
   });
 }};
