@@ -6,9 +6,9 @@ gameOver.prototype = {
 	},
 
   create: function() {
-  	var gameOverTitle = this.gameLoteria.add.sprite(160, 160, "gameover");
+  	var gameOverTitle = gameLoteria.add.sprite(160, 160, "gameover");
     gameOverTitle.anchor.setTo(0.5, 0.5);
-    var playButton = this.gameLoteria.add.button(160, 320, "play", this.playTheGame, this);
+    var playButton = gameLoteria.add.button(160, 320, "play", this.playTheGame, this);
 	playButton.style = {button	};
   	playButton.anchor.setTo(0.5, 0.5);
 	},
