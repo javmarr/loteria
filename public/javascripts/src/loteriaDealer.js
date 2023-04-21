@@ -5,6 +5,7 @@ var loteriaDealer = function(gameDealer){
 loteriaDealer.prototype = {
   preload: function() {
     console.log('preload loteria.js');
+    this.load.image('cartaX', '../images/cards/card_xx.png');
   },
 
   create: function() {
@@ -15,7 +16,7 @@ loteriaDealer.prototype = {
     card = gameDealer.add.group(); // card containing image and border
     cardBorder = card.create(0, 0, 'border');
     if(cardNumber == 0)
-      cardImage = card.create(cardBorder.x+30, cardBorder.y+32, 'loteria', 'card_xx' + '.png');
+      cardImage = card.create(cardBorder.x+30, cardBorder.y+32, 'cartaX', 'card_xx' + '.png');
     else
       cardImage = card.create(cardBorder.x+30, cardBorder.y+32, 'loteria', 'card_' + cardNumber + '.png');
 
