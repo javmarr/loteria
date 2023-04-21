@@ -35,8 +35,8 @@ loteria.prototype = {
       //var image = gameLoteria.cache.getKeys(Phaser.Cache.IMAGE).find(function(key) { return gameLoteria.cache.getImage(key).name === sprite.key; });
       //console.log('sprite.key: ' + image);
       var index = sprite.frameName.slice(5, -4) -1;
-      console.log('sprite.key: ' + otIndex);
-      console.log('IMAGE: ' + imageBoard[otIndex]);  
+      console.log('sprite.key: ' + index);
+      console.log('IMAGE: ' + imageBoard[index]);  
       if(imageBoard[index] === 'card_'+message.data+'.png')
        {
         imageBoard[index] = 'dummyCard.png';
