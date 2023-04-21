@@ -35,6 +35,7 @@ loteria.prototype = {
       //var image = gameLoteria.cache.getKeys(Phaser.Cache.IMAGE).find(function(key) { return gameLoteria.cache.getImage(key).name === sprite.key; });
       //console.log('sprite.key: ' + image);
       var otIndex = sprite.frameName.slice(5, -4) -1;
+      console.log('sprite.key: ' + otIndex);
       if(imageBoard[otIndex] == 'card_'+message.data+'.png')
        {
         console.log('sprite.key: ' + sprite.key);
