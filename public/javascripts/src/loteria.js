@@ -36,6 +36,7 @@ loteria.prototype = {
       //console.log('sprite.key: ' + image);
       var otIndex = sprite.frameName.slice(5, -4) -1;
       console.log('sprite.key: ' + otIndex);
+      console.log('IMAGE: ' + imageBoard[otIndex]);  
       if(imageBoard[otIndex] == 'card_'+message.data+'.png')
        {
         console.log('sprite.key: ' + sprite.key);
