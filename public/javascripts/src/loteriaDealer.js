@@ -35,7 +35,7 @@ loteriaDealer.prototype = {
     }
     else {
       console.log('Game over');
-      gameDealer.state.start('GameOver', true, false, carsDealt);
+      gameDealer.state.start('GameOverDealer', true, false, 51);
     }
       var message = {
         type: 'cardNumber',
