@@ -31,13 +31,13 @@ loteria.prototype = {
     if(message.type === 'cardNumber') 
     {
       groupLoteria.forEach(function(sprite) {
-      console.log('message.data: ' + message.data);
+      //console.log('message.data: ' + message.data);
       //var image = gameLoteria.cache.getKeys(Phaser.Cache.IMAGE).find(function(key) { return gameLoteria.cache.getImage(key).name === sprite.key; });
       //console.log('sprite.key: ' + image);
       var index = sprite.frameName.slice(5, -4) -1;
       
       console.log('IMAGE: ' + imageBoard[index]);  
-      'card_'+message.data+'.png'
+      console.log('card_'+message.data+'.png');
       if(imageBoard[index] === 'card_'+message.data+'.png')
        {
         console.log('!!!!!SUSTITUYENDO.!!!!!!!!!!!!!!!!: ' + imageBoard[index]);  
