@@ -6,7 +6,7 @@ gameOverDealer.prototype = {
 	},
 
   create: function() {
-	var endText = this.add.text(200, 200, 'Fin del juego. Lograste ganar en'+turns+'intentos tenias una probabilidad de: '+calculateProbability+' de lograrlo en ese numero de intentos', { fontSize: '32px', fill: '#FFF' });
+	var endText = this.add.text(200, 200, 'Fin del juego. Lograste ganar en'+turn+'intentos tenias una probabilidad de: '+calculateProbability+' de lograrlo en ese numero de intentos', { fontSize: '32px', fill: '#FFF' });
 	var endText2 = this.add.text(200, 200, 'ANALISIS DE TU SUERTE:'+calcularSuerte(), { fontSize: '32px', fill: '#FFF' });
 	
   	endText.setActive(true).setVisible(true);
@@ -15,8 +15,8 @@ gameOverDealer.prototype = {
 
 function calculateProbability (){
 	  var turns=gameDealer.turns;
-	  var combination=factorial(turn)/(factorial(16)*factorial(turn-16));
-	  probability=combination/(Math.pow(54,turn));
+	  var combination=factorial(turns)/(factorial(16)*factorial(turns-16));
+	  probability=combination/(Math.pow(54,turns));
 }
 
 function factorial(n){

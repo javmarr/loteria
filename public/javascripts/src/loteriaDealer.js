@@ -32,7 +32,7 @@ loteriaDealer.prototype = {
 
   changeCard: function() {
     console.log('TURN IN CHANGE CARD: ' + turn);
-    if(turn<=50 && cardNumber>0) {
+    if(turn<=50) {
       nextCard();
     }
     else if(cardNumber>0){
