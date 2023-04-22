@@ -50,12 +50,11 @@ gameOverDealer.prototype = {
 
 function calcularSuerte (){
 	var probability = this.calculateProbability();
-	alert(probability);
-	if(probability>0.0<0.3)
-		return ' Super afortuna@ en el azar... mejor jugar que buscar pareja... es broma';
-	if(probability>0.3<0.6)
-		return ' Eres un poco afortunad@ en el amor, un poco en el azar, vida balanceada';
+	if(probability>0.0 && probability<30)
+		return ' Tienes una SUPER SUERTE para el azar... mejor jugar que buscar pareja... es broma';
+	if(probability>30 && probability<=60)
+		return ' Tienes una suerte promedio similar a la de la mayoria de la poblacion... no te desanimes... es broma';
 	if(probability>0.6)
-		return ' Eres afortunad@ en el amor, en el azar no tanto... es broma'
+		return ' Tienes una suerte MENOR al promedio, debes serlo en el amor entonces... es broma'
 }
 
