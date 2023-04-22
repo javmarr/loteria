@@ -19,7 +19,7 @@ gameOverDealer.prototype = {
 	const N = 54;
 	const n = 1;
 	const k = 16;
-	const totalCards = 50-turn;
+	const totalCards = 54-turn;
   
 	let probability = 0;
   
