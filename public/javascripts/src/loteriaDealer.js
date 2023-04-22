@@ -35,7 +35,7 @@ loteriaDealer.prototype = {
     if(turn<=50) {
       nextCard();
     }
-    else if(cardNumber>0){
+    else if(cardNumber>0&&turn>50){
       console.log('Game over');
       gameDealer.state.start('GameOverDealer', true, false, 51);
     }
