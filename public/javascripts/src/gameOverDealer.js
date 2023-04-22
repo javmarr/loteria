@@ -6,10 +6,10 @@ gameOverDealer.prototype = {
 	},
 
   create: function() {
-	var gameOverTitle = gameLoteria.add.sprite(160, 160, "gameover");
+	var gameOverTitle = gameDealer.add.sprite(160, 160, "gameover");
     gameOverTitle.anchor.setTo(0.5, 0.5);
-	alert('Fin del juego. Lograste ganar en'+turn+'intentos tenias una probabilidad de: '+calculateProbability+' de lograrlo en ese numero de intentos');
-	alert('ANALISIS DE TU SUERTE:'+calcularSuerte());
+	alert('Fin del juego. Lograste ganar en '+turn+' intentos tenias una probabilidad de: '+calculateProbability+' de lograrlo en ese numero de intentos');
+	alert('ANALISIS DE TU SUERTE: '+calcularSuerte());
   }}
 
 function calculateProbability() {
@@ -17,7 +17,7 @@ function calculateProbability() {
 	const boardSize = 16;
 	const Iturns = turn;
   
-	let cardsLeft = deckSize;
+	let cardsLeft = turn-deckSize;
 	let cardsInBoard = 0;
 	let probability = 0;
   
@@ -42,10 +42,10 @@ function calculateProbability() {
 function calcularSuerte (){
 	var probability = this.calculateProbability();
 	if(probability>0.0<0.3)
-		return 'Eres afortunad@ en el amor, en el azar no tanto'
+		return ' Eres afortunad@ en el amor, en el azar no tanto'
 	if(probability>0.3<0.6)
-		return 'Eres un poco afortunad@ en el amor, un poco en el azar, vida balanceada';
+		return ' Eres un poco afortunad@ en el amor, un poco en el azar, vida balanceada';
 	if(probability>0.6)
-		return 'Super afortuna@ en el azar... mejor jugar que buscar pareja... es broma';
+		return ' Super afortuna@ en el azar... mejor jugar que buscar pareja... es broma';
 }
 
