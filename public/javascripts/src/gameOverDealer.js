@@ -11,7 +11,7 @@ gameOverDealer.prototype = {
 	var probabilidad = calculateProbability();
 	var ganaroPerder = 'perder';
 	if(turn<=50){ ganaroPerder=`ganar`;}
-	alert('Fin del juego. Lograste ' +ganaroPerder+ 'en '+turn+' intentos tenias una probabilidad de: '+probabilidad+'% de lograrlo en ese numero de intentos');
+	alert('Fin del juego. Lograste ' +ganaroPerder+ ' en '+turn+' intentos. Tenias una probabilidad de: '+probabilidad+'% de lograrlo en ese numero de intentos');
 	alert('ANALISIS DE TU SUERTE: '+calcularSuerte());
   }}
 
