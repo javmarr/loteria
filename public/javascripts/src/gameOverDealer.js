@@ -13,25 +13,33 @@ gameOverDealer.prototype = {
 	endText2.setActive(true).setVisible(true);
 }}
 
-function calculateProbability (){
-	  var turns=gameDealer.turns;
-	  var combination=factorial(turns)/(factorial(16)*factorial(turns-16));
-	  return probability=combination/(Math.pow(54,turns));
-}
+function calculateProbability() {
+	const deckSize = 54;
+	const boardSize = 16;
+	const Iturns = turn;
+  
+	let cardsLeft = deckSize;
+	let cardsInBoard = 0;
+	let probability = 0;
+  
+	for (let i = 1; i <= Iturns; i++) {
+	  const cardsDrawn = Math.min(cardsLeft, boardSize - cardsInBoard);
+	  cardsLeft -= cardsDrawn;
+	  cardsInBoard += cardsDrawn;
+  
+	  if (cardsInBoard === boardSize) {
+		probability = 1;
+		break;
+	  }
+	}
+  
+	if (probability === 0) {
+	  probability = 1 - Math.pow((cardsLeft / deckSize), turns);
+	}
+  
+	return probability;
+  }
 
-function factorial(n){
-    if(n < 0){
-        return "number has to be positive."
-    }
-    
-    //base case
-    if(n == 0 || n == 1){
-        return 1;
-    //recursive case
-    }else{
-        return n * factorial(n-1);
-    }
-}
 function calcularSuerte (){
 	var probability = this.calculateProbability();
 	if(probability>0.0<0.3)
