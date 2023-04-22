@@ -15,40 +15,45 @@ gameOverDealer.prototype = {
 	alert('ANALISIS DE TU SUERTE: '+calcularSuerte());
   }}
 
-function calculateProbability() {
-	const deckSize = 54;
-	const boardSize = 16;
-	const Iturns = turn;
+  function calculateProbability() {
+	const N = 54;
+	const n = 1;
+	const k = 16;
+	const totalCards = 50-turn;
   
-	let cardsLeft = turn-deckSize;
-	let cardsInBoard = 0;
 	let probability = 0;
   
-	for (let i = 1; i <= Iturns; i++) {
-	  const cardsDrawn = Math.min(cardsLeft, boardSize - cardsInBoard);
-	  cardsLeft -= cardsDrawn;
-	  cardsInBoard += cardsDrawn;
-  
-	  if (cardsInBoard === boardSize) {
-		probability = 1;
-		break;
-	  }
+	for (let x = k; x <= totalCards; x++) {
+	  const numerator = combination(k, x) * combination(N - k, totalCards - x);
+	  const denominator = combination(N, totalCards);
+	  probability += numerator / denominator;
 	}
   
-	if (probability === 0) {
-	  probability = 1 - Math.pow((cardsLeft / deckSize), turn);
-	}
-  
-	return probability;
+	return probability.toFixed(4); // Redondeamos a 4 decimales
   }
+  
+  function combination(n, k) {
+	if (k === 0) {
+	  return 1;
+	}
+  
+	let result = 1;
+  
+	for (let i = 1; i <= k; i++) {
+	  result *= (n - k + i) / i;
+	}
+  
+	return result;
+  }
+  
 
 function calcularSuerte (){
 	var probability = this.calculateProbability();
 	if(probability>0.0<0.3)
-		return ' Eres afortunad@ en el amor, en el azar no tanto... es broma'
+		return ' Super afortuna@ en el azar... mejor jugar que buscar pareja... es broma';
 	if(probability>0.3<0.6)
 		return ' Eres un poco afortunad@ en el amor, un poco en el azar, vida balanceada';
 	if(probability>0.6)
-		return ' Super afortuna@ en el azar... mejor jugar que buscar pareja... es broma';
+		return ' Eres afortunad@ en el amor, en el azar no tanto... es broma'
 }
 
