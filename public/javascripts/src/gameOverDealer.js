@@ -1,4 +1,4 @@
-var gameOverDealer = function(gameDealer) { var probability = 0;}
+var gameOverDealer = function(gameDealer) { }
 
 gameOverDealer.prototype = {
 	init: function(cardsDealt) {
@@ -16,7 +16,7 @@ gameOverDealer.prototype = {
 function calculateProbability (){
 	  var turns=gameDealer.turns;
 	  var combination=factorial(turns)/(factorial(16)*factorial(turns-16));
-	  probability=combination/(Math.pow(54,turns));
+	  return probability=combination/(Math.pow(54,turns));
 }
 
 function factorial(n){
@@ -33,6 +33,7 @@ function factorial(n){
     }
 }
 function calcularSuerte (){
+	var probability = this.calculateProbability();
 	if(probability>0.0<0.3)
 		return 'Eres afortunad@ en el amor, en el azar no tanto'
 	if(probability>0.3<0.6)
