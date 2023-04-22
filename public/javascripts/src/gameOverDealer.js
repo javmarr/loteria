@@ -11,7 +11,7 @@ gameOverDealer.prototype = {
 	var probabilidad = calculateProbability();
 	var ganaroPerder = 'perder';
 	if(turn<=50){ ganaroPerder=`ganar`;}
-	alert('Fin del juego. Lograste ' +ganaroPerder+ 'en '+turn+' intentos tenias una probabilidad de: '+probabilidad+' de lograrlo en ese numero de intentos');
+	alert('Fin del juego. Lograste ' +ganaroPerder+ 'en '+turn+' intentos tenias una probabilidad de: '+probabilidad+'% de lograrlo en ese numero de intentos');
 	alert('ANALISIS DE TU SUERTE: '+calcularSuerte());
   }}
 
@@ -30,7 +30,7 @@ gameOverDealer.prototype = {
 	  probability += numerator / denominator;
 	}
   
-	return probability.toFixed(4); // Redondeamos a 4 decimales
+	return probability.toFixed(4)*100; // Redondeamos a 4 decimales
   }
   
   function combination(n, k) {
@@ -50,6 +50,7 @@ gameOverDealer.prototype = {
 
 function calcularSuerte (){
 	var probability = this.calculateProbability();
+	alert(probability);
 	if(probability>0.0<0.3)
 		return ' Super afortuna@ en el azar... mejor jugar que buscar pareja... es broma';
 	if(probability>0.3<0.6)
