@@ -16,10 +16,11 @@ gameOverDealer.prototype = {
   }}
 
   function calculateProbability() {
+	const tiradasRestantes = 50-turn;
 	const N = 54;
 	const n = 1;
 	const k = 16;
-	const totalCards = 54-turn;
+	const totalCards = 50-turn;
   
 	let probability = 0;
   
