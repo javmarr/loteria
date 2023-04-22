@@ -8,6 +8,8 @@ gameOverDealer.prototype = {
   create: function() {
 	var endText = this.add.text(1000, 1000, 'Fin del juego. Lograste ganar en'+turn+'intentos tenias una probabilidad de: '+calculateProbability+' de lograrlo en ese numero de intentos', { fontSize: '32px', fill: '#FFF' });
 	var endText2 = this.add.text(1000, 1000, 'ANALISIS DE TU SUERTE:'+calcularSuerte(), { fontSize: '32px', fill: '#FFF' });
+	alert(endText);
+	alert(endText2);
   }}
 
 function calculateProbability() {
