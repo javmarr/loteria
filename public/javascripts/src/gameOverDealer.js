@@ -13,7 +13,6 @@ gameOverDealer.prototype = {
 	var ganaroPerder = 'perder';
 	if(turn<=50){ 
 		ganaroPerder=`ganar`; 
-		startConfetti(); 
 	}
 	alert('Fin del juego. Lograste ' +ganaroPerder+ ' en '+turn+' intentos. Tenias una probabilidad de: '+probabilidad+'% de lograrlo en ese numero de intentos');
 	alert('ANALISIS DE TU SUERTE: '+calcularSuerte());
