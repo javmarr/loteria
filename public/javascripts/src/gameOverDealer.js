@@ -7,6 +7,7 @@ gameOverDealer.prototype = {
 	},
 
   create: function() {
+	startConfetti();
 	var gameOverTitle = gameDealer.add.sprite(160, 160, "gameover");
     gameOverTitle.anchor.setTo(0.5, 0.5);
 	var probabilidad = calculateProbability();

@@ -50,8 +50,6 @@ loteria.prototype = {
       }
      else  {
         console.log('Game over');
-        confeti.start();
-
         //gameLoteria.state.start('GameOver', true, false, 51);
       }
     }
