@@ -5,6 +5,7 @@ var loteria = function(gameLoteria,groupLoteria){
 loteria.prototype = {
   preload: function() {
     console.log('loteria board');
+    this.load.image('cartaX', '../images/cards/card_xx.png');
     this.load.image('cartaCoinci', '../images/cards/cartaCoinci.png');
     
   },
@@ -25,7 +26,6 @@ loteria.prototype = {
     groupLoteria.align(4, 4, 210, 330);
     groupLoteria.scale.set(.9, .9);
     groupLoteria.alive=true;
-    groupLoteria.inputEnabled = true;
     
     window.addEventListener('message', function(event) 
    {
