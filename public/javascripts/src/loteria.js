@@ -25,12 +25,13 @@ loteria.prototype = {
     groupLoteria.align(4, 4, 210, 330);
     groupLoteria.scale.set(.9, .9);
     groupLoteria.alive=true;
-    alert(message.data);
+   
     window.addEventListener('message', function(event) 
    {
     var message = event.data;
     if(message.type === 'cardNumber') 
     {
+      alert(message.data);
       if(message.data <=50 && message.data>0) {
         var iIndex = 0;
         groupLoteria.forEach(function(sprite) {
