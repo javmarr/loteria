@@ -7,15 +7,13 @@ gameOverDealer.prototype = {
 	},
 
   create: function() {
-	startConfetti();
-	var gameOverTitle = gameDealer.add.sprite(160, 160, "gameover");
+	var gameOverTitle = startConfetti();
     gameOverTitle.anchor.setTo(0.5, 0.5);
 	var probabilidad = calculateProbability();
 	var ganaroPerder = 'perder';
 	if(turn<=50){ 
 		ganaroPerder=`ganar`; 
 	}
-	
 	alert('Fin del juego. Lograste ' +ganaroPerder+ ' en '+turn+' intentos. Tenias una probabilidad de: '+probabilidad+'% de lograrlo en ese numero de intentos');
 	alert('ANALISIS DE TU SUERTE: '+calcularSuerte());
   }}
