@@ -54,22 +54,7 @@ loteria.prototype = {
   })} ,
 
   update: function() {
-    gameLoteria.stage.backgroundColor = "#BA97FF";
-   
-    // card = this.game.add.group(); // card containing image and border
-    // cardBorder = card.create(0, 0, 'border');
-    // cardImage = card.create(cardBorder.x+30, cardBorder.y+32, 'loteria', 'card_' + cardNumber + '.png');
-    console.log('imageboard in phaser: ' + imageBoard);
-
-    groupLoteria = gameLoteria.add.group();
-    //groupLoteria.createMultiple(1, 'loteria', imageBoard, true);
-    groupLoteria.createMultiple(1, 'loteria', imageBoard, true, index => {
-      return imageBoard[index];
-    });
-    groupLoteria.align(4, 4, 210, 330);
-    groupLoteria.scale.set(.9, .9);
-    groupLoteria.alive=true;
-    groupLoteria.inputEnabled = true;
+    console.log('update loteria');
     window.addEventListener('message', function(event) 
    {
     var message = event.data;
