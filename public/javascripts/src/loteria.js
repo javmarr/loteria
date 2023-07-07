@@ -27,13 +27,6 @@ loteria.prototype = {
     groupLoteria.alive=true;
     groupLoteria.inputEnabled = true;
     
-    //q:when is this event calles?
-    //a:when the user clicks on the card
-    //q:why is not working? 
-    //a:because the event is not called when the user clicks on the card, but when the user clicks on the screen
-    groupLoteria.events.onInputUp.add(this.changeCard,this);
-    console.log("\n\n\n\n\nOn loteria (gameID) " + gameID);
-    
     window.addEventListener('message', function(event) 
    {
     var message = event.data;
