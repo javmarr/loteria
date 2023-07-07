@@ -5,7 +5,6 @@ var loteria = function(gameLoteria,groupLoteria){
 loteria.prototype = {
   preload: function() {
     console.log('loteria board');
-    this.load.image('cartaX', '../images/cards/card_xx.png');
     this.load.image('cartaCoinci', '../images/cards/cartaCoinci.png');
     
   },
@@ -43,7 +42,7 @@ loteria.prototype = {
             {
               console.log('!!!!!SUSTITUYENDO.!!!!!!!!!!!!!!!!: ' + imageBoard[iIndex]);  
               //q:why is not working?
-              sprite.loadTexture('loteria', 'cartaCoinci.png');
+              sprite.loadTexture('cartaCoinci', 'cartaCoinci.png');
               //sprite.loadTexture('cartaCoinci', 'cartaCoinci.png');
             }
         iIndex++;
