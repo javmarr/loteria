@@ -73,7 +73,7 @@ function addRain(){
 	let rainParticle = this.gameDealer.add.bitmapData(15, 50);
 
 	rainParticle.ctx.rect(0, 0, 15, 50);
-	rainParticle.ctx.fillStyle = '#9cc9de';
+	rainParticle.ctx.fillStyle = 'pink';
 	rainParticle.ctx.fill();
 
 	this.emitter = this.gameDealer.add.emitter(this.gameDealer.world.centerX, -300, 400);
@@ -86,8 +86,8 @@ function addRain(){
 	this.emitter.minParticleScale = 0.1;
 	this.emitter.maxParticleScale = 0.3;
 
-	this.emitter.setYSpeed(600, 1000);
-	this.emitter.setXSpeed(-5, 5);
+	this.emitter.setYSpeed(1200, 2000);
+	this.emitter.setXSpeed(-500, 500);
 
 	this.emitter.minRotation = 0;
 	this.emitter.maxRotation = 0;
