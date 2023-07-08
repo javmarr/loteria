@@ -55,31 +55,33 @@ loteriaDealer.prototype = {
 
 
 
-function addRain(){
+function addConfeti(){
 
-	let rainParticle = this.game.add.bitmapData(15, 50);
 
-	rainParticle.ctx.rect(0, 0, 15, 50);
-	rainParticle.ctx.fillStyle = 'yellow';
-	rainParticle.ctx.fill();
+  
+	manager = this.gameDealer.plugins.add(Phaser.ParticleStorm);
 
-	this.emitter = this.game.add.emitter(this.game.world.centerX, -300, 400);
+    var data = {
+        lifespan: 3000,
+        image: ['pixel_blue', 'pixel_green', 'pixel_red', 'pixel_white', 'pixel_yellow'],
+        vx: { min: -0.5, max: 0.5 },
+        vy: { min: -1, max: -2 },
+        rotation: { delta: 2 },
+        blendMode: 'ADD',
+        alpha: { initial: 0, value: 1, control: 'linear' }
+    };
 
-	this.emitter.width = game.width;
-	this.emitter.angle = 10;
+    manager.addData('basic', data);
 
-	this.emitter.makeParticles(rainParticle);
+    circle = manager.createCircleZone(24);
 
-	this.emitter.minParticleScale = 0.1;
-	this.emitter.maxParticleScale = 0.3;
+    emitter = manager.createEmitter();
 
-	this.emitter.setYSpeed(1200, 2000);
-	this.emitter.setXSpeed(-500, 500);
+    emitter.force.y = 0.05;
 
-	this.emitter.minRotation = 0;
-	this.emitter.maxRotation = 0;
+    emitter.addToWorld();
 
-	this.emitter.start(false, 1600, 5, 0);
+    gameDealer.add.image(432, 487, 'logo');
 }
 
 ;

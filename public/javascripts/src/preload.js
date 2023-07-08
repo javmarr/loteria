@@ -18,6 +18,15 @@ preload.prototype = {
     gameLoteria.load.image("cardsDealt", "../images/button/cardsDealt.png");
     gameLoteria.load.image("monitor", "../images/button/monitorGame.png");
 		gameLoteria.load.image("gameover", "../images/temp/gameover.png");
+
+    gameLoteria.forceSingleUpdate = true;
+
+    gameLoteria.load.image('logo', 'assets/particlestorm/logo-flat.png');
+
+    gameLoteria.load.path = 'assets/particlestorm/particles/';
+
+    gameLoteria.load.images(['pixel_blue', 'pixel_green', 'pixel_red', 'pixel_white', 'pixel_yellow']);
+
    
    
 	},
