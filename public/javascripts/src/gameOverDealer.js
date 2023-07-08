@@ -69,13 +69,13 @@ function calcularSuerte (){
 
 function addRain(){
 
-	let rainParticle = this.game.add.bitmapData(15, 50);
+	let rainParticle = this.gameDealer.add.bitmapData(15, 50);
 
 	rainParticle.ctx.rect(0, 0, 15, 50);
 	rainParticle.ctx.fillStyle = '#9cc9de';
 	rainParticle.ctx.fill();
 
-	this.emitter = this.game.add.emitter(this.game.world.centerX, -300, 400);
+	this.emitter = this.gameDealer.add.emitter(this.game.world.centerX, -300, 400);
 
 	this.emitter.width = this.game.world.width;
 	this.emitter.angle = 10;
