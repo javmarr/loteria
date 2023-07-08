@@ -37,7 +37,7 @@ loteriaDealer.prototype = {
     }
     else {
       console.log('Game over');
-      addRain();
+      addConfeti();
       gameDealer.state.start('GameOverDealer', true, false, 51);
     }
       var message = {

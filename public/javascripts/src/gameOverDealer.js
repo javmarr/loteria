@@ -13,7 +13,6 @@ gameOverDealer.prototype = {
 	//a: https://phaser.io/examples/v2/tweens/complex-chain
 	//a: https://phaser.io/examples/v2/tweens/looped-tween
 	var gameOverTitle = gameDealer.add.sprite(160, 160, "gameover");
-	addRain();
 	gameOverTitle.anchor.setTo(0.5, 0.5);
 	var probabilidad = calculateProbability();
 	var ganaroPerder = 'perder';
@@ -65,31 +64,4 @@ function calcularSuerte (){
 		return ' Tienes una suerte promedio similar a la de la mayoria de la poblacion... no te desanimes... es broma';
 	if(probability>0.6)
 		return ' Tienes una suerte MENOR al promedio, debes serlo en el amor entonces... es broma'
-}
-
-function addRain(){
-
-	let rainParticle = this.gameDealer.add.bitmapData(15, 50);
-
-	rainParticle.ctx.rect(0, 0, 15, 50);
-	rainParticle.ctx.fillStyle = 'yellow';
-	rainParticle.ctx.fill();
-
-	this.emitter = this.gameDealer.add.emitter(this.gameDealer.world.centerX, -300, 400);
-
-	this.emitter.width = 600;
-	this.emitter.angle = 10;
-
-	this.emitter.makeParticles(rainParticle);
-
-	this.emitter.minParticleScale = 0.1;
-	this.emitter.maxParticleScale = 0.3;
-
-	this.emitter.setYSpeed(1200, 2000);
-	this.emitter.setXSpeed(-500, 500);
-
-	this.emitter.minRotation = 0;
-	this.emitter.maxRotation = 0;
-
-	this.emitter.start(false, 1600, 5, 0);
 }
