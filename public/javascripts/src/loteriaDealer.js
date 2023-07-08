@@ -1,4 +1,6 @@
 
+var manager = null;
+
 var loteriaDealer = function(gameDealer){
 };
 
@@ -7,7 +9,7 @@ loteriaDealer.prototype = {
     console.log('preload loteria.js');
     this.load.image('cartaX', '../images/cards/card_xx.png');
     this.load.image('cartaCoinci', '../images/cards/cartaCoinci.png');
-    var manager = null;
+    
   },
 
   create: function() {
