@@ -28,6 +28,10 @@ loteriaDealer.prototype = {
 
     console.log("\n\n\n\n\nOn loteria (gameID) " + gameID);
     console.log("\nOn loteria (cardNumber) " + cardNumber);
+
+    manager = this.gameDealer.plugins.add(Phaser.ParticleStorm);
+
+
   },
 
   changeCard: function() {
@@ -56,10 +60,6 @@ loteriaDealer.prototype = {
 
 
 function addConfeti(){
-
-
-  
-	manager = this.gameDealer.plugins.add(Phaser.ParticleStorm);
 
     var data = {
         lifespan: 3000,
