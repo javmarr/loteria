@@ -11,6 +11,7 @@ loteriaDealer.prototype = {
 
   create: function() {
     //what color is the background? 0xRRGGBB  0x000000 = black  0xffffff = white #ddd 
+    var manager = null;
     gameDealer.stage.backgroundColor = "#BA97FF";
     console.log('cardNumber: ' + cardNumber);
 
