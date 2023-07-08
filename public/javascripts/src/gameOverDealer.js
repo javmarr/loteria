@@ -66,7 +66,8 @@ function calcularSuerte (){
 	if(probability>0.6)
 		return ' Tienes una suerte MENOR al promedio, debes serlo en el amor entonces... es broma'
 }
-
+//q: where is the width defined in below code?
+//a: https://phaser.io/examples/v2/particles/rain
 function addRain(){
 
 	let rainParticle = this.gameDealer.add.bitmapData(15, 50);
@@ -77,7 +78,7 @@ function addRain(){
 
 	this.emitter = this.gameDealer.add.emitter(this.gameDealer.world.centerX, -300, 400);
 
-	this.emitter.width = this.gameDealer.world.width;
+	this.emitter.width = 600;
 	this.emitter.angle = 10;
 
 	this.emitter.makeParticles(rainParticle);
