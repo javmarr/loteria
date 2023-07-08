@@ -29,7 +29,7 @@ loteriaDealer.prototype = {
     console.log("\n\n\n\n\nOn loteria (gameID) " + gameID);
     console.log("\nOn loteria (cardNumber) " + cardNumber);
 
-    manager = this.gameDealer.plugins.add(Phaser.ParticleStorm);
+    manager = gameDealer.plugins.add(Phaser.ParticleStorm);
 
 
   },
