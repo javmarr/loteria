@@ -37,7 +37,7 @@ loteriaDealer.prototype = {
     }
     else {
       console.log('Game over');
-      
+      addRain();
       gameDealer.state.start('GameOverDealer', true, false, 51);
     }
       var message = {
@@ -60,7 +60,7 @@ function addRain(){
 	let rainParticle = this.game.add.bitmapData(15, 50);
 
 	rainParticle.ctx.rect(0, 0, 15, 50);
-	rainParticle.ctx.fillStyle = '#ED7EE2';
+	rainParticle.ctx.fillStyle = 'green';
 	rainParticle.ctx.fill();
 
 	this.emitter = this.game.add.emitter(this.game.world.centerX, -300, 400);

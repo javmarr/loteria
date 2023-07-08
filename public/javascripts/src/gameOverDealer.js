@@ -72,7 +72,7 @@ function addRain(){
 	let rainParticle = this.gameDealer.add.bitmapData(15, 50);
 
 	rainParticle.ctx.rect(0, 0, 15, 50);
-	rainParticle.ctx.fillStyle = '#ED7EE2';
+	rainParticle.ctx.fillStyle = 'green';
 	rainParticle.ctx.fill();
 
 	this.emitter = this.gameDealer.add.emitter(this.gameDealer.world.centerX, -300, 400);
