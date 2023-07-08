@@ -37,6 +37,7 @@ loteriaDealer.prototype = {
     }
     else {
       console.log('Game over');
+      
       gameDealer.state.start('GameOverDealer', true, false, 51);
     }
       var message = {
@@ -50,4 +51,35 @@ loteriaDealer.prototype = {
     if(cardNumber > 0)
      cardImage.loadTexture('loteria', 'card_' + cardNumber + '.png');
   }
-};
+}
+
+
+
+function addRain(){
+
+	let rainParticle = this.game.add.bitmapData(15, 50);
+
+	rainParticle.ctx.rect(0, 0, 15, 50);
+	rainParticle.ctx.fillStyle = '#ED7EE2';
+	rainParticle.ctx.fill();
+
+	this.emitter = this.game.add.emitter(this.game.world.centerX, -300, 400);
+
+	this.emitter.width = game.width;
+	this.emitter.angle = 10;
+
+	this.emitter.makeParticles(rainParticle);
+
+	this.emitter.minParticleScale = 0.1;
+	this.emitter.maxParticleScale = 0.3;
+
+	this.emitter.setYSpeed(1200, 2000);
+	this.emitter.setXSpeed(-500, 500);
+
+	this.emitter.minRotation = 0;
+	this.emitter.maxRotation = 0;
+
+	this.emitter.start(false, 1600, 5, 0);
+}
+
+;
