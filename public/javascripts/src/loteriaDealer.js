@@ -7,11 +7,13 @@ loteriaDealer.prototype = {
     console.log('preload loteria.js');
     this.load.image('cartaX', '../images/cards/card_xx.png');
     this.load.image('cartaCoinci', '../images/cards/cartaCoinci.png');
+    var manager = null;
   },
 
   create: function() {
     //what color is the background? 0xRRGGBB  0x000000 = black  0xffffff = white #ddd 
-    var manager = null;
+   
+
     gameDealer.stage.backgroundColor = "#BA97FF";
     console.log('cardNumber: ' + cardNumber);
 
@@ -83,6 +85,4 @@ function addConfeti(){
     emitter.addToWorld();
 
     gameDealer.add.image(432, 487, 'logo');
-}
-
-;
+};
