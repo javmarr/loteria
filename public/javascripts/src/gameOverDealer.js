@@ -75,7 +75,7 @@ function addRain(){
 	rainParticle.ctx.fillStyle = '#9cc9de';
 	rainParticle.ctx.fill();
 
-	this.emitter = this.gameDealer.add.emitter(this.game.world.centerX, -300, 400);
+	this.emitter = this.gameDealer.add.emitter(this.gameDealer.world.centerX, -300, 400);
 
 	this.emitter.width = this.gameDealer.world.width;
 	this.emitter.angle = 10;
