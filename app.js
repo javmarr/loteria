@@ -58,6 +58,8 @@ app.use(app.router);
 secureServer.listen(443)
 server.listen(80)
 */
+
+app = express();
 var io = global.io = app.io = socketio();
 
 
