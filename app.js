@@ -31,7 +31,7 @@ var clients = {};
 var hosts = {};
 var games = [];
 
-const app = express();
+
 
 // io setup
 var server = require('http').Server(app);
