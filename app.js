@@ -40,11 +40,10 @@ var forceSSL = require('express-force-ssl');
 var fs = require('fs');
 var http = require('http');
 var https = require('https');
- /*
+
 var ssl_options = {
-  key: fs.readFileSync('./keys/private.key'),
-  cert: fs.readFileSync('./keys/cert.crt'),
-  ca: fs.readFileSync('./keys/intermediate.crt')
+  key: fs.readFileSync('./keys/server.key'),
+  cert: fs.readFileSync('./keys/server.crt'),
 };
  
 app = express();
@@ -57,21 +56,21 @@ app.use(app.router);
  
 secureServer.listen(443)
 server.listen(80)
-*/
+
 
 app = express();
 var io = global.io = app.io = socketio();
 
 
 
-/*
+
 app.set('forceSSLOptions', {
   enable301Redirects: true,
   trustXFPHeader: false,
   httpsPort: 443,
   sslRequiredMessage: 'SSL Required.'
 });
-*/
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
