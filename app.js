@@ -42,8 +42,8 @@ var http = require('http');
 var https = require('https');
 
 var ssl_options = {
-  key: fs.readFileSync('./keys/server.key'),
-  cert: fs.readFileSync('./keys/server.crt'),
+  key: fs.readFileSync('server.key'),
+  cert: fs.readFileSync('server.crt'),
 };
  
 app = express();
