@@ -33,11 +33,6 @@ var games = [];
 
 
 
-// io setup
-var server = require('http').Server(app);
-var io = global.io = app.io = socketio();
-
-
 
 
 var express = require('express');
@@ -62,6 +57,10 @@ app.use(app.router);
  
 secureServer.listen(443)
 server.listen(80)
+
+var io = global.io = app.io = socketio();
+
+
 
 
 app.set('forceSSLOptions', {
