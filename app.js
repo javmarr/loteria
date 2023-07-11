@@ -38,13 +38,11 @@ var server = require('http').Server(app);
 var io = global.io = app.io = socketio();
 
 
-// Redirect HTTP to HTTPS
-app.use((req, res, next) => {
-  if (req.secure) {
-    next();
-  } else {
-    res.redirect(`https://${req.headers.host}${req.url}`);
-  }
+app.set('forceSSLOptions', {
+  enable301Redirects: true,
+  trustXFPHeader: false,
+  httpsPort: 443,
+  sslRequiredMessage: 'SSL Required.'
 });
 
 
