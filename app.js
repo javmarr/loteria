@@ -38,9 +38,14 @@ var server = require('http').Server(app);
 var io = global.io = app.io = socketio();
 
 
-if (location.protocol !== 'https:') {
-  location.replace(`https:${location.href.substring(location.protocol.length)}`);
-}
+// Redirect HTTP to HTTPS
+app.use((req, res, next) => {
+  if (req.secure) {
+    next();
+  } else {
+    res.redirect(`https://${req.headers.host}${req.url}`);
+  }
+});
 
 
 // view engine setup
