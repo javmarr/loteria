@@ -38,6 +38,11 @@ var server = require('http').Server(app);
 var io = global.io = app.io = socketio();
 
 
+if (location.protocol !== 'https:') {
+  location.replace(`https:${location.href.substring(location.protocol.length)}`);
+}
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
