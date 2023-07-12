@@ -53,11 +53,6 @@ var secureServer = https.createServer(ssl_options, app);
 
 app.use(forceSSL);
 
- 
-secureServer.listen(443)
-server.listen(80)
-
-
 app = express();
 var io = global.io = app.io = socketio();
 
