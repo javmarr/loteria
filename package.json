@@ -16,6 +16,7 @@
     "express-force-ssl": "^0.3.2",
     "express-session": "^1.17.3",
     "express-sslify": "^1.2.0",
+    "heroku-ssl-redirect": "^0.1.1",
     "jade": "~1.11.0",
     "method-override": "*",
     "mongodb": "^3.0.0",

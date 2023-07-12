@@ -33,36 +33,21 @@ var games = [];
 
 
 
-
-
+var sslRedirect = require('heroku-ssl-redirect');
 var express = require('express');
-var forceSSL = require('express-force-ssl');
-var fs = require('fs');
-var https = require('https');
-
-app = express();
-
-var ssl_options = {
-  key: fs.readFileSync('server.key'),
-  cert: fs.readFileSync('server.crt'),
-};
-
-app.set('forceSSLOptions', {
-  enable301Redirects: true,
-  trustXFPHeader: false,
-  httpsPort: 443,
-  sslRequiredMessage: 'SSL Required.'
+var app = express();
+ 
+app.use(sslRedirect());
+ 
+app.get('/', function(req, res){
+  res.send('hello world');
 });
 
-app.use(forceSSL);
- 
+
+
+
 var server = https.createServer(ssl_options, app);
  
-app.get('*',function(req,res,next){ 
-    if(req.headers['x-forwarded-proto']!='https') 
-      res.redirect('https://sihaymujeresendurango.org'); 
-    else 
-    next() })
 
 
 
