@@ -52,7 +52,7 @@ var secureServer = https.createServer(ssl_options, app);
  
 
 app.use(forceSSL);
-app.use(app.router);
+
  
 secureServer.listen(443)
 server.listen(80)
