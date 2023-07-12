@@ -44,9 +44,9 @@ app.get('/', function(req, res){
 });
 
 
+var server = require('https').Server(app);
 
 
-var server = https.createServer(sslRedirect, app);
  
 
 
