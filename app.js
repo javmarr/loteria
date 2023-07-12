@@ -33,7 +33,7 @@ var games = [];
 
 
 
-var sslRedirect = require('heroku-ssl-redirect');
+const sslRedirect = require('heroku-ssl-redirect').default
 var express = require('express');
 var app = express();
  
