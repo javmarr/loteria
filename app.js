@@ -38,17 +38,23 @@ var games = [];
 var express = require('express');
 var forceSSL = require('express-force-ssl');
 var fs = require('fs');
-var http = require('http');
 var https = require('https');
+
+app = express();
 
 var ssl_options = {
   key: fs.readFileSync('server.key'),
   cert: fs.readFileSync('server.crt'),
 };
+
+app.set('forceSSLOptions', {
+  enable301Redirects: true,
+  trustXFPHeader: false,
+  httpsPort: 443,
+  sslRequiredMessage: 'SSL Required.'
+});
  
-app = express();
-var server = http.createServer(app);
-var secureServer = https.createServer(ssl_options, app);
+var server = https.createServer(ssl_options, app);
  
 
 app.use(forceSSL);
@@ -59,12 +65,7 @@ var io = global.io = app.io = socketio();
 
 
 
-app.set('forceSSLOptions', {
-  enable301Redirects: true,
-  trustXFPHeader: false,
-  httpsPort: 443,
-  sslRequiredMessage: 'SSL Required.'
-});
+
 
 
 // view engine setup
