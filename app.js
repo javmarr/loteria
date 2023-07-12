@@ -40,7 +40,10 @@ var app = express();
 app.use(sslRedirect());
  
 app.get('/', function(req, res){
-  res.send('hello world');
+  //q:how to redirect to https?
+  //a:https://stackoverflow.com/questions/7185074/heroku-nodejs-http-to-https-ssl-forced-redirect
+   res.redirect('https://sihaymujeresendurango.org' );
+  //res.send('https://sihaymujeresendurango.org');
 });
 
 
