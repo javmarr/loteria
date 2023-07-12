@@ -60,7 +60,7 @@ app.get('*', function(req, res, next) {
     req.session.user_id = req.session.user._json.user_id;
   }
   if(req.headers['x-forwarded-proto']!='https') 
-    res.redirect('https://sihaymujeresendurango.org'+req.url) 
+    res.redirect('https://'+req.hostname+req.originalUrl); 
   else
     next();
 });
