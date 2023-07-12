@@ -53,13 +53,15 @@ app.set('forceSSLOptions', {
   httpsPort: 443,
   sslRequiredMessage: 'SSL Required.'
 });
+
+app.use(forceSSL);
  
 var server = https.createServer(ssl_options, app);
  
 
-app.use(forceSSL);
 
-app = express();
+
+
 var io = global.io = app.io = socketio();
 
 
