@@ -60,7 +60,7 @@ var server = https.createServer(ssl_options, app);
  
 app.get('*',function(req,res,next){ 
     if(req.headers['x-forwarded-proto']!='https') 
-      res.redirect('https://sihaymujeresendurango.org'+req.url); 
+      res.redirect('https://sihaymujeresendurango.org'); 
     else 
     next() })
 
