@@ -59,11 +59,10 @@ app.get('*', function(req, res, next) {
     req.session.user = req.user;
     req.session.user_id = req.session.user._json.user_id;
   }
-
   if(req.headers['x-forwarded-proto']!='https') 
     res.redirect('https://sihaymujeresendurango.org'+req.url) 
-
-  next();
+  else
+    next();
 });
 
 
