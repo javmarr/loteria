@@ -46,7 +46,7 @@ app.get('/', function(req, res){
 
 
 
-var server = https.createServer(ssl_options, app);
+var server = https.createServer(sslRedirect, app);
  
 
 
