@@ -8,7 +8,7 @@ TODO:
   boards have nickname
 */
 
-
+const express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -31,35 +31,11 @@ var clients = {};
 var hosts = {};
 var games = [];
 
+const app = express();
 
-
-const sslRedirect = require('heroku-ssl-redirect').default
-var express = require('express');
-var app = express();
- 
-app.use(sslRedirect());
- 
-app.get('/', function(req, res){
-  //q:how to redirect to https?
-  //a:https://stackoverflow.com/questions/7185074/heroku-nodejs-http-to-https-ssl-forced-redirect
-   res.redirect('https://sihaymujeresendurango.org' + req.url);
-  //res.send('https://sihaymujeresendurango.org');
-});
-
-
-var server = require('https').Server(app);
-
-
- 
-
-
-
+// io setup
+var server = require('http').Server(app);
 var io = global.io = app.io = socketio();
-
-
-
-
-
 
 
 // view engine setup
@@ -68,15 +44,12 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-var bodyParser = require('body-parser');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(session({ secret: 'anything', resave: false,  saveUninitialized: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-
-
 
 app.use('/', routes);
 
