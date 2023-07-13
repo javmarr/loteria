@@ -80,6 +80,7 @@ function addConfeti(){
     emitter.force.y = 0.05;
 
     emitter.addToWorld();
+    this.emitter.start(false,1600,5,0);
 };
 
   
