@@ -52,10 +52,9 @@ app.use(cookieParser());
 app.use(session({ secret: 'anything', resave: false,  saveUninitialized: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-app.get('/', function(req, res) {
-  res.redirect('/');
-});
+app.use((req, res, next) => {
+    res.redirect(`https://${req.header('host')}${req.url}`)
+})
 
 app.get('/login', function (req, res) {
   // req.session.user = req.user;
