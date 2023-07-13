@@ -82,6 +82,15 @@ function endRoundConfetti() {
 
     emitter.makeParticles('confetti');
   
+    emitter.minParticleScale = 0.1;
+    emitter.maxParticleScale = 0.3;
+
+    emitter.setYSpeed(600, 1000);
+    emitter.setXSpeed(-5, 5);
+
+    emitter.minRotation = 0;
+    emitter.maxRotation = 0;
+
     // Set emitter bounds
    /* emitter.setScrollFactor(0);
     emitter.setSpeedX(-100, 100);
