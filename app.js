@@ -54,9 +54,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 
-app.use('/', routes);
-
-
 
 app.get('/login', function (req, res) {
   // req.session.user = req.user;
