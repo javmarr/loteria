@@ -69,7 +69,8 @@ function endRoundConfetti() {
 */
     
 
-    var emitter = gameLoteria.add.particles('confetti').createEmitter({
+
+    var emitter =this.gameLoteria.add.emitter({
       x: { min: 0, max: 800 },    // x-axis range
       y: -50,                     // start y-coordinate (above the screen)
       lifespan: 3000,             // lifespan of each particle (in milliseconds)
