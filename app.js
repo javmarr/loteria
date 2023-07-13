@@ -59,12 +59,13 @@ app.get('*', function(req, res, next) {
     req.session.user = req.user;
     req.session.user_id = req.session.user._json.user_id;
   }
-  if(req.headers['x-forwarded-proto']!='https') 
-    res.redirect('https://'+req.hostname+req.originalUrl); 
-  else
-    next();
+  app.use((req, res, next) => {
+    if(req.headers['x-forwarded-proto']!='https') 
+      res.redirect('https://'+req.hostname+req.originalUrl); 
+    else
+      next();
+  })
 });
-
 
 app.get('/login', function (req, res) {
   // req.session.user = req.user;
