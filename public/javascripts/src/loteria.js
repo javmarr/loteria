@@ -74,7 +74,7 @@ function endRoundConfetti() {
 
       this.emitter.makeParticles('images/temp/pixel_red.png');
 
-      this.emitter.width = this.game.world.width;
+      this.emitter.width = gameLoteria.world.width;
       this.emitter.angle = 10;
 
       this.emitter.makeParticles(rainParticle);
