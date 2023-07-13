@@ -8,7 +8,7 @@ TODO:
   boards have nickname
 */
 
-var sslRedirect = require('heroku-ssl-redirect');
+const sslRedirect = require('heroku-ssl-redirect').default;
 const express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
