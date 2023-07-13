@@ -73,8 +73,10 @@ function endRoundConfetti() {
 function createEmitter() {
   const playRect = {width: 800, height: 600, x: 0, y: 0};
 const scale = .9;
+//qwhy is this undefined Phaser.GameObjects?
+//a:
 
-const particleManager = new Phaser.GameObjects.Particles.ParticleEmitterManager(game, 'cheers_confetti_christmas');
+const particleManager = new Phaser.GameObjects.Particles.EmitterManager(game, 'cheers_confetti_christmas');
 
 const emitters = [];
 
