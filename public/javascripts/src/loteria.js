@@ -10,7 +10,7 @@ loteria.prototype = {
     console.log('loteria board');
     this.load.image('cartaCoinci', '../images/cards/cartaCoinci.png');
     gameLoteria.forceSingleUpdate = true;
-    gameLoteria.load.path='javascripts/src/';
+    gameLoteria.load.path='images/temp/';
     gameLoteria.load.images(['pixel_blue', 'pixel_green', 'pixel_red', 'pixel_white', 'pixel_yellow']);
   },
 
@@ -44,7 +44,7 @@ loteria.prototype = {
 
     emitter.addToWorld();
 
-    game.add.image(432, 487, 'logo');
+    gameLoteria.add.image(432, 487, 'logo');
 
 
     groupLoteria = gameLoteria.add.group();
