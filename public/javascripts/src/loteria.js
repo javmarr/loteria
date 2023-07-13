@@ -88,5 +88,5 @@ loteria.prototype = {
 } ;
 
 function endRoundConfetti() {
-  emitter.emit('basic', game.input.x, game.input.y, { zone: circle, total: 2 });
+  emitter.emit('basic', gameLoteria.input.x, gameLoteria.input.y, { zone: circle, total: 2 });
   }
