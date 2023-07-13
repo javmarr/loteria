@@ -6,6 +6,7 @@ loteria.prototype = {
   preload: function() {
     console.log('loteria board');
     this.load.image('cartaCoinci', '../images/cards/cartaCoinci.png');
+    this.load.image('confetti', '../images/temp/pixel_red.png');
     gameLoteria.forceSingleUpdate = true;
     },
 
@@ -66,7 +67,7 @@ function endRoundConfetti() {
       rainParticle.ctx.fillStyle = '#9cc9de';
       rainParticle.ctx.fill();
 */
-    load.image('confetti', '../images/temp/pixel_red.png');
+    
 
     var emitter = this.add.particles('confetti').createEmitter({
       x: { min: 0, max: 800 },    // x-axis range
