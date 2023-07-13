@@ -66,7 +66,7 @@ function endRoundConfetti() {
       rainParticle.ctx.fillStyle = '#9cc9de';
       rainParticle.ctx.fill();
 */
-    this.load.image('confetti', 'images/temp/pixel_red.png');
+    load.image('confetti', '../images/temp/pixel_red.png');
 
     var emitter = this.add.particles('confetti').createEmitter({
       x: { min: 0, max: 800 },    // x-axis range
