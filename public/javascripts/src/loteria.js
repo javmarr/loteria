@@ -58,8 +58,8 @@ loteria.prototype = {
 } ;
 
 function endRoundConfetti() {
-  if (this.emitters.length == 0) {
-    this.createEmitter();
+  if (emitters.length == 0) {
+    createEmitter();
   }
 
   this.confettiExplosion(3);
