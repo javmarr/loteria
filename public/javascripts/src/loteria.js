@@ -71,27 +71,30 @@ function endRoundConfetti() {
 };
 
 function createEmitter() {
-  const playRect = this.gameLoteria.gameAssets.playRect;
+  
+    
+
+  const playRect = gameLoteria.gameAssets.playRect;
   emitters = [];
 
   for (let i = 0; i < 5; i++) {
     const randomX = (playRect.x * 1.25) + Math.random() * (playRect.width * 0.75);
     const randomY = (playRect.y * 1.25) + Math.random() * (playRect.height * 0.75);
 
-    emitters.push(this.game.add.emitter(randomX, randomY));
+    emitters.push(gameLoteria.add.emitter(randomX, randomY));
     emitters[i].makeParticles('cheers_confetti_christmas', ["snowflake_1", "snowflake_2", "snowflake_3"]);
     emitters[i].setSize(playRect.height / 2, playRect.height / 2);
     emitters[i].gravity = 0;
     emitters[i].setAlpha(0, 1, 1000, Phaser.Easing.Linear.None, true);
     emitters[i].setRotation(90, 180);
     emitters[i].setScale(
-      0.2 / game.deviceScale,
-      0.4 / game.deviceScale,
-      0.2 / game.deviceScale,
-      0.4 / game.deviceScale
+      0.2 / gameLoteria.deviceScale,
+      0.4 / gameLoteria.deviceScale,
+      0.2 / gameLoteria.deviceScale,
+      0.4 / gameLoteria.deviceScale
     );
-    emitters[i].setXSpeed(-300 / game.deviceScale, 300 / game.deviceScale);
-    emitters[i].setYSpeed(-300 / game.deviceScale, 300 / game.deviceScale);
+    emitters[i].setXSpeed(-300 / gameLoteria.deviceScale, 300 / gameLoteria.deviceScale);
+    emitters[i].setYSpeed(-300 / gameLoteria.deviceScale, 300 / gameLoteria.deviceScale);
   }
 };
 
