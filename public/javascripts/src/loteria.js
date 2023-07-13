@@ -92,6 +92,7 @@ for (let i = 0; i < 5; i++) {
     gravityY: 0
   });
 
+  } 
 }
 
 function confettiExplosion(emitters) {
