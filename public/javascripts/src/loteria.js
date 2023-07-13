@@ -1,18 +1,13 @@
 
 var loteria = function(gameLoteria,groupLoteria){
 };
-var manager=null;
-var emitter=null;
-var circle=null;
 
 loteria.prototype = {
   preload: function() {
     console.log('loteria board');
     this.load.image('cartaCoinci', '../images/cards/cartaCoinci.png');
     gameLoteria.forceSingleUpdate = true;
-    gameLoteria.load.path='images/temp/';
-    gameLoteria.load.images(['pixel_blue', 'pixel_green', 'pixel_red', 'pixel_white', 'pixel_yellow']);
-  },
+    },
 
   create: function() {
     gameLoteria.stage.backgroundColor = "#BA97FF";
@@ -22,29 +17,7 @@ loteria.prototype = {
     // cardImage = card.create(cardBorder.x+30, cardBorder.y+32, 'loteria', 'card_' + cardNumber + '.png');
     console.log('imageboard in phaser: ' + imageBoard);
 
-    manager = gameLoteria.plugins.add(Phaser.ParticleStorm);
-
-    var data = {
-        lifespan: 3000,
-        image: ['pixel_blue', 'pixel_green', 'pixel_red', 'pixel_white', 'pixel_yellow'],
-        vx: { min: -0.5, max: 0.5 },
-        vy: { min: -1, max: -2 },
-        rotation: { delta: 2 },
-        blendMode: 'ADD',
-        alpha: { initial: 0, value: 1, control: 'linear' }
-    };
-
-    manager.addData('basic', data);
-
-    circle = manager.createCircleZone(24);
-
-    emitter = manager.createEmitter();
-
-    emitter.force.y = 0.05;
-
-    emitter.addToWorld();
-
-    gameLoteria.add.image(432, 487, 'logo');
+    
 
 
     groupLoteria = gameLoteria.add.group();
@@ -86,7 +59,34 @@ loteria.prototype = {
     }
   })} ,
 } ;
-
+var emitter=null;
 function endRoundConfetti() {
-  emitter.start(false,1600,5,0);
+      /*let rainParticle = this.game.add.bitmapData(15, 50);
+
+      rainParticle.ctx.rect(0, 0, 15, 50);
+      rainParticle.ctx.fillStyle = '#9cc9de';
+      rainParticle.ctx.fill();
+*/
+
+     
+      this.emitter = gameLoteria.add.emitter(gameLoteria.world.centerX, -300, 400);
+
+
+      this.emitter.makeParticles('images/temp/pixel_red.png');
+
+      this.emitter.width = this.game.world.width;
+      this.emitter.angle = 10;
+
+      this.emitter.makeParticles(rainParticle);
+
+      this.emitter.minParticleScale = 0.1;
+      this.emitter.maxParticleScale = 0.3;
+
+      this.emitter.setYSpeed(600, 1000);
+      this.emitter.setXSpeed(-5, 5);
+
+      this.emitter.minRotation = 0;
+      this.emitter.maxRotation = 0;
+
+      this.emitter.start(false, 1600, 5, 0);
   }
