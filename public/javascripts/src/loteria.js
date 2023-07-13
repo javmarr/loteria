@@ -50,37 +50,48 @@ loteria.prototype = {
       }
      else  {
         console.log('Game over');
-      addConfeti();
+      endRoundConfetti();
         //gameLoteria.state.start('GameOver', true, false, 51);
       }
     }
   })} ,
+} ;
 
+function endRoundConfetti() {
+  if (this.emitters.length == 0) {
+    this.createEmitter();
+  }
+
+  this.confettiExplosion(3);
 };
 
+function createEmitter() {
+  const playRect = this.game.gameAssets.playRect;
+  this.emitters = [];
 
-function addConfeti(){
+  for (let i = 0; i < 5; i++) {
+    const randomX = (playRect.x * 1.25) + Math.random() * (playRect.width * 0.75);
+    const randomY = (playRect.y * 1.25) + Math.random() * (playRect.height * 0.75);
 
-    var data = {
-        lifespan: 3000,
-        image: ['pixel_blue', 'pixel_green', 'pixel_red', 'pixel_white', 'pixel_yellow'],
-        vx: { min: -0.5, max: 0.5 },
-        vy: { min: -1, max: -2 },
-        rotation: { delta: 2 },
-        blendMode: 'ADD',
-        alpha: { initial: 0, value: 1, control: 'linear' }
-    };
-
-    manager.addData('basic', data);
-
-    circle = manager.createCircleZone(24);
-
-    emitter = manager.createEmitter();
-
-    emitter.force.y = 0.05;
-
-    emitter.addToWorld();
-    this.emitter.start(false,1600,5,0);
+    this.emitters.push(this.game.add.emitter(randomX, randomY));
+    this.emitters[i].makeParticles('cheers_confetti_christmas', ["snowflake_1", "snowflake_2", "snowflake_3"]);
+    this.emitters[i].setSize(playRect.height / 2, playRect.height / 2);
+    this.emitters[i].gravity = 0;
+    this.emitters[i].setAlpha(0, 1, 1000, Phaser.Easing.Linear.None, true);
+    this.emitters[i].setRotation(90, 180);
+    this.emitters[i].setScale(
+      0.2 / this.game.deviceScale,
+      0.4 / this.game.deviceScale,
+      0.2 / this.game.deviceScale,
+      0.4 / this.game.deviceScale
+    );
+    this.emitters[i].setXSpeed(-300 / this.game.deviceScale, 300 / this.game.deviceScale);
+    this.emitters[i].setYSpeed(-300 / this.game.deviceScale, 300 / this.game.deviceScale);
+  }
 };
 
-  
+function confettiExplosion(emitters) {
+  this.emitters.forEach((emitter) => {
+    emitter.start(true, 2000, null, 10);
+  });
+};
