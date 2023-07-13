@@ -80,8 +80,6 @@ function addConfeti(){
     emitter.force.y = 0.05;
 
     emitter.addToWorld();
-
-    gameDealer.add.image(432, 487, 'logo');
 };
 
   
