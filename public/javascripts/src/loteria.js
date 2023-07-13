@@ -58,6 +58,7 @@ loteria.prototype = {
 } ;
 
 
+emitters = [];
 
 function endRoundConfetti() {
   if (emitters.length == 0) {
@@ -69,7 +70,7 @@ function endRoundConfetti() {
 
 function createEmitter() {
   const playRect = {width: 800, height: 600, x: 0, y: 0};
-  this.emitters = [];
+
 
   for (let i = 0; i < 5; i++) {
     const randomX = (playRect.x * 1.25) + Math.random() * (playRect.width * 0.75);
