@@ -22,7 +22,7 @@ loteria.prototype = {
     // cardImage = card.create(cardBorder.x+30, cardBorder.y+32, 'loteria', 'card_' + cardNumber + '.png');
     console.log('imageboard in phaser: ' + imageBoard);
 
-    manager = this.gameLoteria.plugins.add(Phaser.ParticleStorm);
+    manager = gameLoteria.plugins.add(Phaser.ParticleStorm);
 
     var data = {
         lifespan: 3000,
