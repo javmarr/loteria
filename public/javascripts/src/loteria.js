@@ -1,12 +1,17 @@
 
 var loteria = function(gameLoteria,groupLoteria){
 };
+var manager=null;
+var emitter=null;
+var circle=null;
 
 loteria.prototype = {
   preload: function() {
     console.log('loteria board');
     this.load.image('cartaCoinci', '../images/cards/cartaCoinci.png');
-    
+    gameLoteria.forceSingleUpdate = true;
+    gameLoteria.load.path='javascripts/src/';
+    gameLoteria.load.images(['pixel_blue', 'pixel_green', 'pixel_red', 'pixel_white', 'pixel_yellow']);
   },
 
   create: function() {
@@ -16,6 +21,31 @@ loteria.prototype = {
     // cardBorder = card.create(0, 0, 'border');
     // cardImage = card.create(cardBorder.x+30, cardBorder.y+32, 'loteria', 'card_' + cardNumber + '.png');
     console.log('imageboard in phaser: ' + imageBoard);
+
+    manager = this.gameLoteria.plugins.add(Phaser.ParticleStorm);
+
+    var data = {
+        lifespan: 3000,
+        image: ['pixel_blue', 'pixel_green', 'pixel_red', 'pixel_white', 'pixel_yellow'],
+        vx: { min: -0.5, max: 0.5 },
+        vy: { min: -1, max: -2 },
+        rotation: { delta: 2 },
+        blendMode: 'ADD',
+        alpha: { initial: 0, value: 1, control: 'linear' }
+    };
+
+    manager.addData('basic', data);
+
+    circle = manager.createCircleZone(24);
+
+    emitter = manager.createEmitter();
+
+    emitter.force.y = 0.05;
+
+    emitter.addToWorld();
+
+    game.add.image(432, 487, 'logo');
+
 
     groupLoteria = gameLoteria.add.group();
     //groupLoteria.createMultiple(1, 'loteria', imageBoard, true);
@@ -57,49 +87,6 @@ loteria.prototype = {
   })} ,
 } ;
 
-
-emitters = [];
-
-
-
 function endRoundConfetti() {
-  if (emitters.length == 0) {
-    createEmitter();
+  emitter.emit('basic', game.input.x, game.input.y, { zone: circle, total: 2 });
   }
-
-  this.confettiExplosion(3);
-};
-
-function createEmitter() {
-  const playRect = {width: 800, height: 600, x: 0, y: 0};
-const scale = .9;
-//qwhy is this undefined Phaser.GameObjects?
-//a:
-//q: below line is correct?
-
-const particleManager = new Phaser.gameLoteria.Particles.EmitterManager(game, 'cheers_confetti_christmas');
-
-const emitters = [];
-
-for (let i = 0; i < 5; i++) {
-  const randomX = (playRect.x * 1.25) + Math.random() * (playRect.width * 0.75);
-  const randomY = (playRect.y * 1.25) + Math.random() * (playRect.height * 0.75);
-
-  const emitter = particleManager.createEmitter({
-    frame: ["snowflake_1", "snowflake_2", "snowflake_3"],
-    lifespan: 2000,
-    speedX: { min: -300, max: 300 },
-    speedY: { min: -300, max: 300 },
-    scale: { start: 0.2, end: 0.4 },
-    rotate: { start: 90, end: 180 },
-    gravityY: 0
-  });
-
-  } 
-}
-
-function confettiExplosion(emitters) {
-  emitters.forEach((emitter) => {
-    emitter.start(true, 2000, null, 10);
-  });
-};
