@@ -71,7 +71,7 @@ function endRoundConfetti() {
 };
 
 function createEmitter() {
-  const playRect = this.game.gameAssets.playRect;
+  const playRect = this.gameLoteria.gameAssets.playRect;
   emitters = [];
 
   for (let i = 0; i < 5; i++) {
