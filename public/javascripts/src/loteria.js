@@ -74,22 +74,24 @@ function createEmitter() {
   const playRect = {width: 800, height: 600, x: 0, y: 0};
 const scale = .9;
 
-  for (let i = 0; i < 5; i++) {
-    const randomX = (playRect.x * 1.25) + Math.random() * (playRect.width * 0.75);
-    const randomY = (playRect.y * 1.25) + Math.random() * (playRect.height * 0.75);
+const particleManager = new Phaser.GameObjects.Particles.ParticleEmitterManager(game, 'cheers_confetti_christmas');
 
-    this.emitters.push(this.gameLoteria.add.particles('cheers_confetti_christmas').createEmitter({
-      x: randomX,
-      y: randomY,
-      frame: ["snowflake_1", "snowflake_2", "snowflake_3"],
-      lifespan: 2000,
-      speedX: { min: -300 / scale, max: 300 / scale },
-      speedY: { min: -300 / scale, max: 300 / scale},
-      scale: { start: 0.2 / scale, end: 0.4 / scale },
-      rotate: { start: 90, end: 180 },
-      gravityY: 0
-    }));
-  }
+const emitters = [];
+
+for (let i = 0; i < 5; i++) {
+  const randomX = (playRect.x * 1.25) + Math.random() * (playRect.width * 0.75);
+  const randomY = (playRect.y * 1.25) + Math.random() * (playRect.height * 0.75);
+
+  const emitter = particleManager.createEmitter({
+    frame: ["snowflake_1", "snowflake_2", "snowflake_3"],
+    lifespan: 2000,
+    speedX: { min: -300, max: 300 },
+    speedY: { min: -300, max: 300 },
+    scale: { start: 0.2, end: 0.4 },
+    rotate: { start: 90, end: 180 },
+    gravityY: 0
+  });
+
 }
 
 function confettiExplosion(emitters) {
