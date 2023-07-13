@@ -59,7 +59,6 @@ loteria.prototype = {
     }
   })} ,
 } ;
-var emitter=null;
 function endRoundConfetti() {
       /*let rainParticle = this.game.add.bitmapData(15, 50);
 
@@ -67,28 +66,23 @@ function endRoundConfetti() {
       rainParticle.ctx.fillStyle = '#9cc9de';
       rainParticle.ctx.fill();
 */
+    this.load.image('confetti', 'images/temp/pixel_red.png');
 
-     
-      this.emitter = gameLoteria.add.emitter(gameLoteria.world.centerX, -300, 400);
+    var emitter = this.add.particles('confetti').createEmitter({
+      x: { min: 0, max: 800 },    // x-axis range
+      y: -50,                     // start y-coordinate (above the screen)
+      lifespan: 3000,             // lifespan of each particle (in milliseconds)
+      speedY: { min: 200, max: 400 },  // vertical speed range
+      scale: { start: 0.5, end: 0 },   // scale of particles
+      quantity: 5,                // number of particles emitted per frame
+      blendMode: 'ADD'            // blend mode for particles
+    });
 
+        
+    // Set emitter bounds
+    emitter.setScrollFactor(0);
+    emitter.setSpeedX(-100, 100);
+    emitter.setScale(0.5, 1);
 
-     
-
-      this.emitter.width = gameLoteria.world.width;
-      this.emitter.angle = 10;
-
-      //this.emitter.makeParticles(rainParticle);
-
-      this.emitter.makeParticles('images/temp/pixel_red.png');
-
-      this.emitter.minParticleScale = 0.1;
-      this.emitter.maxParticleScale = 0.3;
-
-      this.emitter.setYSpeed(600, 1000);
-      this.emitter.setXSpeed(-5, 5);
-
-      this.emitter.minRotation = 0;
-      this.emitter.maxRotation = 0;
-
-      this.emitter.start(false, 1600, 5, 0);
+    this.emitter.start(false, 1600, 5, 0);
   }
