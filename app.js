@@ -33,7 +33,7 @@ var hosts = {};
 var games = [];
 
 const app = express();
-app.use(sslRedirect());
+app.use(sslRedirect(),routes);
 // io setup
 var server = require('http').Server(app);
 var io = global.io = app.io = socketio();
@@ -52,9 +52,8 @@ app.use(cookieParser());
 app.use(session({ secret: 'anything', resave: false,  saveUninitialized: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', function(req, res){
-  res.redirect('/index');
-});
+//what else is left on this file?
+app.use('/', routes);
 
 app.get('/logout', function(req, res){
   req.logout();
