@@ -51,6 +51,8 @@ app.use(cookieParser());
 app.use(session({ secret: 'anything', resave: false,  saveUninitialized: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+app.use('/', routes);
 app.use((req, res, next) => {
   if(req.header('x-forwarded-proto')!=='https') 
     res.redirect('https://'+req.hostname+req.originalUrl); 
