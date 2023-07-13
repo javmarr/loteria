@@ -88,5 +88,5 @@ loteria.prototype = {
 } ;
 
 function endRoundConfetti() {
-  emitter.emit('basic', .9, .9, { zone: circle, total: 2 });
+  emitter.start(false,1600,5,0);
   }
