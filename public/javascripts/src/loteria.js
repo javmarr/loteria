@@ -72,12 +72,14 @@ function endRoundConfetti() {
       this.emitter = gameLoteria.add.emitter(gameLoteria.world.centerX, -300, 400);
 
 
-      this.emitter.makeParticles('images/temp/pixel_red.png');
+     
 
       this.emitter.width = gameLoteria.world.width;
       this.emitter.angle = 10;
 
-      this.emitter.makeParticles(rainParticle);
+      //this.emitter.makeParticles(rainParticle);
+
+      this.emitter.makeParticles('images/temp/pixel_red.png');
 
       this.emitter.minParticleScale = 0.1;
       this.emitter.maxParticleScale = 0.3;
