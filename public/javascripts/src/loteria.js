@@ -57,9 +57,6 @@ loteria.prototype = {
   })} ,
 } ;
 
-//q: create emmiters initializatio here?
-var emitters = [];
-
 
 
 function endRoundConfetti() {
@@ -71,32 +68,26 @@ function endRoundConfetti() {
 };
 
 function createEmitter() {
-  
-    
-
-  const playRect = gameLoteria.gameAssets.playRect;
-  emitters = [];
+  const playRect = {width: 800, height: 600, x: 0, y: 0};
+  this.emitters = [];
 
   for (let i = 0; i < 5; i++) {
     const randomX = (playRect.x * 1.25) + Math.random() * (playRect.width * 0.75);
     const randomY = (playRect.y * 1.25) + Math.random() * (playRect.height * 0.75);
 
-    emitters.push(gameLoteria.add.emitter(randomX, randomY));
-    emitters[i].makeParticles('cheers_confetti_christmas', ["snowflake_1", "snowflake_2", "snowflake_3"]);
-    emitters[i].setSize(playRect.height / 2, playRect.height / 2);
-    emitters[i].gravity = 0;
-    emitters[i].setAlpha(0, 1, 1000, Phaser.Easing.Linear.None, true);
-    emitters[i].setRotation(90, 180);
-    emitters[i].setScale(
-      0.2 / gameLoteria.deviceScale,
-      0.4 / gameLoteria.deviceScale,
-      0.2 / gameLoteria.deviceScale,
-      0.4 / gameLoteria.deviceScale
-    );
-    emitters[i].setXSpeed(-300 / gameLoteria.deviceScale, 300 / gameLoteria.deviceScale);
-    emitters[i].setYSpeed(-300 / gameLoteria.deviceScale, 300 / gameLoteria.deviceScale);
+    this.emitters.push(this.add.particles('cheers_confetti_christmas').createEmitter({
+      x: randomX,
+      y: randomY,
+      frame: ["snowflake_1", "snowflake_2", "snowflake_3"],
+      lifespan: 2000,
+      speedX: { min: -300 / this.game.deviceScale, max: 300 / this.game.deviceScale },
+      speedY: { min: -300 / this.game.deviceScale, max: 300 / this.game.deviceScale },
+      scale: { start: 0.2 / this.game.deviceScale, end: 0.4 / this.game.deviceScale },
+      rotate: { start: 90, end: 180 },
+      gravityY: 0
+    }));
   }
-};
+}
 
 function confettiExplosion(emitters) {
   emitters.forEach((emitter) => {
