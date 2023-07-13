@@ -8,6 +8,7 @@ TODO:
   boards have nickname
 */
 
+var sslRedirect = require('heroku-ssl-redirect');
 const express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -32,7 +33,7 @@ var hosts = {};
 var games = [];
 
 const app = express();
-
+app.use(sslRedirect());
 // io setup
 var server = require('http').Server(app);
 var io = global.io = app.io = socketio();
@@ -52,14 +53,7 @@ app.use(session({ secret: 'anything', resave: false,  saveUninitialized: false }
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.use((req, res, next) => {
-  if(req.header('x-forwarded-proto')!=='https') 
-    res.redirect('https://'+req.hostname+req.originalUrl); 
-  else
-    next();
-});
-//q:what it does?
-//a:
+
 app.use('/', routes);
 
 
