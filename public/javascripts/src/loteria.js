@@ -80,12 +80,12 @@ function endRoundConfetti() {
       blendMode: 'ADD'            // blend mode for particles
     });
 
-    this.emitter.makeParticles('confetti');
+    emitter.makeParticles('confetti');
   
     // Set emitter bounds
    /* emitter.setScrollFactor(0);
     emitter.setSpeedX(-100, 100);
     emitter.setScale(0.5, 1);
 */
-    this.emitter.start(false, 1600, 5, 0);
+    emitter.start(false, 1600, 5, 0);
   }
