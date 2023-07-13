@@ -56,11 +56,7 @@ app.use((req, res, next) => {
     res.redirect(`https://${req.header('host')}${req.url}`)
 })
 
-app.get('/login', function (req, res) {
-  // req.session.user = req.user;
-  res.redirect('/'); // index
-
-});
+app.use('/', routes);
 
 app.get('/logout', function(req, res){
   req.logout();
