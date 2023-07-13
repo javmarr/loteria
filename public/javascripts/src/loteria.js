@@ -59,23 +59,7 @@ loteria.prototype = {
 
 
 emitters = [];
-const playRect = {
-  x: 0,
-  y: 0,
-  width: 800,
-  height: 600
-};
 
-// Create a Phaser.Game instance
-const game = new Phaser.Game({
-  type: Phaser.AUTO,
-  width: 800,
-  height: 600,
-  deviceScale:.9,
-  scene: {
-    create: createGame
-  }
-});
 
 
 function endRoundConfetti() {
@@ -88,20 +72,20 @@ function endRoundConfetti() {
 
 function createEmitter() {
   const playRect = {width: 800, height: 600, x: 0, y: 0};
-
+const scale = .9;
 
   for (let i = 0; i < 5; i++) {
     const randomX = (playRect.x * 1.25) + Math.random() * (playRect.width * 0.75);
     const randomY = (playRect.y * 1.25) + Math.random() * (playRect.height * 0.75);
 
-    this.emitters.push(gameLoteria.add.particles('cheers_confetti_christmas').createEmitter({
+    this.emitters.push(this.gameLoteria.add.particles('cheers_confetti_christmas').createEmitter({
       x: randomX,
       y: randomY,
       frame: ["snowflake_1", "snowflake_2", "snowflake_3"],
       lifespan: 2000,
-      speedX: { min: -300 / this.game.deviceScale, max: 300 / this.game.deviceScale },
-      speedY: { min: -300 / this.game.deviceScale, max: 300 / this.game.deviceScale },
-      scale: { start: 0.2 / this.game.deviceScale, end: 0.4 / this.game.deviceScale },
+      speedX: { min: -300 / scale, max: 300 / scale },
+      speedY: { min: -300 / scale, max: 300 / scale},
+      scale: { start: 0.2 / scale, end: 0.4 / scale },
       rotate: { start: 90, end: 180 },
       gravityY: 0
     }));
