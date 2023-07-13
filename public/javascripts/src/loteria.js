@@ -75,8 +75,9 @@ function createEmitter() {
 const scale = .9;
 //qwhy is this undefined Phaser.GameObjects?
 //a:
+//q: below line is correct?
 
-const particleManager = new Phaser.GameObjects.Particles.EmitterManager(game, 'cheers_confetti_christmas');
+const particleManager = new Phaser.gameLoteria.Particles.EmitterManager(game, 'cheers_confetti_christmas');
 
 const emitters = [];
 
