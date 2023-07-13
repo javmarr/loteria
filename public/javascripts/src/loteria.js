@@ -67,31 +67,31 @@ function endRoundConfetti() {
 
 function createEmitter() {
   const playRect = this.game.gameAssets.playRect;
-  this.emitters = [];
+  emitters = [];
 
   for (let i = 0; i < 5; i++) {
     const randomX = (playRect.x * 1.25) + Math.random() * (playRect.width * 0.75);
     const randomY = (playRect.y * 1.25) + Math.random() * (playRect.height * 0.75);
 
-    this.emitters.push(this.game.add.emitter(randomX, randomY));
-    this.emitters[i].makeParticles('cheers_confetti_christmas', ["snowflake_1", "snowflake_2", "snowflake_3"]);
-    this.emitters[i].setSize(playRect.height / 2, playRect.height / 2);
-    this.emitters[i].gravity = 0;
-    this.emitters[i].setAlpha(0, 1, 1000, Phaser.Easing.Linear.None, true);
-    this.emitters[i].setRotation(90, 180);
-    this.emitters[i].setScale(
-      0.2 / this.game.deviceScale,
-      0.4 / this.game.deviceScale,
-      0.2 / this.game.deviceScale,
-      0.4 / this.game.deviceScale
+    emitters.push(this.game.add.emitter(randomX, randomY));
+    emitters[i].makeParticles('cheers_confetti_christmas', ["snowflake_1", "snowflake_2", "snowflake_3"]);
+    emitters[i].setSize(playRect.height / 2, playRect.height / 2);
+    emitters[i].gravity = 0;
+    emitters[i].setAlpha(0, 1, 1000, Phaser.Easing.Linear.None, true);
+    emitters[i].setRotation(90, 180);
+    emitters[i].setScale(
+      0.2 / game.deviceScale,
+      0.4 / game.deviceScale,
+      0.2 / game.deviceScale,
+      0.4 / game.deviceScale
     );
-    this.emitters[i].setXSpeed(-300 / this.game.deviceScale, 300 / this.game.deviceScale);
-    this.emitters[i].setYSpeed(-300 / this.game.deviceScale, 300 / this.game.deviceScale);
+    emitters[i].setXSpeed(-300 / game.deviceScale, 300 / game.deviceScale);
+    emitters[i].setYSpeed(-300 / game.deviceScale, 300 / game.deviceScale);
   }
 };
 
 function confettiExplosion(emitters) {
-  this.emitters.forEach((emitter) => {
+  emitters.forEach((emitter) => {
     emitter.start(true, 2000, null, 10);
   });
 };
