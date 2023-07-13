@@ -52,7 +52,9 @@ app.use(cookieParser());
 app.use(session({ secret: 'anything', resave: false,  saveUninitialized: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
+app.get('/', function(req, res){
+  res.redirect('/');
+});
 
 app.get('/logout', function(req, res){
   req.logout();
