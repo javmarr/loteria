@@ -53,7 +53,9 @@ app.use(session({ secret: 'anything', resave: false,  saveUninitialized: false }
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-
+app.get('/', function(req, res) {
+  res.redirect('/');
+});
 
 app.get('/login', function (req, res) {
   // req.session.user = req.user;
