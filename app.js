@@ -60,7 +60,7 @@ app.get('*', function(req, res, next) {
     req.session.user_id = req.session.user._json.user_id;
   }
   app.use((req, res, next) => {
-    if(req.headers['x-forwarded-proto']!='https') 
+    if(req.headers('x-forwarded-proto')!=='https') 
       res.redirect('https://'+req.hostname+req.originalUrl); 
     else
       next();
