@@ -46,7 +46,6 @@ loteriaDealer.prototype = {
     }
     else {
       console.log('Game over');
-      addConfeti();
       gameDealer.state.start('GameOverDealer', true, false, 51);
     }
       var message = {
@@ -64,27 +63,3 @@ loteriaDealer.prototype = {
 
 
 
-function addConfeti(){
-
-    var data = {
-        lifespan: 3000,
-        image: ['pixel_blue', 'pixel_green', 'pixel_red', 'pixel_white', 'pixel_yellow'],
-        vx: { min: -0.5, max: 0.5 },
-        vy: { min: -1, max: -2 },
-        rotation: { delta: 2 },
-        blendMode: 'ADD',
-        alpha: { initial: 0, value: 1, control: 'linear' }
-    };
-
-    manager.addData('basic', data);
-
-    circle = manager.createCircleZone(24);
-
-    emitter = manager.createEmitter();
-
-    emitter.force.y = 0.05;
-
-    emitter.addToWorld();
-
-    gameDealer.add.image(432, 487, 'logo');
-};
