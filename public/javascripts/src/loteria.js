@@ -57,6 +57,11 @@ loteria.prototype = {
   })} ,
 } ;
 
+//q: create emmiters initializatio here?
+var emitters = [];
+
+
+
 function endRoundConfetti() {
   if (emitters.length == 0) {
     createEmitter();
