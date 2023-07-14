@@ -67,6 +67,7 @@ var emitters = [];
 
 
 function endRoundConfetti() {
+    this.createEmitter();
      this.confettiExplosion();
   }
 
