@@ -39,12 +39,12 @@ loteria.prototype = {
     //q:how to get the turn from message?
     //a: message.data.type
    
-      if(message.cardnumber <=50 && message.cardnumber>0) {
+      if(message.cardNumber <=50 && message.cardNumber>0) {
         var iIndex = 0;
         groupLoteria.forEach(function(sprite) {
             console.log('IMAGE: ' + imageBoard[iIndex]);  
-            console.log('card_'+message.data+'.png');
-            if(imageBoard[iIndex] === 'card_'+message.data+'.png')
+            console.log('card_'+message.cardNumber+'.png');
+            if(imageBoard[iIndex] === 'card_'+message.cardNumber+'.png')
             {
               console.log('!!!!!SUSTITUYENDO.!!!!!!!!!!!!!!!!: ' + imageBoard[iIndex]);  
               //q:why is not working?
