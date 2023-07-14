@@ -93,7 +93,7 @@ function endRoundConfetti() {
   }
 
   function confettiExplosion(emitters) {
-    this.emitters.forEach((emitter) => {
+    emitters.forEach((emitter) => {
       emitter.start(true, 2000, null, 10);
     });
   }
