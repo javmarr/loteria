@@ -50,7 +50,9 @@ loteriaDealer.prototype = {
     }
       var message = {
         type: 'cardNumber',
-        data: cardNumber
+        data: cardNumber,
+        type: 'turn',
+        data: turn
       };
       window.parent.postMessage(message, '*');
   },
