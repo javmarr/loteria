@@ -103,6 +103,6 @@ function endRoundConfetti() {
     emitters.forEach((emitter) => {
       //q:which are the parameters?
       //a:
-      emitter.start(true, 2000, 5, 10);
+      emitter.start(true, 20000, 5, 10);
     });
   }
