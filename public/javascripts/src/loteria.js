@@ -10,7 +10,6 @@ loteria.prototype = {
     this.load.image('confetti2', '../images/temp/pixel_blue.png');
     this.load.image('confetti3', '../images/temp/pixel_green.png');
     this.load.image('confetti4', '../images/temp/pixel_yellow.png');
-    gameLoteria.forceSingleUpdate = true;
     },
 
   create: function() {
@@ -68,7 +67,7 @@ var emitters = [];
 
 
 function endRoundConfetti() {
-     this.confettiExplosion(createEmitter);
+     this.confettiExplosion();
   }
 
  function createEmitter() {
@@ -97,6 +96,6 @@ function endRoundConfetti() {
 
   function confettiExplosion() {
     emitters.forEach((emitter) => {
-      emitter.start(true, 2000, null, 10);
+      emitter.start(false, 2000, 5, 0);
     });
   }
