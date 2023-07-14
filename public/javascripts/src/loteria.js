@@ -102,7 +102,7 @@ function endRoundConfetti() {
   function confettiExplosion() {
     emitters.forEach((emitter) => {
       //q:which are the parameters?
-      //a:
-      emitter.start(true, 20000, 5, 10);
+      //a: emitter.start(explode, lifespan, frequency, quantity, forceQuantity);
+      emitter.start(false, 1600, 5, 0);
     });
   }
