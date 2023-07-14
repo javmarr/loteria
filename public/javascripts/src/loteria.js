@@ -63,14 +63,17 @@ loteria.prototype = {
     }
   })} ,
 } ;
+
+var emitters = [];
+
+
 function endRoundConfetti() {
      this.confettiExplosion(createEmitter);
   }
 
  function createEmitter() {
     const playRect = {x: .9, y: .9, width: 600, height: 800};
-    this.emitters = [];
-
+    
     for (let i = 0; i < 5; i++) {
       const randomX = (playRect.x * 1.25) + Math.random() * (playRect.width * 0.75);
       const randomY = (playRect.y * 1.25) + Math.random() * (playRect.height * 0.75);
@@ -92,7 +95,7 @@ function endRoundConfetti() {
     }
   }
 
-  function confettiExplosion(emitters) {
+  function confettiExplosion() {
     emitters.forEach((emitter) => {
       emitter.start(true, 2000, null, 10);
     });
