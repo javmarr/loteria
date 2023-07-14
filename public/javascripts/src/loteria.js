@@ -4,6 +4,7 @@ var loteria = function(gameLoteria,groupLoteria){
 
 loteria.prototype = {
   preload: function() {
+    gameLoteria.forceSingleUpdate = true;
     console.log('loteria board');
     this.load.image('cartaCoinci', '../images/cards/cartaCoinci.png');
     this.load.image('confetti1', '../images/temp/pixel_red.png');

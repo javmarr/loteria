@@ -56,6 +56,6 @@ function endRoundConfetti() {
 
   function confettiExplosion() {
     emitters.forEach((emitter) => {
-      emitter.start(false, 2000, 5, 0);
+      emitter.start(true, 2000, null, 10);
     });
   }

@@ -8,13 +8,6 @@ gameOverDealer.prototype = {
 
   create: function() {
 
-
-	
-
-	//q: how to add an animated javascript to this game over screen?
-	//a: https://phaser.io/examples/v2/tweens/chain
-	//a: https://phaser.io/examples/v2/tweens/complex-chain
-	//a: https://phaser.io/examples/v2/tweens/looped-tween
 	var gameOverTitle = gameDealer.add.sprite(160, 160, "gameover");
 	gameOverTitle.anchor.setTo(0.5, 0.5);
 	var probabilidad = calculateProbability();
