@@ -39,9 +39,7 @@ loteria.prototype = {
     //q:how to get the turn from message?
     //a: message.data.type
    
-      this.alert('numero: ' + message.data);
-      var turn = message.data.type
-      if(message.data.cardnumber <=50 && message.data.cardnumber>0) {
+      if(message.cardnumber <=50 && message.cardnumber>0) {
         var iIndex = 0;
         groupLoteria.forEach(function(sprite) {
             console.log('IMAGE: ' + imageBoard[iIndex]);  
@@ -57,7 +55,7 @@ loteria.prototype = {
 
         });
       }     
-       var turn = message.data.turn;
+       var turn = message.turn;
       console.log('turn: ' + turn);
       if(turn>50) 
         gameLoteria.state.start('GameOver', true, false, 51);

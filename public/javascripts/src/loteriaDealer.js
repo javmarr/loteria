@@ -49,10 +49,8 @@ loteriaDealer.prototype = {
       gameDealer.state.start('GameOverDealer', true, false, 51);
     }
       var message = {
-        type: 'cardNumber',
-        data: cardNumber,
-        type: 'turn',
-        data: turn
+        cardNumber: cardNumber,
+        turn: turn
       };
       window.parent.postMessage(message, '*');
   },
