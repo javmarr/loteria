@@ -88,3 +88,87 @@ body {
 #menu {
    width: 30%;
 }
+
+#topmenu {
+  width: 30%;
+}
+
+
+#game {
+  position: absolute;
+  top: 1%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateY(2px)
+}
+
+.button {
+  font: 16px "YouTube Sans", "Roboto", "sans-serif";
+  color: #FF00FF;
+  background-color: #e2ed0b;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.upperLabel
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.btn-primary
+{
+  background-color: fuchsia;
+  border-color: fuchsia;
+  color : white;
+}
+
+.btn-primary:hover {
+  background-color: #ffffff;
+  border-color: black;
+  color : fuchsia;
+}
+
+
+.jumbotron {
+  background-image: url('../images/logoSiHayMujeresBajito.png');
+  background-repeat: no-repeat;
+  background-color: #BA97FF;
+  background-position: center center;
+  background-size: 50%;
+}
+
+h4 {
+  color: black;
+}
+
+h3 {
+  color: whitesmoke;
+}
+
+#gameDealer {
+  margin: 0 auto;
+  background-color: #BA97FF;
+
+}
+#gameLoteria {
+  margin: 0 auto;
+  background-color: #BA97FF;
+
+}
+
+.body {
+  background-color: #BA97FF;
+  background-image: url('../images/header.png');
+  background-size: 100%;
+  opacity: .8;
+}
+
+.cabecera {
+  background-image: url('../images/header.png');
+  background-repeat: no-repeat;
+  background-color: #BA97FF;
+  background-position: center center;
+  background-size: 100%;
+  opacity: .8;
+}

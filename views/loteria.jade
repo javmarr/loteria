@@ -2,15 +2,46 @@ extends layout
 
 block content  
   script(src="../javascripts/phaser.min.js")
-  
   script(src="../javascripts/src/boot.js")
+  script(src="../javascripts/src/bootDealer.js")
   script(src="../javascripts/src/preload.js")
-  script(src="../javascripts/src/gameTitle.js")
-  script(src="../javascripts/src/loteriaDealer.js")
+  script(src="../javascripts/src/preloadDealer.js")
+  script(src="../javascripts/src/gameTitle.js") 
+  script(src="../javascripts/src/gameTitleDealer.js")
   script(src="../javascripts/src/loteria.js")
+  script(src="../javascripts/src/loteriaDealer.js")
   script(src="../javascripts/src/gameOver.js")
+  script(src="../javascripts/src/gameOverDealer.js")
+  script(src="../javascripts/src/particle-storm.min.js")
+    
+  
   
   script.
+    function shuffleDeck(deck) {
+      var size = deck.length;
+      var output = deck;
+      // every card, swap to a random spot
+      for (var i = 0; i < size; i++) {
+        var temp = output[i];
+        var random = ((Math.floor(Math.random() * 100)) % size); // 0 - (deckSize-1)
+
+        // swap values
+        output[i] = output[random];
+        output[random] = temp;
+      }
+      return output;
+    }
+
+    function generateDeck(size) {
+      var deck = [];
+      for(var i = 1; i <= size; i++) {
+        deck.push(i);
+      }
+      deck = shuffleDeck(deck);
+      return deck;
+    }
+
+   
     var gameID = "#{gameID}";
     var dealer = "#{dealer}";
     var nickname = "#{nickname}";
@@ -19,44 +50,38 @@ block content
     console.log("On jade (gameID) " + gameID);
     console.log("On jade (nickname) " + nickname);
     console.log("On jade (dealer) " + dealer);
-    var game = new Phaser.Game(770, 1300, Phaser.AUTO, "game");
-    game.state.add("Boot", boot);
-    game.state.add("Preload", preload);
-    game.state.add("GameTitle", gameTitle);
-    if (dealer) {
-      var deckSize = 0;
-      var turn = 0;
-      var cardsDealt = [];
-      var cardNumber = 0;
-      var deck = [];
-      game.state.add("Loteria", loteriaDealer); 
+    var gameDealer = new Phaser.Game(300, 500, Phaser.AUTO, "gameDealer");
+    var gameLoteria = new Phaser.Game(770, 1300, Phaser.AUTO, "gameLoteria");
+    gameLoteria.state.add("Boot", boot);
+    gameDealer.state.add("BootDealer", bootDealer);
+    gameLoteria.state.add("Preload", preload);
+    gameDealer.state.add("PreloadDealer", preloadDealer);
+    gameLoteria.state.add("GameTitle", gameTitle);
+    gameDealer.state.add("GameTitleDealer", gameTitleDealer);
+
+    
+  
+    var deckSize = 0;
+    var turn = 0;
+    var cardsDealt = [];
+    var cardNumber = 0;
+    var deck = generateDeck(54);
+    gameDealer.state.add("LoteriaDealer", loteriaDealer); 
+
+
+    gameLoteria.state.add("Loteria", loteria); 
+    nextCard();
+    var gameBoard = generateBoard(boardLayout);
+    var imageBoard = imageBoardFrom(gameBoard);
+    gameLoteria.state.start("Boot");
+    gameDealer.state.start("BootDealer");
+    gameLoteria.state.add("GameOver", gameOver);
+    gameDealer.state.add("GameOverDealer", gameOverDealer);
+    
+   
+
       
-      // returns deck and initial turn
-      jQuery.getJSON('/deck/'+gameID+'.json', function(json) {
-          deck = json['deck'];
-          deckSize = deck.length;
-          turn = json['turn'];
-          cardNumber = deck[turn];
-          if (cardsDealt.length == 0) {
-            for (var i = 0; i < turn; i++) {
-              cardsDealt.push(deck[i]); // catch up the cardsDealt
-            }
-          }
-          //- console.log(deck);
-          nextCard();
-          game.state.start("Boot");
-      });
-    }
-    else { 
-      game.state.add("Loteria", loteria); 
-      var gameBoard = generateBoard(boardLayout);
-      var imageBoard = imageBoardFrom(gameBoard);
-      game.state.start("Boot");
-    }
-    
-    game.state.add("GameOver", gameOver);
-    
-    
+
     function imageBoardFrom(board) {
       var output = [];
       var size = board.length;
@@ -76,13 +101,16 @@ block content
     }
     function nextCard() {
       console.log("next card");
-      jQuery.getJSON('/nextCard/'+gameID+'.json', function(json) {
-          turn = json['turn'];
-          cardNumber = deck[turn];
-          cardsDealt.push(cardNumber);
-          console.log('turn: ' + turn);
-          console.log('cardnumber: ' + cardNumber);
-      });
+      if(turn!=0) {
+        cardNumber = deck[turn];
+      }
+      else {
+        cardNumber=0;
+      }
+        turn ++;
+        cardsDealt.push(cardNumber);
+        console.log('turn: ' + turn);
+        console.log('cardnumber: ' + cardNumber);
     }
     
     function generateBoard(layout) {
@@ -90,37 +118,29 @@ block content
       var random = 0;
       var size = 0;
       size = 16;
-      //- if (layout == "fullBoard") { size = 16; } 
-      //- else { size = 8; }
-      
       for (var i = 0; i < size; i++) {
-        // no duplicate values
         do {
           random = ((Math.floor(Math.random() * 100)) % 54) + 1 ; // 1 -> (size)
         } while (output.includes(random));
-        output.push(random);
+        if(random>0) output.push(random);
       }
       
       console.log('board output: ' + output);
       return output;
-    }
+    };
+  div(id="cabecera" class="vertical-center") 
     
-    socket.on('connect', function(data) {
-      socket.emit('join', 'Hello World from client');
-    });
-    
-    function addMsg(msg) {
-      var newMsg = $('<li>').text(msg);
-      $('#messages').append(newMsg);
-      newMsg.focus();
-    }
-    
-    socket.on('chat message', function(msg) {
-      addMsg(msg);
-    });
-
-  div(id="game" class="vertical-center")
-      h1 Loteria
-      if dealer
-        button(onclick="nextCard()" class="btn btn-default btn-block") next
-      a(href="../" class="btn btn-default btn-block") Back
+  div(id="gameDealer" class="vertical-center" align="center") 
+      h1  Loteria de derechos de las mujeres
+      h3  Bienvenid@ Visitante 
+      h4  Según un cálculo matemático  la probabilidad
+      h4  de ganar el juego de la lotería mexicana, 
+      h4  con 54 cartas tienes una probabilidad de GANAR del 50%.
+      h4  Prueba tu suerte mientras aprendes tus derechos,
+      h4  al final calculamos si eres una persona 
+      h4  afortunda en el azar o en el amor.
+      h4  Da clic en la baraja para sacar una carta,
+      h4  tienes 50 tiradas para ganar.
+      h1  Cartas 
+  div(id="gameLoteria" class="vertical-center" align="center") 
+      h1 Tablero 

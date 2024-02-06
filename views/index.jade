@@ -1,43 +1,28 @@
+
 extends layout
 
-block content
-  script(src='https://cdn.auth0.com/js/lock/10.0/lock.min.js')
-  script.
-    DOMAIN = '#{DOMAIN}';
-    CLIENT_ID = '#{CLIENT_ID}';
-    REDIRECT_URL = '#{REDIRECT_URL}';
-    console.log('#{JSON.stringify(user)}');
-    
-  script.
-    var lock = new Auth0Lock(CLIENT_ID, DOMAIN, {
-      auth: {
-        redirectUrl: REDIRECT_URL,
-        responseType: 'code',
-        params: {
-          scope: 'openid email' // Learn about scopes: https://auth0.com/docs/scopes
-        }
-      }
-    });
 
-  div(class="jumbotron vertical-center")
+block content
+ 
+
+  
+  div(class="jumbotron" vertical-align="top")
     div(id="menu" class="center")
-      h1 Loteria 
       p(class="red") #{error}
-      if displayName
-        p Hello, #{displayName}
-        a(href="/create" class="btn btn-primary btn-lg btn-block" id="createGame") Create Game
-        a(href="/monitor" class="btn btn-default btn-block" id="monitorGame") Monitor Game
-        a(href="/join" class="btn btn-default btn-block") Join Game
-        a(href="/logout" class="btn btn-default btn-block") Logout
-      else 
-        p Hello, Guest
-        a(onclick="lock.show(); return false;" class="btn btn-primary btn-lg btn-block" id="login") Login
-        a(href="/join" class="btn btn-default btn-block") Join Game
-      
-      
-        
-    
+      p Hola, Visitante
+        form(action="/loteria" method="post")
+          div(class="input-group")
+            span(class="input-group-btn")
+             <a href="#" id="submit-form">
+             button(onclick="nextCard()" class="btn btn-primary btn-block") Clic Aquí para Jugar
+             </a>
+             <br><br><br
+     
+  
   script.
     $(document).ready( function () {
+      $('#submit-form').click(function() {
+      $('form').submit();
+    });
     });
     

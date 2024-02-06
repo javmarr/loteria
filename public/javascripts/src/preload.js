@@ -1,4 +1,4 @@
-var preload = function(game){}
+var preload = function(gameLoteria){}
 
 preload.prototype = {
 	preload: function() {
@@ -8,19 +8,25 @@ preload.prototype = {
     loadingBar.anchor.setTo(0.5, 0.5);
     this.game.load.setPreloadSprite(loadingBar);
 
-    this.game.load.atlasJSONHash('loteria', '../images/cards/loteria.png', '../images/cards/loteria.json');
-    this.game.load.image('border', '../images/cards/border.png');
+    gameLoteria.load.atlasJSONHash('loteria', '../images/cards/loteria.png', '../images/cards/loteria.json');
+    gameLoteria.load.image("loteria", "../images/cards/cartaCoinci.png");
+    gameLoteria.load.image('border', '../images/cards/border.png');
 
-		this.game.load.image("gametitle", "../images/temp/gametitle.png");
-		this.game.load.image("join", "../images/button/joinGame.png");
-    this.game.load.image("create", "../images/button/createGame.png");
-    this.game.load.image("cardsDealt", "../images/button/cardsDealt.png");
-    this.game.load.image("monitor", "../images/button/monitorGame.png");
-		this.game.load.image("gameover", "../images/temp/gameover.png");
+		gameLoteria.load.image("gametitle", "../images/temp/gametitle.png");
+		gameLoteria.load.image("join", "../images/button/joinGame.png");
+    gameLoteria.load.image("create", "../images/button/createGame.png");
+    gameLoteria.load.image("cardsDealt", "../images/button/cardsDealt.png");
+    gameLoteria.load.image("monitor", "../images/button/monitorGame.png");
+		gameLoteria.load.image("gameover", "../images/temp/pixel_blue.png");
+    gameLoteria.load.image("gameover", "../images/temp/pixel_green.png");
+    gameLoteria.load.image("gameover", "../images/temp/pixel_red.png");
+    gameLoteria.load.image("gameover", "../images/temp/pixel_white.png");
+    gameLoteria.load.image("gameover", "../images/temp/pixel_yellow.png");
+    
 	},
 
 	create: function() {
 	    // this.game.state.start("GameTitle");
-      this.game.state.start("Loteria"); // skip menu
+      gameLoteria.state.start("Loteria"); // skip menu
 	}
 };

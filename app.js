@@ -8,7 +8,8 @@ TODO:
   boards have nickname
 */
 
-var express = require('express');
+const sslRedirect = require('heroku-ssl-redirect').default;
+const express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -17,11 +18,6 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var socketio = require('socket.io');
-
-var passport = require('passport');
-var strategy = require('./setup-passport');
-
-var Auth0Strategy = require('passport-auth0');
 
 // variables for client/host management
 var debug = false;
@@ -36,26 +32,12 @@ var clients = {};
 var hosts = {};
 var games = [];
 
-// db connection
-var mongoose = require('mongoose');
-const MONGO_HOST = process.env.OPENSHIFT_MONGODB_DB_HOST;
-const MONGO_PORT = process.env.OPENSHIFT_MONGODB_DB_PORT;
-const MONGO_PASSWORD = process.env.OPENSHIFT_MONGODB_DB_PASSWORD;
-const DB_NAME = 'loteria';
-
-if(MONGO_HOST) {
-  mongoose.connect('mongodb://admin:' + MONGO_PASSWORD + '@' + MONGO_HOST + ':' + MONGO_PORT + '/' + DB_NAME);
-}
-else {
-  require('dotenv').config();
-  mongoose.connect('mongodb://localhost/' + DB_NAME);
-}
-var app = express();
-
-
+const app = express();
+app.use(sslRedirect(),routes);
 // io setup
 var server = require('http').Server(app);
 var io = global.io = app.io = socketio();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -67,37 +49,11 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(session({ secret: process.env.CLIENT_SECRET, resave: false,  saveUninitialized: false }));
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(session({ secret: 'anything', resave: false,  saveUninitialized: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+//what else is left on this file?
 app.use('/', routes);
-
-
-app.get('*', function(req, res, next) {
-  if(req.user){
-    req.session.user = req.user;
-    req.session.user_id = req.session.user._json.user_id;
-  }
-  next();
-});
-
-app.get('/callback',
-  passport.authenticate('auth0', { failureRedirect: '/Error' }),
-  function(req, res) {
-    if (!req.user) {
-      throw new Error('user null');
-    }
-    console.log('login worked!');
-    res.redirect("/login");
-  });
-
-app.get('/login', function (req, res) {
-  // req.session.user = req.user;
-  res.redirect('/'); // index
-
-});
 
 app.get('/logout', function(req, res){
   req.logout();
@@ -114,6 +70,16 @@ app.use(function(req, res, next) {
 
 // error handlers
 
+
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
+    });
+  });
+
+
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
@@ -125,16 +91,6 @@ if (app.get('env') === 'development') {
     });
   });
 }
-
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
-});
 
 
 io.on('connection', function(socket) {
@@ -166,12 +122,6 @@ io.on('connection', function(socket) {
     console.log('-- user disconnected --');
   });
 });
-
-
-
-
-
-
 
 
 module.exports = app;

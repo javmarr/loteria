@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "chrome",
+            "name": "https://loteriamujeres.herokuapp.com/",
+            "request": "launch",
+            "url": "https://loteriamujeres.herokuapp.com/"
+        }
+    ]
+}

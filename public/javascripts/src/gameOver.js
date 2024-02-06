@@ -1,4 +1,4 @@
-var gameOver = function(game) {}
+var gameOver = function(gameLoteria) {}
 
 gameOver.prototype = {
 	init: function(cardsDealt) {
@@ -6,13 +6,16 @@ gameOver.prototype = {
 	},
 
   create: function() {
-  	var gameOverTitle = this.game.add.sprite(160, 160, "gameover");
+  	var gameOverTitle = gameLoteria.add.sprite(160, 160, "gameover");
     gameOverTitle.anchor.setTo(0.5, 0.5);
-    var playButton = this.game.add.button(160, 320, "play", this.playTheGame, this);
-  	playButton.anchor.setTo(0.5, 0.5);
 	},
 
 	playTheGame: function() {
-		this.game.state.start("Loteria");
+		gameLoteria.state.start("Loteria");
 	}
+
+
+
+
 };
+
